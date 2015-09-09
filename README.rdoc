@@ -1,28 +1,5 @@
-== README
+== ENEM AMIGO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Aplicação para auxílio nos estudos para o ENEM (Exame Nacional do Ensino Médio). 
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Projeto das disciplinas de GPP (Gestão de Portifólios e Projetos de Software) e MDS (Métodos de Desenvolvimento de Software) do curso de Engenharia de Software, Campus UnB Gama.

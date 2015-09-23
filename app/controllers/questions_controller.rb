@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
 
 	def index
+		@question = Question.all
 	end
 
 	def new
@@ -11,6 +12,8 @@ class QuestionsController < ApplicationController
 		@question = Question.new(question_params)
 		if @question.save
 			flash[:success] = "Questão cadastrada com sucesso!"
+			index
+			render 'index'
 		else
 			render 'new'
 		end
@@ -37,13 +40,13 @@ class QuestionsController < ApplicationController
 		@question = Question.find(params[:id])
 		@question.destroy
 		flash[:success] = "Questão deletada com sucesso!"
-		render 'index'
+		redirect_to questions_path
 	end
 
 	private
 
 	def question_params
-		params.require(:question).permit(:year,:area,:number,:enunciation,:reference,:image)
+		params.require(:question).permit(:year,:area,:number,:enunciation,:reference,:image,:alternatives_attributes => [:letter, :description])
 	end
 
 end

@@ -1,0 +1,43 @@
+<%= form_for(setup_question(@question)) do |f| %>
+	<div>
+		<%= f.label :year %>
+		<%= f.text_field :year %>
+	</div>
+	<div>
+		<%= f.label :area %>
+		<%= f.text_field :area %>
+	</div>
+	<div>
+		<%= f.label :number %>
+		<%= f.text_field :number %>
+	</div>
+	<div>
+		<%= f.label :enunciation %>
+		<%= f.text_field :enunciation %>
+	</div>
+	<div>
+		<%= f.label :reference %>
+		<%= f.text_field :reference %>
+	</div>
+	<div>
+		<%= f.label :image %>
+		<%= f.text_field :image %>
+	</div>
+	<div>
+
+	<br><br>
+
+	<%= f.fields_for :alternatives do |ff| %>
+		<div>
+			<%= ff.label :letter %>
+			<%= ff.text_field :letter %>
+		</div>
+		<div>
+			<%= ff.label :description %>
+			<%= ff.text_field :description %>
+		</div>
+		<br>
+	<% end %>
+
+	<%= f.submit %>
+<% end %>

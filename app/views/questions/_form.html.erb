@@ -1,4 +1,5 @@
-<%= form_for(setup_question(@question)) do |f| %>
+<%= form_for(@question) do |f| %>
+
 	<div>
 		<%= f.label :year %>
 		<%= f.text_field :year %>
@@ -25,18 +26,14 @@
 	</div>
 	<div>
 
-	<br><br>
-
 	<%= f.fields_for :alternatives do |ff| %>
 		<div>
 			<%= ff.label :letter %>
 			<%= ff.text_field :letter %>
-		</div>
-		<div>
+
 			<%= ff.label :description %>
 			<%= ff.text_field :description %>
 		</div>
-		<br>
 	<% end %>
 
 	<%= f.submit %>

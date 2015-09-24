@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
 
 	def new
 		@question = Question.new
+		5.times { @question.alternatives.build }
 	end
 
 	def create
@@ -27,6 +28,7 @@ class QuestionsController < ApplicationController
 		@question = Question.find(params[:id])
 		if @question.update_attributes(question_params)
 			flash[:success] = "Questão atualizada com sucesso!"
+			redirect_to question_path
 		else
 			render 'edit'
 		end
@@ -46,7 +48,7 @@ class QuestionsController < ApplicationController
 	private
 
 	def question_params
-		params.require(:question).permit(:year,:area,:number,:enunciation,:reference,:image,:alternatives_attributes => [:letter, :description])
+		params.require(:question).permit(:year,:area,:number,:enunciation,:reference,:image,:alternatives_attributes => [:id, :letter, :description])
 	end
 
 end

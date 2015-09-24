@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 		if @user.save
 			flash[:success]= "User was created"
+			index
 			render 'index'
 		else
 			render 'new'

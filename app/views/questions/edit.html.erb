@@ -1,5 +1,9 @@
 <h2>Edit question <%= @question.id %> (number <%= @question.number%>)</h2>
 
+<% @question.errors.full_messages.each do |message| %>
+	<li><%= message %></li>
+<% end %>
+
 <%= form_for(@question) do |f| %>
 	<div>
 		<%= f.label :year %>

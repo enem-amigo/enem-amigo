@@ -13,8 +13,7 @@ class QuestionsController < ApplicationController
 		@question = Question.new(question_params)
 		if @question.save
 			flash[:success] = "Questão cadastrada com sucesso!"
-			index
-			render 'index'
+			redirect_to @question
 		else
 			render 'new'
 		end

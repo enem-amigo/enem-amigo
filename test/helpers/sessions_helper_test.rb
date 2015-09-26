@@ -3,7 +3,7 @@ class SessionsHelperTest < ActionView::TestCase
 
   def setup
     @user = users(:renata)
-    @another_user = User.create(name: "Errado", users_name: "errado123", level: 0, email: "")
+    @another_user = User.create(name: "Errado", nickname: "errado123", level: 0, email: "")
   end
 
   test "valid user is sucessfully logged" do

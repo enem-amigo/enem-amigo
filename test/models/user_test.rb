@@ -17,15 +17,15 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  test 'username should not have more than 40 character' do
+  test 'nickname should not have more than 40 character' do
     create_user
-    @user.username="*"*45
+    @user.nickname="*"*45
     assert_not @user.valid?
   end
 
-  test 'username should be unique' do
+  test 'nickname should be unique' do
     create_user
-    @otheruser= User.new(name: "Example Name Of User", username: "examplinho", email: "example2@example2.com", level: "7", password: "supertesttest", password_confirmation: "supertesttest")
+    @otheruser= User.new(name: "Example Name Of User", nickname: "examplinho", email: "example2@example2.com", level: "7", password: "supertesttest", password_confirmation: "supertesttest")
     assert_not @otheruser.valid?
   end
 
@@ -49,14 +49,14 @@ class UserTest < ActiveSupport::TestCase
 
   test 'email should be unique' do
     create_user
-    @otheruser = User.new(name: "Example Name Of User", username: "examplinho", email: "example@example.com", level: "7", password: "supertesttest", password_confirmation: "supertesttest")
+    @otheruser = User.new(name: "Example Name Of User", nickname: "examplinho", email: "example@example.com", level: "7", password: "supertesttest", password_confirmation: "supertesttest")
     @otheruser.email="example@example.com"
     assert_not @otheruser.valid?
   end
 
   test 'case sensitive should be false' do
     create_user
-    @otheruser = User.new(name: "Example Name Of User", username: "examplinho", email: "exaMple@example.com", level: "7", password: "supertesttest", password_confirmation: "supertesttest")
+    @otheruser = User.new(name: "Example Name Of User", nickname: "examplinho", email: "exaMple@example.com", level: "7", password: "supertesttest", password_confirmation: "supertesttest")
     assert_not @otheruser.valid?
   end
 
@@ -68,7 +68,7 @@ class UserTest < ActiveSupport::TestCase
 
   private
   def create_user
-    @user = User.new(name: "Example Name", username: "examplinho", email: "example@example.com", level: "0", password: "supertest", password_confirmation: "supertest");
+    @user = User.new(name: "Example Name", nickname: "examplinho", email: "example@example.com", level: "0", password: "supertest", password_confirmation: "supertest");
     @user.save
   end
 end

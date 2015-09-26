@@ -3,4 +3,4 @@ renata:
   email: renatasoares@gmail.com
   password_digest: <%= User.digest('12345678') %>
   level: 0
-  users_name: renatasoares
+  nickname: renatasoares

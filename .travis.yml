@@ -1,0 +1,14 @@
+language: ruby
+
+script: rake test
+
+rvm:
+  - 2.2.0
+notifications:
+  email:
+    recipients:
+      - matheus_ccmf@yahoo.com.br
+branches:
+  only:
+
+  - devel

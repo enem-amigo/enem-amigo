@@ -1,0 +1,7 @@
+<h1>Edit question <%= @question.id %> (number <%= @question.number%>)</h1>
+
+<% @question.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+<% end %>
+
+<%= render :partial => 'form' %>

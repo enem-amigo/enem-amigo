@@ -1,0 +1,7 @@
+<h1>Create new Question</h1>
+
+<% @question.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+<% end %>
+
+<%= render :partial => 'form' %>

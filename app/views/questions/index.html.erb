@@ -4,7 +4,7 @@
 
 <h1> Index of questions </h1>
 
-<% if !@question.blank? %>
+<% if !@questions.blank? %>
 	<table class='question-index'>
 		<tr>
 			<th>id</th>
@@ -15,7 +15,7 @@
 			<th>image</th>
 		</tr>
 
-		<% @question.each do |t| %>
+		<% @questions.each do |t| %>
 			<tr>
 				<td><%= t.id %></td>
 				<td><%= t.year %></td>

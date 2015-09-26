@@ -1,7 +1,13 @@
 class QuestionsController < ApplicationController
 
+  include QuestionsHelper
+
   def index
-    @question = Question.all
+    if category_selected?
+      @questions = Question.where(area: current_category)
+    else
+      @questions = Question.all
+    end
   end
 
   def new
@@ -41,6 +47,15 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @question.destroy
     flash[:success] = "Questão deletada com sucesso!"
+    redirect_to questions_path
+  end
+
+  def category
+
+  end
+
+  def select_category
+    self.category = params[:category]
     redirect_to questions_path
   end
 

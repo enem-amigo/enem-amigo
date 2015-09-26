@@ -1,0 +1,16 @@
+<h1> Listing Users </h1>
+
+<table class="table">
+	<thead>
+		<th>Name</th>
+		<th>Level</th>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+			<tr>
+				<td><%= user.name %></td>
+				<td><%= user.level %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

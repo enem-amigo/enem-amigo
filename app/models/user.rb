@@ -7,5 +7,10 @@ class User < ActiveRecord::Base
       validates :email, presence: true, length:{maximum: 255},
       format: { with:  VALID_EMAIL },
       uniqueness:{ case_sensitive: false}
-      validates :password, length:{minimum: 8}
+      validates :password, length:{minimum: 8}, presence: true
+
+  def  User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+    BCrypt::Password.create(string,     cost: cost)
+  end
 end

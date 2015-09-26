@@ -10,11 +10,15 @@ class SessionsController < ApplicationController
                   flash[:sucess] = "Sucessfully logged as #{current_user.name}!"
             else
                   flash[:danger]    =     'Invalid    email/password    combination'
-                  render      'new'
+                  render 'new'
             end
       end
 
       def destroy
+            if current_user
+                  log_out
+            end
+            redirect_to login_path
       end
 
 end

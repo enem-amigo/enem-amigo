@@ -91,19 +91,19 @@ class QuestionTest < ActiveSupport::TestCase
 
     assert_not question.save
   end
-  
-  test 'should save question with more than 5 alternatives' do
-    question = Question.new(area: 'something', year: 2000, enunciation: 'something', number: 001) 
+
+  test 'should not save question with more than 5 alternatives' do
+    question = Question.new(area: 'something', year: 2000, enunciation: 'something', number: 001)
     6.times{question.alternatives.build}
-    create_alternatives_atributes(question) 
+    create_alternatives_atributes(question)
 
     assert_not question.save
   end
 
-  test 'should save question with less than 5 alternatives' do
-    question = Question.new(area: 'something', year: 2000, enunciation: 'something', number: 001) 
+  test 'should not save question with less than 5 alternatives' do
+    question = Question.new(area: 'something', year: 2000, enunciation: 'something', number: 001)
     3.times{question.alternatives.build}
-    create_alternatives_atributes(question)      
+    create_alternatives_atributes(question)
 
     assert_not question.save
   end
@@ -114,16 +114,16 @@ class QuestionTest < ActiveSupport::TestCase
       ch = '@'
 
       question.alternatives.each do |alt|
-          alt.letter = ch.next!
-          alt.description = 'something'
-        end
+        alt.letter = ch.next!
+        alt.description = 'something'
+      end
     end
 
     def create_alternatives(question)
       ch = '@'
 
       5.times{question.alternatives.build}
-        create_alternatives_atributes(question)    
+      create_alternatives_atributes(question)
     end
 
 end

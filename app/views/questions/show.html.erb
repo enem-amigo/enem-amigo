@@ -5,22 +5,22 @@
 <%= link_to "delete", question_path, :method => :delete %>
 
 <table class='question-index'>
-	<tr>
-		<td>Questão <%= @question.number %> - Ano <%= @question.year %></td>
-	</tr>
-	<tr><td>Area: <%= @question.area %></td></tr>
-	<tr><td><%= @question.enunciation %></td></tr>
+  <tr>
+    <td>Questão <%= @question.number %> - Ano <%= @question.year %></td>
+  </tr>
+  <tr><td>Area: <%= @question.area %></td></tr>
+  <tr><td><%= @question.enunciation %></td></tr>
 </table>
 
 <table class='alternatives-index'>
-	<tr>
-		<th>letter</th>
-		<th>description</th>
-	</tr>
-	<% @question.alternatives.each do |t| %>
-		<tr>
-			<td>(<%= t.letter %>)</td>
-			<td><%= t.description %></td>
-		</tr>
-	<% end %>
+  <tr>
+    <th>letter</th>
+    <th>description</th>
+  </tr>
+  <% @question.alternatives.each do |t| %>
+    <tr>
+      <td>(<%= t.letter %>)</td>
+      <td><%= t.description %></td>
+    </tr>
+  <% end %>
 </table>

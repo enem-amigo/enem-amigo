@@ -1,0 +1,14 @@
+.profile-sidebar {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-sidebar .profile-image {
+  height: 12em;
+  overflow: hidden;
+}
+
+.profile-sidebar .profile-image img {
+  max-width: 64%;
+  height: auto;
+}

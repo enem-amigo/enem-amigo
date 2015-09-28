@@ -1,0 +1,12 @@
+<div class="col-md-3">
+  <div class="profile-sidebar">
+    <div class="profile-image">
+      <%= image_tag("profiles_images/#{current_user.profile_image}", alt: "Profile image") %>
+    </div>
+    <div class="profile-information">
+      <p id="user-name"><%= current_user.name %></p>
+      <p>Posição: 98º</p>
+      <p>Questões resolvidas: 45</p>
+    </div>
+  </div>
+</div>

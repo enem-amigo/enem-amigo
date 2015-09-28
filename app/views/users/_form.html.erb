@@ -4,15 +4,15 @@
 
 <%= form_for(@user) do |f| %>
   <%= f.label :nickname, "Nickname" %>
-  <%= f.text_field :nickname %>
+  <%= f.text_field :nickname, class: 'form-control' %>
   <%= f.label :name, "Name" %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, class: 'form-control' %>
   <%= f.label :email, "Email" %>
-  <%= f.text_field :email %>
+  <%= f.text_field :email, class: 'form-control' %>
   <%= f.label :password, "Password" %>
-  <%= f.password_field :password %>
+  <%= f.password_field :password, class: 'form-control' %>
   <%= f.label :password_confirmation, "Password Confirmation" %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit "Create" %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
+  <%= f.submit "Create", class: 'btn btn-primary' %>
 <% end %>
 

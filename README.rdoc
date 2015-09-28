@@ -1,6 +1,6 @@
 == ENEM AMIGO
 
-[![Build Status](https://travis-ci.org/mateusmanuel/enem-amigo.svg?branch=devel)](https://travis-ci.org/mateusmanuel/enem-amigo)
+{<img src="https://travis-ci.org/mateusmanuel/enem-amigo.svg?branch=devel" alt="Build Status" />}[https://travis-ci.org/mateusmanuel/enem-amigo]
 
 * Aplicação para auxílio nos estudos para o ENEM (Exame Nacional do Ensino Médio). 
 

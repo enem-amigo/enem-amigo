@@ -1,5 +1,7 @@
 == ENEM AMIGO
 
+[![Build Status](https://travis-ci.org/mateusmanuel/enem-amigo.svg?branch=devel)](https://travis-ci.org/mateusmanuel/enem-amigo)
+
 * Aplicação para auxílio nos estudos para o ENEM (Exame Nacional do Ensino Médio). 
 
 * Projeto das disciplinas de GPP (Gestão de Portifólios e Projetos de Software) e MDS (Métodos de Desenvolvimento de Software) do curso de Engenharia de Software, Campus UnB Gama.

@@ -1,14 +1,45 @@
 .profile-sidebar {
+  background: #222 none repeat scroll 0% 0%;
+  color: #333;
   text-align: center;
-  margin-top: 20px;
+  padding: 20px 0px 20px 0px;
 }
 
 .profile-sidebar .profile-image {
-  height: 12em;
+  border-radius: 5px;
+  height: 9em;
+  width: 9em;
+  margin: auto;
   overflow: hidden;
 }
 
 .profile-sidebar .profile-image img {
-  max-width: 64%;
-  height: auto;
+  margin: 0px auto;
+  width: 80%;
+  height: 80%;
+  border-radius: 50% !important;
+}
+
+.profile-sidebar .profile-information {
+  color: #8B91A0;
+}
+
+.profile-sidebar .profile-information p#user-name {
+  color: #fff;
+  border-bottom: 1px solid #1F2429;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-top: -10px;
+}
+
+.profile-sidebar .ranking {
+  border-radius: 5px;
+  margin: auto;
+  width: 80%;
+  background-color: #fff;
+}
+
+.profile-sidebar .ranking th {
+  border-bottom: 1px solid #3C3C3C;
+  text-align: center;
 }

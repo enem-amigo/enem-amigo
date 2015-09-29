@@ -7,9 +7,10 @@ html {
 }
 
 body {
+  background: #E5E9EC none repeat scroll 0% 0%;
   padding-top: 60px;
   margin-bottom: 50px;
-  font-family: "Arial", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 body > .container {
@@ -22,6 +23,10 @@ section {
 
 textarea {
   resize: vertical;
+}
+
+.content {
+  background: #FFF none repeat scroll 0% 0%;
 }
 
 .center {
@@ -89,3 +94,4 @@ input {
 .field_with_errors .form-control {
   color: #A94442;
 }
+

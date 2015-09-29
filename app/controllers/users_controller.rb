@@ -21,6 +21,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.level = 0
+    @user.points = 0
+
     if @user.save
       flash[:success]= "User was created"
       render 'index'

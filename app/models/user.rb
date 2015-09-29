@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  serialize :accepted_questions, Array
+
   before_save { self.email = email.downcase }
   has_secure_password
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

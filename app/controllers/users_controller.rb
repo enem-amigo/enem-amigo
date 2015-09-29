@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :authenticate_user, except: [:ranking, :new]
+
   def new
     @user = User.new
   end

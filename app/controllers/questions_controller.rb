@@ -1,5 +1,7 @@
 class QuestionsController < ApplicationController
 
+  before_action :authenticate_user
+
   include QuestionsHelper
 
   def index

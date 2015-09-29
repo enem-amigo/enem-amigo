@@ -26,4 +26,9 @@ class User < ActiveRecord::Base
     end
     i
   end
+
+  def is_admin?
+    self.role_admin
+  end
+
 end

@@ -47,6 +47,10 @@ class UsersController < ApplicationController
     @users= User.all
   end
 
+  def ranking
+    @users = User.order(:points).reverse
+  end
+
   private
 
   def user_params

@@ -8,7 +8,7 @@
   <tbody>
     <% @users.each do |user| %>
     <tr>
-        <td><%= user.name %></td>
+        <td><%= link_to "#{user.name}", "/users/#{user.id}" %></td>
         <td><%= user.level %></td>
     </tr>
     <% end %>

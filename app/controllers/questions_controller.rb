@@ -3,11 +3,7 @@ class QuestionsController < ApplicationController
   include QuestionsHelper
 
   def index
-    if category_selected?
-      @questions = Question.where(area: current_category)
-    else
-      @questions = Question.all
-    end
+    @questions = Question.all
   end
 
   def new
@@ -50,15 +46,6 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
-  def category
-
-  end
-
-  def select_category
-    self.category = params[:category]
-    redirect_to questions_path
-  end
-
   def answer
     question = Question.find(params[:id])
     unless current_user.accepted_questions.include? question.id
@@ -68,6 +55,25 @@ class QuestionsController < ApplicationController
       end
     end
     redirect_to questions_path
+  end
+
+  def category
+  end
+
+  def natureza
+    @questions = Question.where(area: "natureza")
+  end
+
+  def humanas
+    @questions = Question.where(area: "humanas")
+  end
+
+  def linguagens
+    @questions = Question.where(area: "linguagens")
+  end
+
+  def matematica
+    @questions = Question.where(area: "matematica")
   end
 
   private

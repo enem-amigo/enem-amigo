@@ -1,0 +1,33 @@
+<h1> Index of questions </h1>
+
+<% if !@questions.blank? %>
+  <table class='question-index'>
+    <tr>
+      <th>id</th>
+      <th>year</th>
+      <th>number</th>
+      <th>area</th>
+      <th>reference</th>
+      <th>image</th>
+    </tr>
+
+    <% @questions.each do |t| %>
+      <tr>
+        <td><%= t.id %></td>
+        <td><%= t.year %></td>
+        <td><%= link_to t.number, "/questions/#{t.id}" %></td>
+        <td><%= t.area %></td>
+        <td><%= t.reference %></td>
+        <td>
+          <% if not t.image.blank? %>
+            yes
+          <% else %>
+            no
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h3> There are no questions to show right now. :( </h3>
+<% end %>

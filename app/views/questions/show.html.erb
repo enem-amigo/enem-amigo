@@ -17,10 +17,17 @@
     <th>letter</th>
     <th>description</th>
   </tr>
-  <% @question.alternatives.each do |t| %>
-    <tr>
-      <td>(<%= t.letter %>)</td>
-      <td><%= t.description %></td>
-    </tr>
-  <% end %>
 </table>
+
+<%= form_tag answer_question_path do %>
+
+  <% @question.alternatives.each do |f| %>
+    <p>
+      <td><%= radio_button_tag(:alternative, f.letter) %></td>
+      <td><%= label_tag(f.letter.to_s, f.description) %></td>
+    </p>
+  <% end %>
+
+  <%= submit_tag "Answer" %>
+
+<% end %>

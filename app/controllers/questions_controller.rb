@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
 
   before_action :authenticate_user
+  before_action :authenticate_admin, only: [ :new, :create, :edit, :destroy, :update ]
 
   include QuestionsHelper
 
@@ -50,13 +51,19 @@ class QuestionsController < ApplicationController
 
   def answer
     question = Question.find(params[:id])
-    unless current_user.accepted_questions.include? question.id
-      if params[:alternative] == question.right_answer
-        current_user.accepted_questions.push(question.id)
-        current_user.update_attribute(:points, current_user.points + 4)
+
+    if params[:alternative].blank?
+      redirect_to :back
+      flash[:danger] = "Selecione uma alternativa"
+    else
+      unless current_user.accepted_questions.include? question.id
+        if params[:alternative] == question.right_answer
+          current_user.accepted_questions.push(question.id)
+          current_user.update_attribute(:points, current_user.points + 4)
+        end
       end
+      redirect_to questions_path
     end
-    redirect_to questions_path
   end
 
   def category

@@ -18,9 +18,11 @@ module SessionsHelper
   end
 
   def authenticate_user
-    unless logged_in?
-      redirect_to login_path
-    end
+    redirect_to login_path unless logged_in?
+  end
+
+  def authenticate_admin
+    redirect_to :back unless current_user.is_admin?
   end
 
 end

@@ -7,14 +7,19 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user= User.find(params[:id])
+    @user = User.find(params[:id])
+    redirect_to users_path unless @user.id == current_user.id or current_user.is_admin?
   end
 
-  def delete
+  def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    flash[:notice] = "User was deleted"
-    redirect_to users_path
+    if @user.id == current_user.id or current_user.is_admin?
+      @user.destroy
+      flash[:notice] = "User was deleted"
+      redirect_to users_path
+    else
+      redirect_to :back
+    end
   end
 
   def show
@@ -23,15 +28,16 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.level = 0
+    @user.level = 1
     @user.points = 0
+    @user.role_admin = false
 
     if @user.save
-      flash[:success]= "User was created"
+      flash[:success] = "User was created"
       redirect_to @user
     else
       render 'new'
-      flash[:failure]= "It was not possible to create your user"
+      flash[:failure] = "It was not possible to create your user"
     end
   end
 

@@ -1,27 +1,27 @@
-<h1>Questions Page</h1>
+<h1> Lista de Questões </h1>
 
-<%= link_to 'Create Question', new_question_path %>
-
-<h1> Index of questions </h1>
+<% if current_user.is_admin? %>
+	<%= link_to 'Criar Questão', new_question_path %>
+<% end %>
 
 <% if !@questions.blank? %>
 	<table class='question-index'>
 		<tr>
 			<th>id</th>
-			<th>year</th>
-			<th>number</th>
-			<th>area</th>
-			<th>reference</th>
-			<th>image</th>
+			<th>Ano</th>
+			<th>Número</th>
+			<th>Área</th>
+			<th>Enunciado</th>
+			<th>Imagem</th>
 		</tr>
 
 		<% @questions.each do |t| %>
 			<tr>
-				<td><%= t.id %></td>
+				<td><%= link_to t.id, "/questions/#{t.id}" %></td>
 				<td><%= t.year %></td>
-				<td><%= link_to t.number, "/questions/#{t.id}" %></td>
+				<td><%= t.number %></td>
 				<td><%= t.area %></td>
-				<td><%= t.reference %></td>
+				<td><%= t.enunciation %></td>
 				<td>
 					<% if not t.image.blank? %>
 						yes

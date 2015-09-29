@@ -1,4 +1,10 @@
-<h1>Showing User</h1>
+<h1>User: <%= @user.name %></h1>
+
+<% if current_user.is_admin? || current_user.id == @user.id %>
+  <%= link_to "Editar", edit_user_path %>
+  <%= link_to "Excluir", user_path, :method => :delete %>
+<% end %>
+
 <p>
   <strong>Name:</strong>
   <%= @user.name %>
@@ -25,6 +31,20 @@
 </p>
 
 <p>
-  <strong>Accepted Questions:</strong>
-  <%= @user.accepted_questions %>
+  <strong>Accepted Questions: <%= @user.accepted_questions.count %></strong>
+  <table>
+    <thead>
+      <th>Número</th>
+      <th>Área</th>
+      <th>Ano</th>
+    </thead>
+    <% @user.accepted_questions.each do |a| %>
+      <% accepted = Question.find(a) %>
+      <tbody>
+        <td><%= link_to "#{accepted.number}", "/questions/#{a}" %></td>
+        <td><%= accepted.area %></td>
+        <td><%= accepted.year %></td>
+      </tbody>
+    <% end %>
+  </table>
 </p>

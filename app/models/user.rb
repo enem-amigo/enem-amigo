@@ -16,4 +16,14 @@ class User < ActiveRecord::Base
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
     BCrypt::Password.create(string, cost: cost)
   end
+
+  def find_by_area(area)
+    i = 0
+    self.accepted_questions.each do |t|
+      if Question.find(t).area == area
+        i = i+1
+      end
+    end
+    i
+  end
 end

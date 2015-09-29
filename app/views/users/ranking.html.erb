@@ -1,0 +1,29 @@
+<h1>Ranking Geral</h1>
+
+<table class="ranking-table">
+  <thead>
+    <th>Posição</th>
+    <th>Nome</th>
+    <th>Pontos</th>
+    <th>Nível</th>
+    <th>Ciências da Natureza</th>
+    <th>Ciências Humanas</th>
+    <th>Linguagens e Códigos</th>
+    <th>Matemática</th>
+  </thead>
+  <tbody>
+    <% i = 0 %>
+    <% @users.each do |user| %>
+    <tr>
+        <td><%= i = i+1 %>º</td>
+        <td><%= user.name %></td>
+        <td><%= user.points %></td>
+        <td><%= user.level %></td>
+        <td><%= user.find_by_area('natureza') %></td>
+        <td><%= user.find_by_area('humanas') %></td>
+        <td><%= user.find_by_area('linguagens') %></td>
+        <td><%= user.find_by_area('matematica') %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>

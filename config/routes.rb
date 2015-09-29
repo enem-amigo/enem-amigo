@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
 
-  root 'static_pages#home'
+  root 'sessions#new'
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  get 'questions/category'
-  get 'questions/select_category'
+
+  get 'questions/matematica' => 'questions#matematica'
+  get 'questions/natureza' => 'questions#natureza'
+  get 'questions/humanas' => 'questions#humanas'
+  get 'questions/linguagens' => 'questions#linguagens'
+  get 'questions/all' => 'questions#index'
+
+  get 'questions' => 'questions#category'
 
   resources :users
   resources :questions do

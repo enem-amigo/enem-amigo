@@ -59,10 +59,21 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
+  def answer
+    question = Question.find(params[:id])
+    unless current_user.accepted_questions.include? question.id
+      if params[:alternative] == question.right_answer
+        current_user.accepted_questions.push(question.id)
+        current_user.update_attribute(:points, current_user.points + 4)
+      end
+    end
+    redirect_to questions_path
+  end
+
   private
 
   def question_params
-    params.require(:question).permit(:year,:area,:number,:enunciation,:reference,:image,:alternatives_attributes => [:id, :letter, :description])
+    params.require(:question).permit(:year,:area,:number,:enunciation,:reference,:image,:right_answer,:alternatives_attributes => [:id, :letter, :description])
   end
 
 end

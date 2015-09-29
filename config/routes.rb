@@ -9,5 +9,9 @@ Rails.application.routes.draw do
   get 'questions/select_category'
 
   resources :users
-  resources :questions
+  resources :questions do
+    member do
+      post "answer"
+    end
+  end
 end

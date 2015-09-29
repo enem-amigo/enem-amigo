@@ -5,6 +5,7 @@ class Question < ActiveRecord::Base
   validates :number, presence: true, length: { maximum: 3 }
   validates :enunciation, presence: true
   validates :alternatives, presence: true
+  validates :right_answer, presence: true, length: { maximum: 1 }
 
   validate do
     check_alternatives_number

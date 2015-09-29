@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success]= "User was created"
-      render 'index'
+      redirect_to @user
     else
       render 'new'
       flash[:failure]= "It was not possible to create your user"
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user= User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success]= "User was updated"
-      render 'index'
+      redirect_to @user
     else
       render 'edit'
     end

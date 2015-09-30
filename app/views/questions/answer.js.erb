@@ -1,0 +1,4 @@
+$('input.btn').hide();
+$('#jump-btn').html('Próxima questão');
+$('#jump-btn').after("<%= j link_to 'Fórum', '#', class: 'btn btn-primary btn-sm button' %>");
+$("label[for='<%= j @answer_letter %>']").after('<%= j image_tag("correct-answer", alt: "", class: "answer-feedback") %>');

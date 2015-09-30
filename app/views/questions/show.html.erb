@@ -13,17 +13,19 @@
   <tr><td>Area: <%= @question.area %></td></tr>
 </table>
 
-<p><h4><%= @question.enunciation %></h4></p>
+<p class="question"><%= @question.enunciation %></p>
 
-<%= form_tag answer_question_path do %>
+<%= form_tag answer_question_path, remote: true do %>
 
   <% @question.alternatives.each do |f| %>
-    <p>
-      <td><%= radio_button_tag(:alternative, f.letter) %></td>
-      <td><%= f.letter %>) <%= label_tag(f.letter.to_s, f.description) %></td>
-    </p>
+      <div class="alternative">
+        <%= radio_button_tag(:alternative, f.letter) %>
+        <%= f.letter %>)
+        <%= label_tag(f.letter.to_s, f.description) %>
+      </div>
   <% end %>
 
-  <%= submit_tag "Answer" %>
+  <%= submit_tag "Responder", class: 'btn btn-primary btn-sm button' %>
+  <%= link_to "Pular", "#", class: 'btn btn-primary btn-sm button', id: 'jump-btn' %>
 
 <% end %>

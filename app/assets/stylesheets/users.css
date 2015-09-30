@@ -53,6 +53,10 @@
   background-color: #fff;
 }
 
+.profile-sidebar .ranking tr {
+  height: 1.5em;
+}
+
 .profile-sidebar .ranking th {
   border-bottom: 2px solid #ECEDF1;
   font-size: 1.8em;

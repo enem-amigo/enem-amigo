@@ -51,18 +51,25 @@ class QuestionsController < ApplicationController
 
   def answer
     question = Question.find(params[:id])
-
+    @answer_letter = params[:alternative]
+    puts '=' * 80
+    puts @answer_letter
+    puts '=' * 80
     if params[:alternative].blank?
       redirect_to :back
       flash[:danger] = "Selecione uma alternativa"
     else
-      unless current_user.accepted_questions.include? question.id
-        if params[:alternative] == question.right_answer
+      if params[:alternative] == question.right_answer
+        @correct_answer = true
+        unless current_user.accepted_questions.include? question.id
           current_user.accepted_questions.push(question.id)
-          current_user.update_attribute(:points, current_user.points + 4)
+          # current_user.update_attribute(:points, current_user.points + 4)
         end
       end
-      redirect_to questions_path
+      respond_to do |format|
+        format.html { redirect_to questions_path }
+        format.js
+      end 
     end
   end
 

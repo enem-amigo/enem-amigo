@@ -11,14 +11,14 @@
 <%= render 'layouts/header' %>
 
 <div class="container">
-  <% flash.each do |message_type, message| %>
-    <%= content_tag :div, message, class: "alert alert-#{message_type}" %>
-  <% end %>
 
   <div class="row">
+    <% flash.each do |message_type, message| %>
+      <%= content_tag :div, message, class: "alert alert-#{message_type}" %>
+    <% end %>
     <% if logged_in? %>
       <%= render 'users/profile_sidebar' %>
-      <div class="col-md-9 content">
+      <div class="col-md-9 content main-content">
         <%= yield %>
       </div>
     <% else %>

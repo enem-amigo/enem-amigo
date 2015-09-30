@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user, except: [:ranking, :new]
+  before_action :authenticate_user, except: [:ranking, :new, :create]
 
   def new
     @user = User.new
-    @home_page = true
   end
 
   def edit
@@ -37,8 +36,8 @@ class UsersController < ApplicationController
       flash[:success] = "User was created"
       redirect_to @user
     else
-      render 'new'
       flash[:failure] = "It was not possible to create your user"
+      render 'new'
     end
   end
 

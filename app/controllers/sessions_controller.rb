@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  def  new
+  def new
+    @home_page = true # FIXME
   end
 
   def create
@@ -7,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       redirect_to user
-      flash[:sucess] = "Sucessfully logged as #{current_user.name}!"
+      flash[:success] = "Sucessfully logged as #{current_user.name}!"
     else
       flash[:danger] = 'Invalid email/password combination'
       render 'new'

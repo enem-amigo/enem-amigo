@@ -13,6 +13,13 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+body.homepage {
+  background: image-url("study1.jpg") !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
 body > .container {
   padding-bottom: 50px;
 }
@@ -28,6 +35,19 @@ textarea {
 .content {
   background: #FFF none repeat scroll 0% 0%;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
+  padding-bottom: 1.2em;
+}
+
+.content-radius {
+  border-radius: 8px;
+}
+
+.login input.btn {
+  background-color: #222;
+}
+
+.login input.btn:hover {
+  background-color: #333;
 }
 
 .row {

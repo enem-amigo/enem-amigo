@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= @home_page ? 'homepage' : '' %>">
 
 <%= render 'layouts/header' %>
 
@@ -22,7 +22,9 @@
         <%= yield %>
       </div>
     <% else %>
-      <%= yield %>
+      <div class="col-md-6 col-md-offset-3 login-form content content-radius">
+        <%= yield %>
+      </div>
     <% end %>
   </div>
 </div>

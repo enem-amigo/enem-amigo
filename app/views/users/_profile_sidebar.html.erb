@@ -4,9 +4,10 @@
       <%= image_tag("profiles_images/#{current_user.profile_image}", alt: "Profile image") %>
     </div>
     <div class="profile-information">
-      <p id="user-name"><%= current_user.nickname %></p>
-      <p id="user-rank">Posição: 98º</p>
-      <p>Resolvido: 45</p>
+      <p id="user-name"><%= current_user.name %></p>
+      <p id="user-rank"><strong>Posição:</strong> 98º</p>
+      <p><strong>Resolvido:</strong> 45 questões</p>
+      <a href="#" class="btn btn-success"><%= image_tag("star.png") %><span>Medalhas</span></a>
     </div>
     <%= render 'users/ranking' %>
   </div>

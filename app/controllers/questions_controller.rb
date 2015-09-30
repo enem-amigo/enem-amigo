@@ -69,26 +69,26 @@ class QuestionsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to questions_path }
         format.js
-      end 
+      end
     end
   end
 
   def category
   end
 
-  def natureza
+  def nature
     @questions = Question.where(area: "natureza")
   end
 
-  def humanas
+  def humans
     @questions = Question.where(area: "humanas")
   end
 
-  def linguagens
+  def languages
     @questions = Question.where(area: "linguagens")
   end
 
-  def matematica
+  def math
     @questions = Question.where(area: "matematica")
   end
 

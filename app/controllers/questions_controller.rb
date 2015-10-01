@@ -50,9 +50,6 @@ class QuestionsController < ApplicationController
   def answer
     question = Question.find(params[:id])
     @answer_letter = params[:alternative]
-    puts '=' * 80
-    puts @answer_letter
-    puts '=' * 80
     if params[:alternative].blank?
       redirect_to :back
       flash[:danger] = "Selecione uma alternativa"
@@ -61,32 +58,32 @@ class QuestionsController < ApplicationController
         @correct_answer = true
         unless current_user.accepted_questions.include? question.id
           current_user.accepted_questions.push(question.id)
-          # current_user.update_attribute(:points, current_user.points + 4)
+          current_user.update_attribute(:points, current_user.points + 4)
         end
       end
       respond_to do |format|
         format.html { redirect_to questions_path }
         format.js
-      end 
+      end
     end
   end
 
   def category
   end
 
-  def natureza
+  def nature
     @questions = Question.where(area: "natureza")
   end
 
-  def humanas
+  def humans
     @questions = Question.where(area: "humanas")
   end
 
-  def linguagens
+  def languages
     @questions = Question.where(area: "linguagens")
   end
 
-  def matematica
+  def math
     @questions = Question.where(area: "matematica")
   end
 

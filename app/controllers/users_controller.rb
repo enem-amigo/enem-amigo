@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user, except: [:ranking, :new]
+  before_action :authenticate_user, except: [:ranking, :new, :create]
 
   def new
     @user = User.new
-    @home_page = true
+    redirect_to current_user if logged_in?
   end
 
   def edit
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.id == current_user.id or current_user.is_admin?
       @user.destroy
-      flash[:notice] = "User was deleted"
+      flash[:notice] = "Usuário foi deletado"
       redirect_to users_path
     else
       redirect_to :back
@@ -29,23 +29,21 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.level = 1
-    @user.points = 0
-    @user.role_admin = false
 
     if @user.save
-      flash[:success] = "User was created"
+      flash[:success] = "Usuário criado com sucesso!"
+      log_in @user
       redirect_to @user
     else
+      flash[:failure] = "Não foi possível criar seu usuário"
       render 'new'
-      flash[:failure] = "It was not possible to create your user"
     end
   end
 
   def update
     @user= User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success]= "User was updated"
+      flash[:success]= "Usuário atualizado"
       redirect_to @user
     else
       render 'edit'

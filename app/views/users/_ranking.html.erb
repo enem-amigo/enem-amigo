@@ -1,39 +1,16 @@
 <table class="ranking">
   <thead>
     <tr>
-      <th><%= image_tag("trophy.jpg") %><span>top 10</span></th>
+      <% top10 = User.all.order(:points).reverse %>
+      <% min = top10.count < 10 ? top10.count : 10 %>
+      <th><%= link_to image_tag("trophy.jpg"), ranking_path %><span>top <%= min %></span></th>
     </tr>
   </thead>
   <tbody>
+  <% for i in 0...min %>
     <tr>
-      <td>Brenddon Gontijo</td>
+      <td><%= link_to top10[i].name, "/users/#{top10[i].id}" %></td>
     </tr>
-    <tr>
-      <td>Brenddon Gontijo</td>
-    </tr>
-    <tr>
-      <td>Brenddon Gontijo</td>
-    </tr>
-    <tr>
-      <td>Brenddon Gontijo</td>
-    </tr>
-    <tr>
-      <td>Brenddon Gontijo</td>
-    </tr>
-    <tr>
-      <td>Brenddon Gontijo</td>
-    </tr>
-    <tr>
-      <td>Brenddon Gontijo</td>
-    </tr>
-    <tr>
-      <td>Brenddon Gontijo</td>
-    </tr>
-    <tr>
-      <td>Brenddon Gontijo</td>
-    </tr>
-    <tr>
-      <td>Brenddon Gontijo</td>
-    </tr>
+  <% end %>
   </tbody>
 </table>

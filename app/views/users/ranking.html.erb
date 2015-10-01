@@ -19,10 +19,10 @@
         <td><%= user.name %></td>
         <td><%= user.points %></td>
         <td><%= user.level %></td>
-        <td><%= user.find_by_area('natureza') %></td>
-        <td><%= user.find_by_area('humanas') %></td>
-        <td><%= user.find_by_area('linguagens') %></td>
-        <td><%= user.find_by_area('matematica') %></td>
+        <td><%= user.count_questions_by_area('natureza') %></td>
+        <td><%= user.count_questions_by_area('humanas') %></td>
+        <td><%= user.count_questions_by_area('linguagens') %></td>
+        <td><%= user.count_questions_by_area('matematica') %></td>
     </tr>
     <% end %>
     </tbody>

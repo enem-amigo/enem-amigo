@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  root 'sessions#new'
+  root 'static_pages#home'
+
+  get 'sobre' => 'static_pages#about'
+  get 'ajuda' => 'static_pages#help'
 
   get 'signup' => 'users#new'
   get 'ranking' => 'users#ranking'
@@ -11,10 +14,10 @@ Rails.application.routes.draw do
 
   get 'questions' => 'questions#category'
   get 'questions/all' => 'questions#index'
-  get 'questions/humanas' => 'questions#humanas'
-  get 'questions/natureza' => 'questions#natureza'
-  get 'questions/linguagens' => 'questions#linguagens'
-  get 'questions/matematica' => 'questions#matematica'
+  get 'questions/humanas' => 'questions#humans'
+  get 'questions/natureza' => 'questions#nature'
+  get 'questions/linguagens' => 'questions#languages'
+  get 'questions/matematica' => 'questions#math'
   post 'questions/upload'
 
   resources :users

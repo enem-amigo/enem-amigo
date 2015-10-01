@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  get 'sobre' => 'static_pages#about'
-  get 'ajuda' => 'static_pages#help'
+  get 'about' => 'static_pages#about'
+  get 'help' => 'static_pages#help'
 
   get 'signup' => 'users#new'
   get 'ranking' => 'users#ranking'
@@ -14,10 +14,10 @@ Rails.application.routes.draw do
 
   get 'questions' => 'questions#category'
   get 'questions/all' => 'questions#index'
-  get 'questions/humanas' => 'questions#humans'
-  get 'questions/natureza' => 'questions#nature'
-  get 'questions/linguagens' => 'questions#languages'
-  get 'questions/matematica' => 'questions#math'
+  get 'questions/humans' => 'questions#humans'
+  get 'questions/nature' => 'questions#nature'
+  get 'questions/languages' => 'questions#languages'
+  get 'questions/math' => 'questions#math'
 
   resources :users
   resources :questions do

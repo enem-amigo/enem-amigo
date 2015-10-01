@@ -18,11 +18,11 @@
     <% end %>
     <% if logged_in? %>
       <%= render 'users/profile_sidebar' %>
-      <div class="col-md-9 content main-content">
+      <div class="col-sm-9 content main-content">
         <%= yield %>
       </div>
     <% else %>
-      <div class="col-md-6 col-md-offset-3 login-form content content-radius">
+      <div class="col-sm-6 col-sm-offset-3 login-form content content-radius">
         <%= yield %>
       </div>
     <% end %>

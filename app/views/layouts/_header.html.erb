@@ -7,7 +7,7 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Início", root_path %></li>
-        <li><%= link_to "Ajuda", ajuda_path %></li>
+        <li><%= link_to "Ajuda", help_path %></li>
         <li><%= link_to "Ranking", ranking_path %></li>
         <% if current_user && current_user.role_admin? %>
           <li><%= link_to "Usuários", users_path %></li>
@@ -29,7 +29,7 @@
           </li>
 
         <% else %>
-          <li><%= link_to "Log in", login_path %></li>
+          <li><%= link_to "Cadastre-se", signup_path %></li>
         <% end %>
       </ul>
     </nav>

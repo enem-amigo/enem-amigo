@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       log_in @user
       redirect_to @user
     else
-      flash[:failure] = "Não foi possível criar seu usuário"
+      flash.now[:danger] = "Não foi possível criar seu usuário"
       render 'new'
     end
   end

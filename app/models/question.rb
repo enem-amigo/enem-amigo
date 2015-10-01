@@ -24,6 +24,11 @@ class Question < ActiveRecord::Base
     (100 * (self.hits.to_f / self.tries)).round(2)
   end
 
+  def next_question
+    question = Question.where(area: self.area).where("id > ?", id).first
+    question ? question : Question.where(area: self.area).first
+  end
+
   private
 
     def alternatives_count_valid?

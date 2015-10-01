@@ -106,6 +106,10 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
+  def next_question
+    redirect_to Question.find(params[:id]).next_question
+  end
+
   private
 
   def question_params

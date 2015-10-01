@@ -27,7 +27,7 @@ module SessionsHelper
 
   def verify_user_permission
     user = User.find(params[:id])
-    redirect_to users_path unless user.id == current_user.id or current_user.role_admin?
+    redirect_to :back unless user.id == current_user.id or current_user.role_admin?
   end
 
 end

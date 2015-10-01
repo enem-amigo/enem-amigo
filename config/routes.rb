@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   resources :users
   resources :questions do
     member do
-      post "answer"
+      post 'answer'
+      post 'next' => 'questions#next_question'
     end
   end
 end

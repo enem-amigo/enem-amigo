@@ -26,7 +26,7 @@
     <% end %>
 
   <%= submit_tag "Responder", class: 'btn btn-primary btn-sm button', id: 'answer-btn' %>
-  <%= link_to "Pular", "#", class: 'btn btn-primary btn-sm button', id: 'jump-btn' %>
+  <%= link_to "Pular", next_question_path, method: :post, class: 'btn btn-primary btn-sm button', id: 'jump-btn' %>
 
   <% end %>
 </div>

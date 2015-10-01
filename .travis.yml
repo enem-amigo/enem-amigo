@@ -1,5 +1,7 @@
 language: ruby
 
+before_script: rake db:migrate RAILS_ENV=test
+
 script: rake test
 
 rvm:

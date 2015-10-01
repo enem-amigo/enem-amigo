@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
-  def find_by_area(area)
+  def count_questions_by_area(area)
     i = 0
     self.accepted_questions.each do |t|
       if Question.find(t).area == area
@@ -30,5 +30,17 @@ class User < ActiveRecord::Base
   def is_admin?
     self.role_admin
   end
+
+  def find_position_in_ranking
+    ranking = User.all.order(:points).reverse
+    for i in 0...ranking.count
+      return i+1 if ranking[i].id == self.id
+    end
+  end
+
+  def total_accepted_questions
+    self.accepted_questions.count
+  end
+
 
 end

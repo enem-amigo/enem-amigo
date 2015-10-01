@@ -16,13 +16,9 @@
 <p class="question"><%= @question.enunciation %></p>
 
 <%= form_tag answer_question_path, remote: true do %>
-
   <% @question.alternatives.each do |f| %>
       <div class="alternative">
-        <% unless current_user.accepted_questions.include? @question.id %>
-          <%= radio_button_tag(:alternative, f.letter) %>
-        <% end %>
-        <%= f.letter %>)
+        <%= radio_button_tag(:alternative, f.letter) %>
         <%= label_tag(f.letter.to_s, f.description) %>
       </div>
   <% end %>

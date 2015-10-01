@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'questions/natureza' => 'questions#natureza'
   get 'questions/linguagens' => 'questions#linguagens'
   get 'questions/matematica' => 'questions#matematica'
+  post 'questions/upload'
 
   resources :users
   resources :questions do

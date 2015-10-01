@@ -10,8 +10,6 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
-    5.times { @question.alternatives.build }
   end
 
   def create
@@ -90,6 +88,22 @@ class QuestionsController < ApplicationController
 
   def matematica
     @questions = Question.where(area: "matematica")
+  end
+
+  def upload
+    uploaded_file = params[:questions_file]
+    if uploaded_file.respond_to?(:read)
+      oi = 'lala'
+      file_content = uploaded_file.read
+    elsif uploaded_file.respond_to?(:path)
+      oi = 'haha'
+      file_content = File.read(uploaded_file.path)
+    else
+      logger.error "Bad uploaded_file: #{uploaded_file.class.name}: #{uploaded_file.inspect}"
+    end
+    puts file_content
+    puts oi
+    redirect_to questions_path
   end
 
   private

@@ -139,7 +139,7 @@ p.question {
 
 form .alternative input[type="radio"] {
   margin: 0px !important;
-  width: 2px;
+  width: 15px;
   vertical-align: middle;
 }
 
@@ -148,7 +148,7 @@ form .alternative input[type="radio"] {
   font-weight: 700;
   margin-top: 0.8em;
   margin-right: 0.4em;
-  min-width: 10em; 
+  min-width: 10em;
 }
 
 form input[type="submit"] {
@@ -158,3 +158,4 @@ form input[type="submit"] {
 .answer-feedback {
   margin-left: 0.5em;
 }
+

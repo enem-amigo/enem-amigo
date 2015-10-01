@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :verify_user_permission, only: [:edit, :destroy]
 
   def new
+    @home_page = true
     @user = User.new
     redirect_to current_user if logged_in?
   end

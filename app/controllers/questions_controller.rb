@@ -10,8 +10,6 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
-    5.times { @question.alternatives.build }
   end
 
   def create
@@ -75,19 +73,37 @@ class QuestionsController < ApplicationController
   end
 
   def nature
-    @questions = Question.where(area: "CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS")
+    @questions = Question.where(area: "ciências da natureza e suas tecnologias")
   end
 
   def humans
-    @questions = Question.where(area: "CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS")
+    @questions = Question.where(area: "ciências humanas e suas tecnologias")
   end
 
   def languages
-    @questions = Question.where(area: "LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS")
+    @questions = Question.where(area: "linguagens, códigos e suas tecnologias")
   end
 
   def math
-    @questions = Question.where(area: "MATEMÁTICA E SUAS TECNOLOGIAS")
+    @questions = Question.where(area: "matemática e suas tecnologias")
+  end
+
+  def upload_questions
+    uploaded_file = params[:questions_file]
+    file_content = uploaded_file.read
+
+    Parser.read_questions(file_content)
+
+    flash[:success] = "Questões armazenadas com sucesso."
+    redirect_to questions_path
+  end
+
+  def upload_candidates_data
+    uploaded_file = params[:candidates_data_file]
+    file_content = uploaded_file.read
+    Parser.read_candidates_data(file_content, params[:test_year])
+    flash[:success] = "Dados armazenados com sucesso."
+    redirect_to questions_path
   end
 
   private

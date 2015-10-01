@@ -14,10 +14,14 @@ Rails.application.routes.draw do
 
   get 'questions' => 'questions#category'
   get 'questions/all' => 'questions#index'
+
   get 'questions/humans' => 'questions#humans'
   get 'questions/nature' => 'questions#nature'
   get 'questions/languages' => 'questions#languages'
   get 'questions/math' => 'questions#math'
+  get 'questions/upload' => 'questions#new'
+  post 'questions/upload_questions'
+  post 'questions/upload_candidates_data'
 
   resources :users
   resources :questions do

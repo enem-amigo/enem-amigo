@@ -1,7 +1,25 @@
-<h1>Criar Questão</h1>
+<h1 class="border-title">Upload de Dados</h1>
 
-<% @question.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
-<% end %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div>
+      <h2 class="form-title">Questões em JSON</h2>
+      <h2 class="form-title">Dados dos candidatos do Enem</h2>
+    </div>
+    <%= form_tag({ action: :upload_questions }, multipart: true, class: 'upload-form',
+                   id: 'questions-form') do %>
+      <span class="btn btn-default btn-file">
+        Browse<%= file_field_tag 'questions_file' %>
+      </span>
+      <%= submit_tag 'Enviar', class: 'btn btn-primary btn-sm' %>
+    <% end %>
 
-<%= render :partial => 'form' %>
+    <%= form_tag({ action: :upload_candidates_data }, multipart: true, class: 'upload-form', id: 'candidates-data-form') do %>
+      <%= select_tag :test_year, options_for_select((2009..2012).to_a.collect { |x| x.to_s }), class: 'form-control' %>
+      <span class="btn btn-default btn-file">
+        Browse<%= file_field_tag 'candidates_data_file' %>
+      </span>
+      <%= submit_tag 'Enviar', class: 'btn btn-primary btn-sm' %>
+    <% end %>
+  </div>
+</div>

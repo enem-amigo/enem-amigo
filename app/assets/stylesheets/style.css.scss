@@ -32,6 +32,15 @@ textarea {
   resize: vertical;
 }
 
+table.ranking {
+  min-height: 259px;
+}
+
+div.alert {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
+  width: 101.4%;
+}
+
 .content {
   background: #FFF none repeat scroll 0% 0%;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
@@ -76,6 +85,11 @@ textarea {
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
+}
+
+h1.border-title {
+  border-bottom: 1px solid #D3D6DE;
+  padding-bottom: 0.2em;
 }
 
 h1 {
@@ -151,7 +165,7 @@ form .alternative input[type="radio"] {
   min-width: 10em;
 }
 
-form input[type="submit"] {
+form input#answer-btn {
   width: 10em;
 }
 
@@ -159,3 +173,56 @@ form input[type="submit"] {
   margin-left: 0.5em;
 }
 
+/********* upload file **********/
+
+.upload-forms-container {
+  margin: auto;
+}
+
+.form-title {
+  display: table-cell;
+  padding-right: 3.5em;
+  padding-bottom: 1em;
+  white-space: nowrap;
+}
+
+.upload-form {
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.upload-form h2 {
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+#questions-form {
+  border-right: 1px dotted #D3D6DE;
+  padding-right: 2em;
+}
+
+#candidates-data-form {
+  padding-left: 2em;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.2em;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}

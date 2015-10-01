@@ -1,34 +1,24 @@
 <h1> Lista de Questões </h1>
 
 <% if current_user.is_admin? %>
-	<%= link_to 'Criar Questão', new_question_path %>
+	<%= link_to 'Criar Questão', new_question_path, class: "btn btn-success"  %>
 <% end %>
 
 <% if !@questions.blank? %>
-	<table class='question-index'>
-		<tr>
-			<th>id</th>
+	<table class='table'>
+		<thead>
 			<th>Ano</th>
 			<th>Número</th>
 			<th>Área</th>
 			<th>Enunciado</th>
-			<th>Imagem</th>
-		</tr>
+		</thead>
 
 		<% @questions.each do |t| %>
 			<tr>
-				<td><%= link_to t.id, "/questions/#{t.id}" %></td>
 				<td><%= t.year %></td>
-				<td><%= t.number %></td>
+				<td><%= link_to t.number, "/questions/#{t.id}" %></td>
 				<td><%= t.area %></td>
 				<td><%= t.enunciation %></td>
-				<td>
-					<% if not t.image.blank? %>
-						yes
-					<% else %>
-						no
-					<% end %>
-				</td>
 			</tr>
 		<% end %>
 	</table>

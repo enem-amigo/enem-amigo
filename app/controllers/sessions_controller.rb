@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    @home_page = true # FIXME
+    @home_page = true
   end
 
   def create

@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       redirect_to user
        flash[:success] = "Logado com sucesso!"
       else
-       flash[:danger] = 'Combinação inválida de e-mail/senha'
+       flash.now[:danger] = 'Combinação inválida de e-mail/senha'
       render 'new'
     end
   end

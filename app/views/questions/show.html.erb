@@ -1,7 +1,7 @@
 <h1>Questão <%= @question.number %></h1>
 <h2>Ano: <%= @question.year %></h2>
 
-<% if current_user.is_admin? %>
+<% if current_user.role_admin? %>
   <%= link_to "Editar", edit_question_path, class: "btn btn-primary" %>
   <%= link_to "Deletar", question_path, :method => :delete, class: "btn btn-danger" %>
 <% end %>

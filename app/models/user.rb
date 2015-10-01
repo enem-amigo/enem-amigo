@@ -27,10 +27,6 @@ class User < ActiveRecord::Base
     i
   end
 
-  def is_admin?
-    self.role_admin
-  end
-
   def find_position_in_ranking
     ranking = User.all.order(:points).reverse
     for i in 0...ranking.count

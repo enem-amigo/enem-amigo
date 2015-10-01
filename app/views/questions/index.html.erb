@@ -1,6 +1,6 @@
 <h1> Lista de Questões </h1>
 
-<% if current_user.is_admin? %>
+<% if current_user.role_admin? %>
 	<%= link_to 'Criar Questão', new_question_path, class: "btn btn-success"  %>
 <% end %>
 

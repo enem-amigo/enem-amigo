@@ -8,9 +8,9 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       redirect_to user
-      flash[:success] = "Sucessfully logged as #{current_user.name}!"
-    else
-      flash[:danger] = 'Invalid email/password combination'
+       flash[:success] = "Logado com sucesso!"
+      else
+       flash[:danger] = 'Combinação inválida de e-mail/senha'
       render 'new'
     end
   end

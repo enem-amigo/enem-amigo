@@ -1,37 +1,38 @@
-<h1>User: <%= @user.name %></h1>
+<h1><%= @user.name %></h1>
 
 <% if current_user.is_admin? || current_user.id == @user.id %>
-  <%= link_to "Editar", edit_user_path %>
-  <%= link_to "Excluir", user_path, :method => :delete %>
+  <%= link_to "Editar", edit_user_path, class: "btn btn-primary" %>
+  <%= link_to "Excluir", user_path, :method => :delete,  class: "btn btn-danger" %>
 <% end %>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Nome:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Nickname:</strong>
+  <strong>Usuário:</strong>
   <%= @user.nickname %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong>E-mail:</strong>
   <%= @user.email %>
 </p>
 
 <p>
-  <strong>Level:</strong>
+  <strong>Nível:</strong>
   <%= @user.level %>
 </p>
 
 <p>
-  <strong>Points:</strong>
+  <strong>Pontos:</strong>
   <%= @user.points %>
 </p>
 
 <p>
-  <strong>Accepted Questions: <%= @user.accepted_questions.count %></strong>
+  <strong>Questões acertadas: <%= @user.total_accepted_questions %></strong>
+  <% if @user.total_accepted_questions != 0 %>
   <table>
     <thead>
       <th>Número</th>
@@ -47,4 +48,5 @@
       </tbody>
     <% end %>
   </table>
+  <% end %>
 </p>

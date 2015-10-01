@@ -3,15 +3,15 @@
 <% end %>
 
 <%= form_for(@user) do |f| %>
-  <%= f.label :nickname, "Nickname" %>
+  <%= f.label :nickname, "Usuário" %>
   <%= f.text_field :nickname, class: 'form-control' %>
-  <%= f.label :name, "Name" %>
+  <%= f.label :name, "Nome" %>
   <%= f.text_field :name, class: 'form-control' %>
-  <%= f.label :email, "Email" %>
+  <%= f.label :email, "E-mail" %>
   <%= f.text_field :email, class: 'form-control' %>
-  <%= f.label :password, "Password" %>
+  <%= f.label :password, "Senha" %>
   <%= f.password_field :password, class: 'form-control' %>
-  <%= f.label :password_confirmation, "Password Confirmation" %>
+  <%= f.label :password_confirmation, "Confirmação da senha" %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
   <%= f.submit "Create", class: 'btn btn-primary' %>
 <% end %>

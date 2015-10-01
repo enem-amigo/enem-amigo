@@ -87,19 +87,21 @@ class QuestionsController < ApplicationController
     @questions = Question.where(area: "matematica")
   end
 
-  def upload
+  def upload_questions
     uploaded_file = params[:questions_file]
-    if uploaded_file.respond_to?(:read)
-      oi = 'lala'
-      file_content = uploaded_file.read
-    elsif uploaded_file.respond_to?(:path)
-      oi = 'haha'
-      file_content = File.read(uploaded_file.path)
-    else
-      logger.error "Bad uploaded_file: #{uploaded_file.class.name}: #{uploaded_file.inspect}"
-    end
-    puts file_content
-    puts oi
+    file_content = uploaded_file.read
+    
+    Parser.read_questions(file_content)
+
+    flash[:success] = "Questões armazenadas com sucesso."
+    redirect_to questions_path
+  end
+
+  def upload_candidates_data
+    uploaded_file = params[:candidates_data_file]
+    file_content = uploaded_file.read
+    Parser.read_candidates_data(file_content, params[:test_year])
+    flash[:success] = "Dados armazenados com sucesso."
     redirect_to questions_path
   end
 

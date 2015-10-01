@@ -19,7 +19,8 @@
   <% @question.alternatives.each do |f| %>
       <div class="alternative">
         <%= radio_button_tag(:alternative, f.letter) %>
-        <%= label_tag(f.letter.to_s, f.description) %>
+        <%= label_tag(f.letter.to_s, f.letter.to_s + ")") %>
+        <span class="<%= f.letter.to_s %>-description"><%= f.description %></span>
       </div>
   <% end %>
 

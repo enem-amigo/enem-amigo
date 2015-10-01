@@ -75,19 +75,19 @@ class QuestionsController < ApplicationController
   end
 
   def nature
-    @questions = Question.where(area: "natureza")
+    @questions = Question.where(area: "CIÊNCIAS DA NATUREZA E SUAS TECNOLOGIAS")
   end
 
   def humans
-    @questions = Question.where(area: "humanas")
+    @questions = Question.where(area: "CIÊNCIAS HUMANAS E SUAS TECNOLOGIAS")
   end
 
   def languages
-    @questions = Question.where(area: "linguagens")
+    @questions = Question.where(area: "LINGUAGENS, CÓDIGOS E SUAS TECNOLOGIAS")
   end
 
   def math
-    @questions = Question.where(area: "matematica")
+    @questions = Question.where(area: "MATEMÁTICA E SUAS TECNOLOGIAS")
   end
 
   private

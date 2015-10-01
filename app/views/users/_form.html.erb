@@ -3,9 +3,9 @@
 <% end %>
 
 <%= form_for(@user) do |f| %>
-  <%= f.label :nickname, "Usuário" %>
+  <%= f.label :nickname, "Nome de Usuário" %>
   <%= f.text_field :nickname, class: 'form-control' %>
-  <%= f.label :name, "Nome" %>
+  <%= f.label :name, "Nome Completo" %>
   <%= f.text_field :name, class: 'form-control' %>
   <%= f.label :email, "E-mail" %>
   <%= f.text_field :email, class: 'form-control' %>
@@ -13,6 +13,6 @@
   <%= f.password_field :password, class: 'form-control' %>
   <%= f.label :password_confirmation, "Confirmação da senha" %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
-  <%= f.submit "Create", class: 'btn btn-primary' %>
+  <%= f.submit "Criar", class: 'btn btn-primary' %>
 <% end %>
 

@@ -1,17 +1,17 @@
-<h1>Log in</h1>
+<h1>Entrar</h1>
 
-<% provide(:title, "Log in") %>
+<% provide(:title, "Entrar") %>
 
 <% if logged_in? %>
-  <h1> Already logged as <%= current_user.name %></h1>
-  <%= link_to 'Logout', logout_path, method: :delete %>
+  <h1> Bem vindo, <%= current_user.name %></h1>
+  <%= link_to 'Sair', logout_path, method: :delete %>
 <% else %>
   <%= form_for(:session, url: login_path, html: { class: 'login' }) do |f| %>
     <%= f.label :email%>
     <%= f.email_field :email, class: 'form-control' %>
     <%= f.label :password %>
     <%= f.password_field :password, class: 'form-control' %>
-    <%= f.submit "Login", class: "btn btn-primary" %>
+    <%= f.submit "Entrar", class: "btn btn-primary" %>
   <% end %>
-  <p id="new-user">New user? <%= link_to "Sign up", signup_path %></p>
+  <p id="new-user">Primeiro acesso? <%= link_to "Cadastre-se", signup_path %></p>
 <% end %>

@@ -1,0 +1,19 @@
+.category-images {
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 5em;
+  width: 80%;
+}
+
+.category-images tr img {
+	margin-bottom: 3em;	
+}
+
+.home-images{
+  text-align: center;
+  margin-top: 6em;
+}
+
+.home-images td img {
+	margin-left: 2em;
+}

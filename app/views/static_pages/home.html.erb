@@ -1,4 +1,13 @@
 <h1>Enem Amigo</h1>
-<p><%= link_to "Questões", questions_path, class: "btn btn-success" %></p>
-<p><%= link_to "Ranking", ranking_path,  class: "btn btn-warning" %></p>
-<p><%= link_to "Perfil", current_user,  class: "btn btn-primary" %></p>
+
+<table class="home-images">
+	<tr>
+	<td><%= link_to image_tag("questoes.png"), questions_path %></td>
+	<td><%= link_to image_tag("perfil.png"), current_user %></td>
+	</tr>
+</table>
+
+<div class="home-images">
+	<%= link_to image_tag("ranking.png"), ranking_path %>
+</div>
+

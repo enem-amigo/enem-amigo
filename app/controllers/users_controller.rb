@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :authenticate_user, except: [:ranking, :new, :create]
+  before_action :verify_user_permission, only: [:edit, :destroy]
 
   def new
     @user = User.new
@@ -9,22 +10,17 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    redirect_to users_path unless @user.id == current_user.id or current_user.is_admin?
   end
 
   def destroy
     @user = User.find(params[:id])
-    if @user.id == current_user.id or current_user.is_admin?
-      @user.destroy
-      flash[:notice] = "Usuário foi deletado"
-      redirect_to users_path
-    else
-      redirect_to :back
-    end
+    @user.destroy
+    flash[:notice] = "Usuário foi deletado"
+    redirect_to users_path
   end
 
   def show
-    @user= User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def create
@@ -56,6 +52,12 @@ class UsersController < ApplicationController
 
   def ranking
     @users = User.order(:points).reverse
+  end
+
+  def top10
+    ranking = User.all.order(:points).reverse
+    min = ranking.count < 10 ? ranking.count : 10
+    @top10 = ranking.take(min)
   end
 
   private

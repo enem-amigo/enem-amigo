@@ -54,6 +54,7 @@ module QuestionsHelper
             question.tries += 1
             question.save
           end
+          Candidate.create general_average: (100 * student_hits.to_f / 180).round(2)
         end
       end
     end

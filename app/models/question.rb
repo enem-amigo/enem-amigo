@@ -29,6 +29,10 @@ class Question < ActiveRecord::Base
     question ? question : Question.where(area: self.area).first
   end
 
+  def users_hit_rate
+    (100 * (self.users_hits.to_f / self.users_tries)).round(2)
+  end
+
   private
 
     def alternatives_count_valid?
@@ -40,5 +44,4 @@ class Question < ActiveRecord::Base
         errors.add(:alternatives, "cannot be less than 5")
       end
     end
-
 end

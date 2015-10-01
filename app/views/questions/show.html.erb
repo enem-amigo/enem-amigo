@@ -1,33 +1,34 @@
-<h1>Questão <%= @question.number %></h1>
-<h2>Ano: <%= @question.year %></h2>
-
-<% if current_user.role_admin? %>
-  <%= link_to "Editar", edit_question_path, class: "btn btn-primary" %>
-  <%= link_to "Deletar", question_path, :method => :delete, class: "btn btn-danger" %>
-<% end %>
-
-<table class='question-index'>
-  <tr>
-    <td>Questão <%= @question.number %> - Ano <%= @question.year %></td>
-  </tr>
-  <tr><td>Area: <%= @question.area %></td></tr>
-</table>
-
-<p class="question"><%= @question.enunciation %></p>
-
-<%= form_tag answer_question_path, remote: true do %>
-
-  <% @question.alternatives.each do |f| %>
-      <div class="alternative">
-        <% unless current_user.accepted_questions.include? @question.id %>
-          <%= radio_button_tag(:alternative, f.letter) %>
-        <% end %>
-        <%= f.letter %>)
-        <%= label_tag(f.letter.to_s, f.description) %>
-      </div>
+<div class="buttons-questions">
+  <% if current_user.role_admin? %>
+    <%= link_to "Editar", edit_question_path, class: "btn btn-primary", id: "btn-edit" %>
+    <%= link_to "Deletar", question_path, :method => :delete, class: "btn btn-danger", id: "btn-delete" %>
   <% end %>
+</div>
 
-  <%= submit_tag "Responder", class: 'btn btn-primary btn-sm button' %>
-  <%= link_to "Pular", "#", class: 'btn btn-primary btn-sm button', id: 'jump-btn' %>
+<div class="question">
+  <h1>Questão <%= @question.number %></h1>
+  <h2>Ano: <%= @question.year %></h2>
 
-<% end %>
+  <div class='question-index'>
+    <p><%= @question.area %></p>
+  </div>
+
+  <p class="question"><%= @question.enunciation %></p>
+
+  <%= form_tag answer_question_path, remote: true do %>
+
+    <% @question.alternatives.each do |f| %>
+        <div class="alternative">
+          <% unless current_user.accepted_questions.include? @question.id %>
+            <%= radio_button_tag(:alternative, f.letter) %>
+          <% end %>
+          <%= f.letter %>)
+          <%= label_tag(f.letter.to_s, f.description) %>
+        </div>
+    <% end %>
+
+    <%= submit_tag "Responder", class: 'btn btn-primary btn-sm button' %>
+    <%= link_to "Pular", "#", class: 'btn btn-primary btn-sm button', id: 'jump-btn' %>
+
+  <% end %>
+</div>

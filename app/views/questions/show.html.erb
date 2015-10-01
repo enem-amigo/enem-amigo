@@ -1,7 +1,7 @@
 <h1>Question <%= @question.number %></h1>
 <h2>Year: <%= @question.year %></h2>
 
-<% if current_user.is_admin? %>
+<% if current_user.role_admin? %>
   <%= link_to "edit", edit_question_path %>
   <%= link_to "delete", question_path, :method => :delete %>
 <% end %>

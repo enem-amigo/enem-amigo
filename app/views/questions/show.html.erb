@@ -19,7 +19,9 @@
 
   <% @question.alternatives.each do |f| %>
       <div class="alternative">
-        <%= radio_button_tag(:alternative, f.letter) %>
+        <% unless current_user.accepted_questions.include? @question.id %>
+          <%= radio_button_tag(:alternative, f.letter) %>
+        <% end %>
         <%= f.letter %>)
         <%= label_tag(f.letter.to_s, f.description) %>
       </div>

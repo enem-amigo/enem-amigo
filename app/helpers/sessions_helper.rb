@@ -22,12 +22,20 @@ module SessionsHelper
   end
 
   def authenticate_admin
-    redirect_to :back unless current_user.role_admin?
+    redirect_to_back(root_path) unless current_user.role_admin?
   end
 
   def verify_user_permission
     user = User.find(params[:id])
-    redirect_to users_path unless user.id == current_user.id or current_user.role_admin?
+    redirect_to_back(users_path) unless user.id == current_user.id or current_user.role_admin?
+  end
+
+  def redirect_to_back(default = root_path)
+    if !request.env["HTTP_REFERER"].blank? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+      redirect_to :back
+    else
+      redirect_to default
+    end
   end
 
 end

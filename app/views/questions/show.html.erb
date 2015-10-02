@@ -40,7 +40,7 @@
 
 <p>
   <%= yield :charts_js %>
-  <%= bar_chart @question.data,min: 0, max: 100, library: {backgroundColor: "#eee"}, legend: 'none' %>
+  <%= bar_chart @question.data %>
 </p>
 
 </div>

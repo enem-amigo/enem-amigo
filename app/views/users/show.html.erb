@@ -1,0 +1,50 @@
+<div class="buttons-questions">
+  <% if current_user.role_admin? || current_user.id == @user.id %>
+    <%= link_to "Editar", edit_user_path, class: "btn btn-primary" %>
+    <%= link_to "Excluir", user_path, :method => :delete,  class: "btn btn-danger" %>
+  <% end %>
+<div>
+
+<h1><%= @user.name %></h1>
+
+<%= pie_chart @user.data, colors: ["red", "#0080FF" , "#009900", "#EEEE00"] %>
+
+<table class="table">
+  <tr>
+    <td><b>Usuário:</b> <%= @user.nickname %></td>
+  </tr>
+  <tr>
+    <td><b>Nível:</b> <%= @user.level %></td>
+  </tr>
+  <tr>
+    <td><b>Membro desde:</b> <%= @user.created_at.strftime(" %d/ %m/ %Y ") %></td>
+  </tr>
+  <tr>
+    <td><b>Pontos:</b> <%= @user.points %></td>
+  </tr>
+</table>
+
+<div>
+  <p>
+    <b>Questões resolvidas: </b>
+    <%= @user.total_accepted_questions %>
+  </p>
+
+  <% if @user.total_accepted_questions != 0 %>
+    <table class = 'table'>
+      <thead>
+        <th>Número</th>
+        <th>Área</th>
+        <th>Ano</th>
+      </thead>
+      <% @user.accepted_questions.each do |a| %>
+        <% accepted = Question.find(a) %>
+        <tbody>
+          <td><%= link_to "#{accepted.number}", "/questions/#{a}" %></td>
+          <td><%= accepted.area %></td>
+          <td><%= accepted.year %></td>
+        </tbody>
+      <% end %>
+    </table>
+  <% end %>
+</div>

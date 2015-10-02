@@ -1,0 +1,19 @@
+<% if !@questions.blank? %>
+  <table class='table'>
+    <thead>
+      <th>Ano</th>
+      <th>Número</th>
+      <th>Enunciado</th>
+    </thead>
+
+    <% @questions.each do |t| %>
+      <tr>
+        <td><%= t.year %></td>
+        <td><%= link_to t.number, "/questions/#{t.id}" %></td>
+        <td><%= t.enunciation %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h3> Não há questões cadastradas no momento. </h3>
+<% end %>

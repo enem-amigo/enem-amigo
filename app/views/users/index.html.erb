@@ -1,0 +1,16 @@
+<h1> Usuários </h1>
+
+<table class="table">
+  <thead>
+    <th>Nome</th>
+    <th>Nível</th>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+        <td><%= link_to "#{user.name}", "/users/#{user.id}" %></td>
+        <td><%= user.level %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>

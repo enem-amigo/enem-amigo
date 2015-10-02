@@ -1,0 +1,14 @@
+<table class="ranking">
+  <thead>
+    <tr>
+      <th><%= link_to image_tag("trophy.jpg"), ranking_path %><span>top 10</span></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% top10.each do |x| %>
+    <tr>
+      <td><%= link_to x.name, "/users/#{x.id}" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

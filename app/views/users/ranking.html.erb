@@ -1,0 +1,21 @@
+<h1>Ranking Geral</h1>
+
+<table class="table">
+  <thead>
+    <th>Posição</th>
+    <th>Nome</th>
+    <th>Pontos</th>
+    <th>Nível</th>
+  </thead>
+  <tbody>
+    <% i = 0 %>
+    <% @users.each do |user| %>
+    <tr>
+        <td><%= i = i+1 %>º</td>
+        <td><%= link_to user.name, "/users/#{user.id}" %></td>
+        <td><%= user.points %></td>
+        <td><%= user.level %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>

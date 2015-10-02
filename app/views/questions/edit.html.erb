@@ -1,0 +1,7 @@
+<h1>Edit question <%= @question.id %> (number <%= @question.number%>)</h1>
+
+<% unless @question.errors.empty? %>
+  <% flash.now[:danger] = @question.errors.full_messages.join("<br/>").html_safe %>
+<% end %>
+
+<%= render :partial => 'form' %>

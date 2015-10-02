@@ -1,0 +1,14 @@
+<div class="col-sm-3">
+  <div class="profile-sidebar">
+    <div class="profile-image">
+      <%= link_to image_tag("profiles_images/#{current_user.profile_image}", alt: "Profile image"), "/users/#{current_user.id}" %>
+    </div>
+    <div class="profile-information">
+      <p id="user-name"><%= current_user.name %></p>
+      <p id="user-rank"><strong>Posição:</strong> <%= current_user.find_position_in_ranking %>º</p>
+      <p><strong>Resolvido:</strong> <%= pluralize(current_user.total_accepted_questions, 'questão' ,'questões')%></p>
+      <a href="#" class="btn btn-success"><%= image_tag("star.png") %><span>Medalhas</span></a>
+    </div>
+    <%= render 'users/ranking' %>
+  </div>
+</div>

@@ -1,56 +1,37 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'static_pages#home'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  get 'about' => 'static_pages#about'
+  get 'help' => 'static_pages#help'
+  get 'server_error' => 'static_pages#server_error'
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  get 'signup' => 'users#new'
+  get 'ranking' => 'users#ranking'
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  get 'questions' => 'questions#category'
+  get 'questions/all' => 'questions#index'
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  get 'questions/humans' => 'questions#humans'
+  get 'questions/nature' => 'questions#nature'
+  get 'questions/languages' => 'questions#languages'
+  get 'questions/math' => 'questions#math'
+  get 'questions/upload' => 'questions#new'
+  post 'questions/upload_questions'
+  post 'questions/upload_candidates_data'
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
+  resources :users
+  resources :questions do
+    member do
+      post 'answer'
+      post 'next' => 'questions#next_question'
+    end
+  end
 
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
+  get '*unmatched_route', :to => 'application#raise_not_found!'
 
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

@@ -1,0 +1,34 @@
+footer {
+  padding-top: 5px;
+  border-top: 1px solid #333333;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  height: 50px;
+  background-color: #333333;
+  color: white;
+}
+
+footer a {
+  color: white;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+  margin-top: 13px;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+  margin-top: 10px;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}

@@ -1,0 +1,299 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background: #E5E9EC none repeat scroll 0% 0%;
+  padding-top: 60px;
+  margin-bottom: 50px;
+  font-family: "Open Sans", sans-serif;
+}
+
+body.homepage {
+  background: image-url("study1.jpg") !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+body > .container {
+  padding-bottom: 50px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+table.ranking {
+  min-height: 259px;
+}
+
+div.alert {
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
+  width: 101.4%;
+  margin-top: 1em;
+}
+
+.content {
+  background: #FFF none repeat scroll 0% 0%;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
+  padding-bottom: 1.2em;
+}
+
+.content-radius {
+  border-radius: 8px;
+}
+
+.main-content {
+  padding-right: 2em;
+  padding-left: 2em;
+  padding-top: 1em;
+  min-height: 42.3em;
+}
+
+.content-title {
+  border-bottom: 1px solid #222;
+  padding-bottom: 0.3em;
+}
+
+.login input.btn {
+  background-color: #222;
+}
+
+.login input.btn:hover {
+  background-color: #333;
+}
+
+.row {
+  margin-top: 1em;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+/*** typography ***/
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1.border-title {
+  border-bottom: 1px solid #D3D6DE;
+  padding-bottom: 0.2em;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+
+p {
+  font-size: 1.1em;
+  font-family: 'arial', sans-serif;
+  line-height: 1.7em;
+  text-align: center;
+}
+
+/*** form ***/
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+input {
+  height: auto;
+}
+
+#error-explanation {
+  color: red;
+}
+
+#error-explanation ul {
+  color: red;
+  margin: 0 0 30px 0;
+}
+
+.field_with_errors {
+  @extend .has-error;
+}
+
+.field_with_errors .form-control {
+  color: #A94442;
+}
+
+/****** questions *******/
+
+p.question {
+  font-size: 1.2em;
+  text-align: left;
+}
+
+p.question-text {
+  font-size: 1.2em;
+  text-align: left;
+  text-indent: 2em;
+}
+
+p.question-text-reference {
+  font-size: 0.8em;
+  text-decoration: italic;
+  text-align: right;
+}
+
+form .alternative input[type="radio"] {
+  margin: 0px !important;
+  width: 15px;
+  vertical-align: middle;
+}
+
+.button {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: 0.8em;
+  margin-right: 0.4em;
+  min-width: 10em;
+}
+
+form input#answer-btn {
+  width: 10em;
+}
+
+.answer-feedback {
+  margin-left: 0.5em;
+}
+
+/********* upload file **********/
+
+.upload-forms-container {
+  margin: auto;
+}
+
+.form-title {
+  display: table-cell;
+  padding-right: 3.5em;
+  padding-bottom: 1em;
+  white-space: nowrap;
+}
+
+.upload-form {
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.upload-form h2 {
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+#questions-form {
+  border-right: 1px dotted #D3D6DE;
+  padding-right: 2em;
+}
+
+#candidates-data-form {
+  padding-left: 2em;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.2em;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.user-options,
+.upload-forms-container {
+  display: inline-block
+}
+
+.options-container,
+.content-container {
+  text-align: center;
+}
+
+.content-container {
+  margin-top: 4em;
+}
+
+.custom-img {
+  margin-bottom: 1.2em;
+}
+
+.question-img {
+  margin: auto;
+}
+
+.question-index p {
+  font-weight: 700;
+}
+
+.align-center {
+  text-align: center;
+}
+
+#error_explanation {
+  color: #a94442;
+  ul {
+    color: #a94442;
+    margin: 0 0 30px 0;
+  }
+}
+.field_with_errors  {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+
+.progress{
+  height: 2.5em;
+}
+
+.progress-bar {
+  height: 100%;
+  padding-top: 0.8em;
+}
+
+.user-info {
+  display: inline-block;
+}

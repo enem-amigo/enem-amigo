@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EnemAmigo</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <title><%= full_title(yield :title) %></title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "//www.google.com/jsapi" %>
+  <%= javascript_include_tag "chartkick" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= @home_page ? 'homepage' : '' %>">
 
-<%= yield %>
+<%= render 'layouts/header' %>
+
+<div class="container">
+
+    <% flash.each do |message_type, message| %>
+      <%= content_tag :div, message, class: "alert alert-#{message_type}" %>
+    <% end %>
+
+  <div class="row">
+
+    <% if logged_in? %>
+      <%= render 'users/profile_sidebar' %>
+      <div class="col-sm-9 content main-content">
+        <%= yield %>
+      </div>
+    <% else %>
+      <div class="col-sm-6 col-sm-offset-3 login-form content content-radius">
+        <%= yield %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'layouts/footer' %>
 
 </body>
 </html>

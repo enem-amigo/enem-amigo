@@ -1,0 +1,83 @@
+.profile-sidebar {
+  background: #222 none repeat scroll 0% 0%;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
+  color: #333;
+  text-align: center;
+  padding: 20px 0px 20px 0px;
+}
+
+.profile-sidebar .profile-image {
+  border-radius: 5px;
+  height: 9em;
+  width: 9em;
+  margin: auto;
+  overflow: hidden;
+}
+
+.profile-sidebar .profile-image img {
+  margin: 0px auto;
+  width: 80%;
+  height: 80%;
+  border-radius: 50% !important;
+}
+
+.profile-sidebar .profile-information {
+  color: #fff;
+}
+
+.profile-sidebar .profile-information a {
+  font-weight: 700;
+  width: 80%;
+  text-transform: uppercase;
+}
+
+.profile-sidebar .profile-information a img {
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
+.profile-sidebar .profile-information p#user-name {
+  color: #fff;
+  border-bottom: 1px solid #777;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-top: -10px;
+  padding-bottom: 4px;
+}
+
+.profile-sidebar .ranking {
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 2em;
+  width: 80%;
+  background-color: #fff;
+}
+
+.profile-sidebar .ranking tr {
+  height: 1.5em;
+}
+
+.profile-sidebar .ranking th {
+  border-bottom: 2px solid #ECEDF1;
+  font-size: 1.8em;
+  text-transform: uppercase;
+  padding-bottom: 4px;
+}
+
+.profile-sidebar .ranking th span {
+  display: table-cell;
+  padding-top: 6px;
+}
+
+.profile-sidebar .ranking th img {
+  display: table-cell;
+  float: left;
+  padding-left: 0.6em;
+  padding-right: 0.3em;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+p#new-user {
+  margin-top: 0.5em;
+}

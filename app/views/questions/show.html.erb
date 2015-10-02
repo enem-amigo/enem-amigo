@@ -1,0 +1,53 @@
+<p></p>
+<div class="buttons-questions">
+  <% if current_user.role_admin? %>
+    <%= link_to "Editar", edit_question_path, class: "btn btn-primary", id: "btn-edit" %>
+    <%= link_to "Deletar", question_path, :method => :delete, class: "btn btn-danger", id: "btn-delete" %>
+  <% end %>
+</div>
+
+<div class="question">
+  <h1>Questão <%= @question.number%></h1>
+  <h2>Ano: <%= @question.year %></h2>
+
+  <div class='question-index'>
+    <p><%= @question.area %></p>
+  </div>
+
+  <p class="question-text"><%= @question.text unless @question.text.nil? %></p>
+  <% unless @question.image.empty? %>
+    <%= image_tag(@question.image , class: 'img-responsive question-img') %>
+  <% end %>
+
+  <p class="question-text-reference"><%= @question.reference unless @question.reference.nil? %></p>
+
+  <p class="question"><%= @question.enunciation %></p>
+
+
+  <%= form_tag answer_question_path, remote: true do %>
+    <% @question.alternatives.each do |f| %>
+      <div class="alternative">
+        <%= radio_button_tag(:alternative, f.letter) %>
+        <%= label_tag(f.letter.to_s, f.letter.to_s + ")") %>
+        <span class="<%= f.letter.to_s %>-description"><%= f.description %></span>
+      </div>
+    <% end %>
+
+  <%= submit_tag "Responder", class: 'btn btn-primary btn-sm button', id: 'answer-btn' %>
+  <%= link_to "Pular", next_question_path, method: :post, class: 'btn btn-primary btn-sm button', id: 'jump-btn' %>
+
+  <% end %>
+
+<p>
+  <%= yield :charts_js %>
+  <%= bar_chart @question.data, colors: ["#009900", "#BBBB00" , "#0080FF"],
+  min: 0,
+  max: 100,
+  library: {backgroundColor: "#eee",
+            isStacked: true,
+            title: 'Desempenho da Questão  (Porcentagem de acertos por tentativa)',
+
+  } %>
+</p>
+
+</div>

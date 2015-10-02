@@ -42,13 +42,6 @@ class QuestionsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
-  test 'should get question page' do
-    log_in @user
-    @question = create_question
-    get :show, id: @question.id
-    assert_response :success
-  end
-
   test 'should points be incremented if user marks wrong answer' do
     log_in @another_user
     @question = create_question
@@ -56,15 +49,6 @@ class QuestionsControllerTest < ActionController::TestCase
     post :answer, id: @question.id, alternative: @question.right_answer.next
 
     assert_equal point, current_user.points
-  end
-
-  test 'should points be incremented if user marks right answer' do
-    log_in @another_user
-    @question = create_question
-    point = @another_user.points
-    post :answer, id: @question.id, alternative: @question.right_answer
-
-    assert_equal point + 4, current_user.points
   end
 
   test 'should points not be incremented if user marks right answer in question already answered' do

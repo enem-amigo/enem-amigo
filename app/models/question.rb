@@ -21,7 +21,7 @@ class Question < ActiveRecord::Base
   ALTERNATIVES_COUNT = 5
 
   def hit_rate
-    (100 * (self.hits.to_f / self.tries)).round(2)
+    hit_rate = self.tries == 0 ? 0 : (100 * (self.hits.to_f / self.tries)).round(2)
   end
 
   def next_question
@@ -30,7 +30,20 @@ class Question < ActiveRecord::Base
   end
 
   def users_hit_rate
-    (100 * (self.users_hits.to_f / self.users_tries)).round(2)
+    users_hit_rate = self.users_tries == 0 ? 0 :
+          (100 * (self.users_hits.to_f / self.users_tries)).round(2)
+  end
+
+  def total_hit_rate
+    total_hit_rate = (100 * (self.hits + self.users_hits.to_f)/(self.tries + self.users_tries)).round(2)
+  end
+
+  def data
+    [
+      {"name" => "Enem","data" => {"Enem" => self.hit_rate}},
+      {"name" => "Usuários","data" => {"Usuários" => self.users_hit_rate}},
+      {"name" => "Todos","data" => {"Todos" => self.total_hit_rate}}
+    ]
   end
 
   private

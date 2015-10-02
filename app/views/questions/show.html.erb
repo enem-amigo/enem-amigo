@@ -1,3 +1,4 @@
+<p></p>
 <div class="buttons-questions">
   <% if current_user.role_admin? %>
     <%= link_to "Editar", edit_question_path, class: "btn btn-primary", id: "btn-edit" %>
@@ -6,7 +7,7 @@
 </div>
 
 <div class="question">
-  <h1>Questão <%= @question.number %></h1>
+  <h1>Questão <%= @question.number%></h1>
   <h2>Ano: <%= @question.year %></h2>
 
   <div class='question-index'>
@@ -29,4 +30,10 @@
   <%= link_to "Pular", next_question_path, method: :post, class: 'btn btn-primary btn-sm button', id: 'jump-btn' %>
 
   <% end %>
+
+<p>
+  <%= yield :charts_js %>
+  <%= bar_chart @question.data,min: 0, max: 100, library: {backgroundColor: "#eee"}, legend: 'none' %>
+</p>
+
 </div>

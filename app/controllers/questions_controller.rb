@@ -55,16 +55,17 @@ class QuestionsController < ApplicationController
       redirect_to :back
       flash[:danger] = "Selecione uma alternativa"
     else
-      question.users_tries += 1
+      question.update_attribute(:users_tries, question.users_tries + 1)
+
       respond_to do |format|
         format.html { redirect_to questions_path }
         format.js { @correct_answer = (@answer_letter == question.right_answer) }
       end
 
-      if @answer_letter == question.right_answer
+      if @correct_answer
+        question.update_attribute(:users_hits, question.users_hits + 1)
         unless current_user.accepted_questions.include? question.id
           current_user.accepted_questions.push(question.id)
-          question.users_hits += 1
           current_user.update_attribute(:points, current_user.points + 4)
         end
       end

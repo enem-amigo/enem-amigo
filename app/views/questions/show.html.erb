@@ -13,6 +13,13 @@
     <p><%= @question.area %></p>
   </div>
 
+  <p class="question-text"><%= @question.text unless @question.text.nil? %></p>
+  <% unless @question.image.empty? %>
+    <%= image_tag(@question.image , class: 'img-responsive question-img') %>
+  <% end %>
+
+  <p class="question-text-reference"><%= @question.reference unless @question.reference.nil? %></p>
+
   <p class="question"><%= @question.enunciation %></p>
 
 

@@ -1,6 +1,8 @@
-<h1>Enem Amigo</h1>
-
-<%= link_to image_tag("questoes.png"), questions_path %>
-<%= link_to image_tag("perfil.png"), current_user %>
-<%= link_to image_tag("ranking.png"), ranking_path %>
-
+<h1 class="content-title">Enem Amigo</h1>
+<div class="options-container">
+  <div class="user-options">
+    <%= link_to image_tag("perfil.png", class: 'img-responsive custom-img'), current_user %>
+    <%= link_to image_tag("questoes.png", class: 'img-responsive custom-img'), questions_path %>
+    <%= link_to image_tag("ranking.png", class: 'img-responsive custom-img'), ranking_path %>
+  </div>
+</div>

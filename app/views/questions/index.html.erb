@@ -1,7 +1,7 @@
 <h1> Lista de Questões </h1>
 
 <% if current_user.role_admin? %>
-	<%= link_to 'Criar Questão', new_question_path, class: "btn btn-success"  %>
+	<%= link_to 'Novas Questões', new_question_path, class: "btn btn-success"  %>
 <% end %>
 
 <% if !@questions.blank? %>
@@ -15,10 +15,10 @@
 
 		<% @questions.each do |t| %>
 			<tr>
-				<td><%= t.year %></td>
-				<td><%= link_to t.number, "/questions/#{t.id}" %></td>
+				<td class="align-center"><%= t.year %></td>
+				<td class="align-center"><%= link_to t.number, "/questions/#{t.id}" %></td>
 				<td><%= t.area %></td>
-				<td><%= t.enunciation %></td>
+				<td><%= truncate(t.enunciation, length: 180, separator: ' ') %></td>
 			</tr>
 		<% end %>
 	</table>

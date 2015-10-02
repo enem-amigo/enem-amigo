@@ -15,6 +15,11 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'should get create user' do
+    post :create, user: { nickname: 'newuser', name: 'New User', email: 'newuser@email.com', password: '12345678', password_confirmation: '12345678' }
+    assert_equal User.last.email, 'newuser@email.com'
+  end
+
   test 'should get index of users' do
     log_in @user
     get :index

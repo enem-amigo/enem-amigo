@@ -1,38 +1,30 @@
+<div class="buttons-questions">
+  <% if current_user.role_admin? || current_user.id == @user.id %>
+    <%= link_to "Editar", edit_user_path, class: "btn btn-primary" %>
+    <%= link_to "Excluir", user_path, :method => :delete,  class: "btn btn-danger" %>
+  <% end %>
+<div>
+
 <h1><%= @user.name %></h1>
 
-<% if current_user.role_admin? || current_user.id == @user.id %>
-  <%= link_to "Editar", edit_user_path, class: "btn btn-primary" %>
-  <%= link_to "Excluir", user_path, :method => :delete,  class: "btn btn-danger" %>
-<% end %>
+<table class="table">
+  <tr>
+    <td><b>Usuário:</b> <%= @user.nickname %></td>
+    <td><b>Nível:</b> <%= @user.level %></td>
+  </tr>
+  <tr>
+    <td><b>Membro desde:</b> <%= @user.created_at.strftime(" %d/ %m/ %Y ") %></td>
+    <td><b>Pontos:</b> <%= @user.points %></td>
+  </tr>
+</table>
 
-<p>
-  <strong>Nome:</strong>
-  <%= @user.name %>
-</p>
+<%= pie_chart @user.data, colors: ["red", "#0080FF" , "#009900", "#EEEE00"] %>
 
-<p>
-  <strong>Usuário:</strong>
-  <%= @user.nickname %>
-</p>
-
-<p>
-  <strong>E-mail:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Nível:</strong>
-  <%= @user.level %>
-</p>
-
-<p>
-  <strong>Pontos:</strong>
-  <%= @user.points %>
-</p>
-
-<p>
-  <strong>Questões acertadas: </strong>
-  <%= @user.total_accepted_questions %>
+<div>
+  <p>
+    <b>Questões acertadas: </b>
+    <%= @user.total_accepted_questions %>
+  </p>
 
   <% if @user.total_accepted_questions != 0 %>
     <table class = 'table'>
@@ -51,4 +43,4 @@
       <% end %>
     </table>
   <% end %>
-</p>
+</div>

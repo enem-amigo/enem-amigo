@@ -4,7 +4,7 @@
   <div class="upload-forms-container">
     <%= form_tag({ action: :upload_questions }, multipart: true, class: 'upload-form',
                    id: 'questions-form') do %>
-      <h2 class="form-title">Questões em JSON</h2>                  
+      <h2 class="form-title">Questões em JSON</h2>
       <span class="btn btn-default btn-file">
         Browse<%= file_field_tag 'questions_file' %>
       </span>

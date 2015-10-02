@@ -31,23 +31,24 @@
 </p>
 
 <p>
-  <strong>Questões acertadas: <%= @user.total_accepted_questions %></strong>
-  <% if @user.total_accepted_questions != 0 %>
+  <strong>Questões acertadas: </strong>
+  <%= @user.total_accepted_questions %>
 
-  <table class = 'table'>
-    <thead>
-      <th>Número</th>
-      <th>Área</th>
-      <th>Ano</th>
-    </thead>
-    <% @user.accepted_questions.each do |a| %>
-      <% accepted = Question.find(a) %>
-      <tbody>
-        <td><%= link_to "#{accepted.number}", "/questions/#{a}" %></td>
-        <td><%= accepted.area %></td>
-        <td><%= accepted.year %></td>
-      </tbody>
-    <% end %>
-  </table>
+  <% if @user.total_accepted_questions != 0 %>
+    <table class = 'table'>
+      <thead>
+        <th>Número</th>
+        <th>Área</th>
+        <th>Ano</th>
+      </thead>
+      <% @user.accepted_questions.each do |a| %>
+        <% accepted = Question.find(a) %>
+        <tbody>
+          <td><%= link_to "#{accepted.number}", "/questions/#{a}" %></td>
+          <td><%= accepted.area %></td>
+          <td><%= accepted.year %></td>
+        </tbody>
+      <% end %>
+    </table>
   <% end %>
 </p>

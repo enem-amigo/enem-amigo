@@ -1,5 +1,5 @@
-<% @user.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
+<% unless @user.errors.empty? %>
+  <% flash.now[:danger] = @user.errors.full_messages.join("<br/>").html_safe %>
 <% end %>
 
 <%= form_for(@user) do |f| %>
@@ -11,7 +11,7 @@
   <%= f.text_field :email, class: 'form-control' %>
   <%= f.label :password, "Senha" %>
   <%= f.password_field :password, class: 'form-control' %>
-  <%= f.label :password_confirmation, "Confirmação da senha" %>
+  <%= f.label :password_confirmation, "Confirmar senha" %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
   <%= f.submit "Criar", class: 'btn btn-primary' %>
 <% end %>

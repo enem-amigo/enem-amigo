@@ -1,8 +1,17 @@
-<% unless @user.errors.empty? %>
-  <% flash.now[:danger] = @user.errors.full_messages.join("<br/>").html_safe %>
-<% end %>
-
 <%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        O registro contém <%= pluralize(@user.errors.count, "erro", "erros") %>
+      </div>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= f.label :nickname, "Nome de Usuário" %>
   <%= f.text_field :nickname, class: 'form-control' %>
   <%= f.label :name, "Nome Completo" %>

@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       log_in @user
       redirect_to @user
     else
-      flash.now[:danger] = "Não foi possível criar seu usuário"
+      @home_page = true
       render 'new'
     end
   end

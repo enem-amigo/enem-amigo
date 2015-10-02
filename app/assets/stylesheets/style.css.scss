@@ -270,3 +270,17 @@ form input#answer-btn {
 .align-center {
   text-align: center;
 }
+
+#error_explanation {
+  color: #a94442;
+  ul {
+    color: #a94442;
+    margin: 0 0 30px 0;
+  }
+}
+.field_with_errors  {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}

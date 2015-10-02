@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'static_pages#about'
   get 'help' => 'static_pages#help'
+  get 'server_error' => 'static_pages#server_error'
 
   get 'signup' => 'users#new'
   get 'ranking' => 'users#ranking'

@@ -93,6 +93,9 @@ class QuestionsController < ApplicationController
 
   def upload_questions
     uploaded_file = params[:questions_file]
+
+    raise Exception if uploaded_file.nil?
+
     file_content = uploaded_file.read
 
     Parser.read_questions(file_content)
@@ -103,8 +106,13 @@ class QuestionsController < ApplicationController
 
   def upload_candidates_data
     uploaded_file = params[:candidates_data_file]
+
+    raise Exception if uploaded_file.nil?
+
     file_content = uploaded_file.read
+
     Parser.read_candidates_data(file_content, params[:test_year])
+
     flash[:success] = "Dados armazenados com sucesso."
     redirect_to questions_path
   end

@@ -53,6 +53,7 @@ div.alert {
 }
 
 .main-content {
+  padding-right: 2em;
   padding-left: 2em;
   padding-top: 1em;
   min-height: 42.3em;
@@ -283,4 +284,16 @@ form input#answer-btn {
   .form-control {
     color: $state-danger-text;
   }
+
+.progress{
+  height: 2.5em;
+}
+
+.progress-bar {
+  height: 100%;
+  padding-top: 0.8em;
+}
+
+.user-info {
+  display: inline-block;
 }

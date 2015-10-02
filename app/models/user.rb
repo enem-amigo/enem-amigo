@@ -38,5 +38,17 @@ class User < ActiveRecord::Base
     self.accepted_questions.count
   end
 
+  def data
+    [
+      ["Matemática", self.count_questions_by_area('matemática e suas tecnologias')],
+      ["Natureza", self.count_questions_by_area('ciências da natureza e suas tecnologias')],
+      ["Linguagens", self.count_questions_by_area('linguagens, códigos e suas tecnologias')],
+      ["Humanas", self.count_questions_by_area('ciências humanas e suas tecnologias')]
+    ]
+  end
+
+  def progress
+      (100 * self.total_accepted_questions.to_f/Question.all.count).round(2)
+  end
 
 end

@@ -1,0 +1,7 @@
+<%= form_for @forum do |f| -%>
+	<%= f.label :name, "Nome" %>
+	<%= f.text_field :name %>
+	<%= f.label :description, "Descrição" %>
+	<%= f.text_field :description %>
+	<%= f.submit "Criar Fórum" %>
+<% end -%>

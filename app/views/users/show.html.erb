@@ -7,17 +7,21 @@
 
 <h1><%= @user.name %></h1>
 
-<%= pie_chart @user.data, colors: ["red", "#0080FF" , "#009900", "#EEEE00"] %>
+<% unless @user.accepted_questions.blank? %>
+  <%= pie_chart @user.data, colors: ["red", "#0080FF" , "#009900", "#EEEE00"] %>
+<% else %>
+  <h4><center>Você ainda não respondeu nenhuma questão</center></h4>
+<% end %>
 
 <table class="table">
   <tr>
     <td><b>Usuário:</b> <%= @user.nickname %></td>
   </tr>
   <tr>
-    <td><b>Nível:</b> <%= @user.level %></td>
+    <td><b>Nível:</b> <%= @user.find_level(@user.points) %></td>
   </tr>
   <tr>
-    <td><b>Membro desde:</b> <%= @user.created_at.strftime(" %d/ %m/ %Y ") %></td>
+    <td><b>Membro desde:</b> <%= @user.created_at.strftime(" %d/%m/%Y ") %></td>
   </tr>
   <tr>
     <td><b>Pontos:</b> <%= @user.points %></td>

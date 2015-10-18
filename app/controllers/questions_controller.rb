@@ -57,16 +57,21 @@ class QuestionsController < ApplicationController
     else
       question.update_attribute(:users_tries, question.users_tries + 1)
 
+      @correct_answer = (@answer_letter == question.right_answer)
+
       respond_to do |format|
         format.html { redirect_to questions_path }
-        format.js { @correct_answer = (@answer_letter == question.right_answer) }
+        format.js { @correct_answer }
       end
+
+      previous_user_level = current_user.level
 
       if @correct_answer
         question.update_attribute(:users_hits, question.users_hits + 1)
         unless current_user.accepted_questions.include? question.id
           current_user.accepted_questions.push(question.id)
           current_user.update_attribute(:points, current_user.points + 4)
+          current_user.find_level current_user.points
         end
       end
     end

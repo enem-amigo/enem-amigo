@@ -5,6 +5,7 @@
     </div>
     <div class="profile-information">
       <p id="user-name"><%= current_user.name %></p>
+      <p id="user-level"><strong>Nível:</strong> <%= current_user.level %></p>
       <p id="user-rank"><strong>Posição:</strong> <%= current_user.find_position_in_ranking %>º</p>
       <p><strong>Resolvido:</strong> <%= pluralize(current_user.total_accepted_questions, 'questão' ,'questões')%></p>
       <a href="#" class="btn btn-success"><%= image_tag("star.png") %><span>Medalhas</span></a>

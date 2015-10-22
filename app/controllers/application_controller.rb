@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include SessionsHelper
+  include MedalsHelper
 
   if ENV['RAILS_ENV'] != 'test'
     rescue_from Exception, :with => :server_exception

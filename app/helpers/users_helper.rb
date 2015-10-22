@@ -5,5 +5,5 @@ module UsersHelper
     min = ranking.count < 10 ? ranking.count : 10
     @top10 = ranking.take(min)
   end
-  
+
 end

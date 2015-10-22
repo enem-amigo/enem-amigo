@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   post 'questions/upload_questions'
   post 'questions/upload_candidates_data'
 
+  get 'medals' => 'medals#index'
+
   resources :users
   resources :questions do
     member do

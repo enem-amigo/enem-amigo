@@ -31,6 +31,7 @@ module QuestionsHelper
             end
           end
           q.save
+          t = Topic.create(name: "Questão #{q.number} - Ano #{q.year}", question_id: q.id, post_at: Time.now)
         end
       end
 

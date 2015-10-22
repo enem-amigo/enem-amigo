@@ -36,11 +36,6 @@ Rails.application.routes.draw do
       post 'next' => 'questions#next_question'
     end
   end
-  resources :posts do
-    member do
-      post 'rate'
-    end
-  end
 
   resources :posts do
     member do

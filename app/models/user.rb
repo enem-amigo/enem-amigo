@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
 
   serialize :accepted_questions, Array
-  serialize :rating, Array
 
   before_save { self.email = email.downcase }
   has_secure_password

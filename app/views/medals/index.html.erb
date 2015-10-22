@@ -1,24 +1,42 @@
 <h1>Medalhas</h1>
 
+
+<p>Medalhas Conquistadas</p>
+
 <div class="row">
-  <% @medals.each do |medal| %>
-          <div class="col-sm-6 col-md-3">
-                  <div class="thumbnail">
-                    <%= image_tag medal.image %>
-                    <p>
-                      <%= medal.name %>
-                    </p>
-                    <p>
-                      <%= medal.description %>
-                    </p>
-                    <p>
-                      <% if current_user.medals.include?(medal)  %>
-                        Conseguiu!!!
-                      <% else %>
-                        <%= percentage(medal) %>% completo
-                      <% end %>
-                    </p>
-                  </div>
-          </div>
+  <% current_user.medals.each do |medal| %>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail" id="user_medals">
+        <%= image_tag medal.image %>
+        <p class="medal_name">
+          <b><%= medal.name %></b>
+        </p>
+        <p class="medal_description">
+          <%= medal.description %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<p>Outras Medalhas</p>
+
+<div class="row">
+  <% @missing_medals.each do |medal| %>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail" id="missing_medals">
+        <%= image_tag medal.image %>
+        <p class="medal_name">
+          <%= medal.name %>
+        </p>
+        <p class="medal_description">
+          <%= medal.description %>
+        </p>
+        <p>
+          <%= percentage(medal) %>% completo
+        </p>
+      </div>
+    </div>
     <% end %>
 </div>
+

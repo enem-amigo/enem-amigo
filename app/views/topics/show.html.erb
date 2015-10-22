@@ -1,14 +1,10 @@
 <%= link_to "Novo", new_post_path, class: "btn btn-success" %>
 
 <table>
-	<tr>
-		<th>Título</th>
-		<th>Comentários</th>
-		<th>Último comentário</th>
-	</tr>
 	<% @topic.posts.each do |t| %>
 		<tr>
-			<td><%= link_to t.content, "/posts/#{t.id}" %></td>
+			<td><%= t.content %></td>
+			<td><%= t.user.name %></td>
 			<td><%= link_to "Editar", edit_post_path, class: "btn btn-primary" %></td>
 			<td><%= link_to "Excluir", post_path, :method => :delete, class: "btn btn-danger" %></td>
 		</tr>

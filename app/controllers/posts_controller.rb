@@ -29,6 +29,29 @@ class PostsController < ApplicationController
 		user = User.where(id: user_id).name
 	end
 
+	def rate
+		post = Post.find(params[:id])
+
+		if not post.user_ratings.include? current_user.id
+			post.user_ratings.push(current_user.id)
+			post.save
+		else
+			redirect_to :back
+		end
+
+		respond_to do |format|
+			format.html { redirect_to questions_path }
+      format.js { flash[:notice] = "Votou!!" }
+    end
+	end
+
+	def destroy
+		@post = Post.find(params[:id])
+		@post.destroy
+		flash[:notice] = "O comentário foi excluído com sucesso"
+		redirect_to root_path
+	end
+
 	private
 
 	def post_params

@@ -24,11 +24,11 @@ Rails.application.routes.draw do
   post 'questions/upload_questions'
   post 'questions/upload_candidates_data'
 
-  get 'posts/new' => 'posts#new'
-  post 'posts' => 'posts#create'
+  get 'comment/new' => 'comment#new'
+  post 'comment' => 'comment#create'
 
-  resources :forums
   resources :topics
+  resources :posts
   resources :users
   resources :questions do
     member do

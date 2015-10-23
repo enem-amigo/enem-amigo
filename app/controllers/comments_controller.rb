@@ -9,10 +9,10 @@ class CommentsController < ApplicationController
 
 	def create
 		@comment = Comment.new(comment_params)
-		@post.user_id = current_user.id
+		@comment.user_id = current_user.id
 		if @comment.save
-			flash[:sucess] = "Seu comentário foi criado com sucesso"
-			redirect_to @topic
+			flash[:success] = "Seu comentário foi criado com sucesso"
+			redirect_to Topic.find(session[:topic_id])
 		else
 			render 'form'
 		end
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 	private
 
 	def comment_params
-		params.require(:comment).permit(:content)
+		params.require(:comment).permit(:content, :post_id)
 	end
 
 end

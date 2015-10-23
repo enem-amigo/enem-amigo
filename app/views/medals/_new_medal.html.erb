@@ -1,6 +1,33 @@
-<div id="myModal" class="modal fade" role="dialog">
+<% if @new_medals.count == 1 %>
+<div id="new_medal_modal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
-
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Parabéns!!! Você ganhou uma nova medalha!</h4>
+      </div>
+      <div class="modal-body">
+        <% @new_medals.each do |medal| %>
+          <div class="thumbnail" id="user_medals">
+            <%= image_tag medal.image %>
+            <p class="medal_name">
+              <b><%= medal.name %></b>
+            </p>
+            <p class="medal_description">
+              <%= medal.description %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% else %>
+<div id="new_medal_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -9,33 +36,28 @@
       <div class="modal-body">
         <div class="row">
           <% @new_medals.each do |medal| %>
-          <div class="col-sm-4 col-md-6">
-            <div class="thumbnail" id="user_medals">
-              <%= image_tag medal.image %>
-              <p class="medal_name">
-                <b><%= medal.name %></b>
-              </p>
-              <p class="medal_description">
-                <%= medal.description %>
-              </p>
+            <div class="col-sm-4 col-md-6">
+              <div class="thumbnail" id="user_medals">
+                <%= image_tag medal.image %>
+                <p class="medal_name">
+                  <b><%= medal.name %></b>
+                </p>
+                <p class="medal_description">
+                  <%= medal.description %>
+                </p>
+              </div>
             </div>
-          </div>
-        <% end %>
-</div>
+          <% end %>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
       </div>
     </div>
-
   </div>
 </div>
-
-<p>
-Entrou
-</p>
+<% end %>
 
 <script>
-$('#myModal').modal('hide');
-$('#myModal').modal('show');
+$('#new_medal_modal').modal('show');
 </script>

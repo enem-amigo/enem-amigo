@@ -25,6 +25,28 @@
 </table>
 
 <div>
+  <b> Medalhas </b>
+
+  <div class="row">
+      <% @user.medals.reverse.take(4).each do |medal| %>
+        <div class="col-sm-6 col-md-3">
+          <div class="thumbnail" id="user_medals">
+            <%= image_tag medal.image %>
+            <p class="medal_name">
+              <b><%= medal.name %></b>
+            </p>
+            <p class="medal_description">
+              <%= medal.description %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<%= render partial: 'medals' %>
+
+<div>
   <p>
     <b>Questões resolvidas: </b>
     <%= @user.total_accepted_questions %>

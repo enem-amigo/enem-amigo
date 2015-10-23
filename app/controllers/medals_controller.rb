@@ -1,7 +1,6 @@
 class MedalsController < ApplicationController
 
   def index
-    @medals = Medal.all
     check_medals
     @missing_medals = @medals - current_user.medals
   end

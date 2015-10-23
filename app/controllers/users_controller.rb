@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user= User.find(params[:id])
+    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success]= "Usuário atualizado"
       redirect_to @user
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users= User.all
+    @users = User.all
   end
 
   def ranking
@@ -57,8 +57,7 @@ class UsersController < ApplicationController
 
   def top10
     ranking = User.all.order(:points).reverse
-    min = ranking.count < 10 ? ranking.count : 10
-    @top10 = ranking.take(min)
+    @top10 = ranking.take(10)
   end
 
   private

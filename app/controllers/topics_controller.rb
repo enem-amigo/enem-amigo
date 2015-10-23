@@ -1,7 +1,10 @@
 class TopicsController < ApplicationController
 
+	include PostsHelper
+	include CommentsHelper
+
 	before_action :authenticate_user
-  before_action :authenticate_admin, only: [ :new, :create, :edit, :destroy, :update ]
+  	before_action :authenticate_admin, only: [ :new, :create, :edit, :destroy, :update ]
 
 	def new
 		@topic = Topic.new
@@ -18,6 +21,7 @@ class TopicsController < ApplicationController
 	def show
 		@topic = Topic.find(params[:id])
 		session[:topic_id] = @topic.id
+		new_post
 	end
 
 	def index

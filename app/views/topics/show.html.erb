@@ -1,12 +1,12 @@
-<%= link_to "Novo", new_post_path, class: "btn btn-success" %>
+
+<%= render "posts/new" %>
 
 <table>
 	<% @topic.posts.each do |t| %>
 		<tr>
-			<td><%= t.content %></td>
-			<td><%= t.user.name %></td>
-			<td><%= link_to "Editar", edit_post_path, class: "btn btn-primary" %></td>
-			<td><%= link_to "Excluir", post_path, :method => :delete, class: "btn btn-danger" %></td>
+			<%= t.content %>
+			<%= t.user.name %>
+			<%= render partial: "comments/new", method: new_comment(t) %>
 		</tr>
 	<% end %>
 </table>

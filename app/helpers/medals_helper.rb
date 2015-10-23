@@ -1,9 +1,13 @@
 module MedalsHelper
 
   def check_medals
-    @missing_medals = Medal.all - current_user.medals
-    @missing_medals.each do |missing_medal|
-      current_user.medals << missing_medal if achieved(missing_medal)
+    @new_medals = []
+    missing_medals = @medals - current_user.medals
+    missing_medals.each do |missing_medal|
+      if achieved(missing_medal)
+        current_user << missing_medal
+        @new_medals.push(missing_medal)
+      end
     end
   end
 

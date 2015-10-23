@@ -5,11 +5,11 @@ class Medal < ActiveRecord::Base
   serialize :achieved_instructions, Array
   serialize :percentage_instructions, Array
 
-  #validates :name, presence: true
-  #validates :description, presence: true
-  #validates :image, presence: true
-  #validates :achieved_instructions, presence: true
-  #validates :percentage_instructions, presence: true
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :image, presence: true
+  validates :achieved_instructions, presence: true
+  validates :percentage_instructions, presence: true
 
   validate :instructions_work
 

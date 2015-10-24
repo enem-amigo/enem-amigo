@@ -1,0 +1,14 @@
+first_medal:
+  name: Iniciante
+  description: Entrou no Enem Amigo
+  image: trophy.png
+  achieved_instructions: ["return true"]
+  message_instructions: ["return ''"]
+
+second_medal:
+  name: Primeiros Passos
+  description: Acertou 5 questões
+  image: trophy.png
+  achieved_instructions: ["return current_user.accepted_questions.count >= 5"]
+  message_instructions: ["return 'Falta uma questão' if  5-current_user.accepted_questions.count == 1",
+  "return \"Faltam #{5-current_user.accepted_questions.count} questões\""]

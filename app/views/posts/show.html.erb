@@ -1,10 +1,12 @@
 <p><%= @post.content %></p>
 
 <div class="rate-index">
-  <p id="show-vote"><%= pluralize(@post.count_rates,"voto","votos") %></p>
-  <%= form_tag rate_post_path, remote: true do %>
+  <p id="show-vote"><%= pluralize(@post.count_post_rates,"voto","votos") %></p>
+  <%= form_tag rate_post_post_path, remote: true do %>
     <%= submit_tag "Avaliar", class: 'btn btn-primary btn-sm button', id: 'rate-btn' %>
   <% end %>
 </div>
 
-<%= link_to "Excluir", post_path, method: :delete, class: 'btn btn-primary btn-sm button', id: 'destroy-btn' %>
+<% if current_user.id == @post.id  || current_user.role_admin? %>
+    <%= link_to "Excluir", post_path, method: :delete, class: 'btn btn-primary btn-sm button', id: 'destroy-btn' %>
+<% end %>

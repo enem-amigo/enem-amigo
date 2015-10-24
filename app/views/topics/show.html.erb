@@ -9,8 +9,10 @@
 	<% @topic.posts.each do |t| %>
 		<tr>
 			<td><%= link_to t.content, "/posts/#{t.id}" %></td>
-			<td><%= link_to "Editar", edit_post_path, class: "btn btn-primary" %></td>
-			<td><%= link_to "Excluir", post_path, :method => :delete, class: "btn btn-danger" %></td>
+			<% if current_user.role_admin? || current_user.id == t.user_id %>
+				<td><%= link_to "Editar", edit_post_path(t), class: "btn btn-primary" %></td>
+				<td><%= link_to "Excluir", post_path(t), :method => :delete, class: "btn btn-danger" %></td>
+			<% end %>
 		</tr>
 	<% end %>
 </table>

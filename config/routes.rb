@@ -24,11 +24,9 @@ Rails.application.routes.draw do
   post 'questions/upload_questions'
   post 'questions/upload_candidates_data'
 
-  get 'comment/new' => 'comment#new'
-  post 'comment' => 'comment#create'
-
   resources :topics
   resources :posts
+  resources :comments
   resources :users
   resources :questions do
     member do
@@ -39,7 +37,13 @@ Rails.application.routes.draw do
 
   resources :posts do
     member do
-      post 'rate' => 'posts#rate'
+      post 'rate_post' => 'posts#rate_post'
+    end
+  end
+
+  resources :comments do
+    member do
+      post 'rate_comment' => 'comments#rate_comment'
     end
   end
 

@@ -1,0 +1,10 @@
+<p><%= @comment.content %></p>
+
+<div class="rate-index">
+  <p id="show-vote"><%= pluralize(@comment.count_comment_rates,"voto","votos") %></p>
+  <%= form_tag rate_comment_comment_path, remote: true do %>
+    <%= submit_tag "Avaliar", class: 'btn btn-primary btn-sm button', id: 'rate-btn' %>
+  <% end %>
+</div>
+
+<%= link_to "Excluir", comment_path, method: :delete, class: 'btn btn-primary btn-sm button', id: 'destroy-btn' %>

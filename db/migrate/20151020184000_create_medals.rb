@@ -5,7 +5,7 @@ class CreateMedals < ActiveRecord::Migration
     t.text  :description
     t.string :image
     t.text :achieved_instructions
-    t.text :percentage_instructions
+    t.text :message_instructions
 
     t.timestamps null: false
     end

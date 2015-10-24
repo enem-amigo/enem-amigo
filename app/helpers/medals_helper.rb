@@ -18,8 +18,8 @@ module MedalsHelper
     end
   end
 
-  def percentage(medal)
-    medal.percentage_instructions.each do |instruction|
+  def message(medal)
+    medal.message_instructions.each do |instruction|
       eval instruction
     end
   end

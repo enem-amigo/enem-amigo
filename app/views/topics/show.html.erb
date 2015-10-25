@@ -1,12 +1,15 @@
 
-<%= render "posts/new" %>
-
 <table>
 	<% @topic.posts.each do |t| %>
-		<tr>
-			<%= t.content %>
-			<%= t.user.name %>
-			<%= render partial: "comments/new", method: new_comment(t) %>
+		<tr class="post">
+			<td id="username"><%= t.user.name %></td>
+			<td id="content"><%= t.content %></td>
+			<% t.comments.each do |j| %>
+				<tr class="comment">
+					<td id="response-username"><%= j.user.name %></td>
+					<td id="response-content"><%= j.content %></td>
+				</tr>
+			<% end %>
 		</tr>
 	<% end %>
 </table>

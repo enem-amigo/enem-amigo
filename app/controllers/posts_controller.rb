@@ -3,9 +3,9 @@ class PostsController < ApplicationController
 	before_action :authenticate_user
 	before_action :authenticate_admin
 
-		def new
-			@post = Post.new
-		end
+	def new
+		@post = Post.new
+	end
 
 	def create
 		@post = Post.new(post_params)

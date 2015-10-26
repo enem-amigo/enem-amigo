@@ -299,3 +299,18 @@ form input#answer-btn {
 .user-info {
   display: inline-block;
 }
+
+/********new-level********/
+
+#new_level_modal > div > div.modal-content {
+  width: 350px;
+}
+
+#new_level_modal > div > div > div.modal-header {
+  height: 75px;
+}
+
+#new_level_modal > div > div > div.modal-header > h4 {
+  padding-top: 15px;
+  padding-left: 5px;
+}

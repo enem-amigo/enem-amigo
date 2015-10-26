@@ -3,6 +3,7 @@ class StaticPagesController < ApplicationController
   before_action :authenticate_user, only: [:home]
 
   def home
+    find_level current_user.points
   end
 
   def about

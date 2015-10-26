@@ -1,3 +1,8 @@
+<% if @user_level != current_user.level %>
+    <%= render partial: 'users/new_level.html.erb' %>
+    <% update_user_level %>
+<% end %>
+
 <div class="buttons-questions">
   <% if current_user.role_admin? || current_user.id == @user.id %>
     <%= link_to "Editar", edit_user_path, class: "btn btn-primary" %>
@@ -18,7 +23,7 @@
     <td><b>Usuário:</b> <%= @user.nickname %></td>
   </tr>
   <tr>
-    <td><b>Nível:</b> <%= @user.find_level(@user.points) %></td>
+    <td><b>Nível:</b> <%= @user.level %></td>
   </tr>
   <tr>
     <td><b>Membro desde:</b> <%= @user.created_at.strftime(" %d/%m/%Y ") %></td>

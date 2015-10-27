@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
 
   before_action :authenticate_user
   before_action :authenticate_admin
+  before_action :verify_user_permission, only: [:destroy]
 
   def new
     @comment = Comment.new
@@ -24,20 +25,21 @@ class CommentsController < ApplicationController
       comment.user_ratings.push(current_user.id)
       comment.save
     else
-      redirect_to :back
+      redirect_to_back(root_path)
     end
 
     respond_to do |format|
-      format.html { redirect_to questions_path }
+      format.html { redirect_to_back(root_path) }
       format.js { flash[:notice] = "Votou!!" }
     end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
+    comment_parent = @comment.post_id
     @comment.destroy
     flash[:notice] = "O comentário foi excluído com sucesso"
-    redirect_to root_path
+    redirect_to post_path(comment_parent)
   end
 
   def show

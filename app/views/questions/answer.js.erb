@@ -1,5 +1,5 @@
 $('input.btn').hide();
 $('input[type="radio"]').hide();
 $('#jump-btn').html('Próxima questão');
-$('#jump-btn').after("<%= j link_to 'Fórum', '#', class: 'btn btn-primary btn-sm button' %>");
-$(".<%= j @answer_letter %>-description").after('<%= j image_tag(@correct_answer ? "correct-answer" : "wrong-answer", alt: "", class: "answer-feedback") %>');
+$('#jump-btn').after("<%= j link_to 'Fórum', 'topics/1', class: 'btn btn-primary btn-sm button' %>");
+$(".<%= j @answer_letter %>-description").after('<%= j image_tag(@correct_answer ? "correct-answer" : "wrong-answer", alt: "", class: "answer-feedback") %>');	

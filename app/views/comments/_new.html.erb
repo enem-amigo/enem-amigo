@@ -1,5 +1,4 @@
 <%= form_for @comment do |f| %>
-	<%= f.label :content, "Entre na discussão" %>
-	<%= f.text_area :content %>
-	<%= f.submit "Comentar" %>
+	<%= f.text_area :content, class: 'form-control' %>
+	<%= f.submit "Comentar", class: 'btn btn-info col-md-2' %>
 <% end %>

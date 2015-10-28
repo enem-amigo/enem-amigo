@@ -1,8 +1,5 @@
 class CommentsController < ApplicationController
 
-	before_action :authenticate_user
-	before_action :authenticate_admin
-
 	def new
 		@comment = Comment.new
 	end
@@ -10,6 +7,7 @@ class CommentsController < ApplicationController
 	def create
 		@comment = Comment.new(comment_params)
 		@comment.user_id = current_user.id
+		@comment.post_id = session[:post_id]
 		if @comment.save
 			flash[:success] = "Seu comentário foi criado com sucesso"
 			redirect_to Topic.find(session[:topic_id])

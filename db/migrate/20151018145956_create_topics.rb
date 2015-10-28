@@ -4,7 +4,8 @@ class CreateTopics < ActiveRecord::Migration
 			t.string :name
 			t.integer :question_id
 			t.text :description
-			t.datetime :post_at
+
+			t.timestamps null: false
 		end
 	end
 end

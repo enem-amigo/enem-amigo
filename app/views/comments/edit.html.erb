@@ -1,4 +1,4 @@
-<%= form_tag "/posts/:post_id/comments", method: :post do %>
+<%= form_tag "/posts/:post_id/comments/:id", method: :post do %>
 	<%= text_area_tag :content %>
 	<% session[:post_id] = params["post_id"] %>
 	<%= hidden_field :post_id, :value => params["post_id"] %>

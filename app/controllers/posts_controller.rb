@@ -30,6 +30,13 @@ class PostsController < ApplicationController
 		end
 	end
 
+	def destroy
+    	@post = Post.find(params[:id])
+    	@post.destroy
+    	flash[:success] = "Post deletado com sucesso"
+    	redirect_to Topic.find(session[:topic_id])
+  	end
+
 	private
 
 	def post_params

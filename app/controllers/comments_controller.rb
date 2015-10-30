@@ -29,6 +29,14 @@ class CommentsController < ApplicationController
 			redirect_to edit_post_comment_path(session[:post_id])
 		end
 	end
+
+	def destroy
+    	@comment = Comment.find(params[:id])
+    	@comment.destroy
+    	flash[:success] = "Comentário deletado com sucesso"
+    	redirect_to Topic.find(session[:topic_id])
+  	end
+
 	private
 
 	def comment_params

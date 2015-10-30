@@ -1,7 +1,6 @@
 class TopicsController < ApplicationController
 
 	include PostsHelper
-	include CommentsHelper
 
 	before_action :authenticate_user
 	before_action :verify_user_permission, only: [:edit, :destroy]

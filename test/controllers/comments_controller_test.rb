@@ -5,7 +5,7 @@ class CommentsControllerTest < ActionController::TestCase
 	
 	def setup
 		@user= users(:joao)
-		@topic= Topic.create(name: 'Test1', question_id: 1, description: 'Test', post_at: DateTime.now)
+		@topic= Topic.create(name: 'Test1', question_id: 1, description: 'Test')
 		@post = Post.create(content: 'Controller', topic_id: @topic.id, user_id: @user.id)
 	end
 

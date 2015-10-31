@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
 
   def home
     check_medals
+    find_level current_user.points
   end
 
   def about

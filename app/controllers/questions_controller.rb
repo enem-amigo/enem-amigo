@@ -57,9 +57,11 @@ class QuestionsController < ApplicationController
     else
       question.update_attribute(:users_tries, question.users_tries + 1)
 
+      @correct_answer = (@answer_letter == question.right_answer)
+
       respond_to do |format|
         format.html { redirect_to questions_path }
-        format.js { @correct_answer = (@answer_letter == question.right_answer) }
+        format.js { @correct_answer }
       end
 
       if @correct_answer

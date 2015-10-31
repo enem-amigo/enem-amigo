@@ -1,3 +1,8 @@
+<% if @user_level != current_user.level %>
+    <%= render partial: 'users/new_level.html.erb' %>
+    <% update_user_level %>
+<% end %>
+
 <div class="buttons-questions">
   <% if current_user.role_admin? || current_user.id == @user.id %>
     <%= link_to "Editar", edit_user_path, class: "btn btn-primary" %>
@@ -7,7 +12,11 @@
 
 <h1><%= @user.name %></h1>
 
-<%= pie_chart @user.data, colors: ["red", "#0080FF" , "#009900", "#EEEE00"] %>
+<% unless @user.accepted_questions.blank? %>
+  <%= pie_chart @user.data, colors: ["red", "#0080FF" , "#009900", "#EEEE00"] %>
+<% else %>
+  <h4><center>Você ainda não respondeu nenhuma questão</center></h4>
+<% end %>
 
 <table class="table">
   <tr>
@@ -17,7 +26,7 @@
     <td><b>Nível:</b> <%= @user.level %></td>
   </tr>
   <tr>
-    <td><b>Membro desde:</b> <%= @user.created_at.strftime(" %d/ %m/ %Y ") %></td>
+    <td><b>Membro desde:</b> <%= @user.created_at.strftime(" %d/%m/%Y ") %></td>
   </tr>
   <tr>
     <td><b>Pontos:</b> <%= @user.points %></td>

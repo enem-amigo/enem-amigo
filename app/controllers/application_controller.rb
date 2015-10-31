@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
   include MedalsHelper
+  include UsersHelper
 
   if ENV['RAILS_ENV'] != 'test'
     rescue_from Exception, :with => :server_exception

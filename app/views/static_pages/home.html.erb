@@ -3,6 +3,10 @@
 <% if @new_medals.count > 0 %>
   <%= render partial: '/medals/new_medal' %>
 <% end %>
+<% if @user_level != current_user.level %>
+    <%= render partial: 'users/new_level.html.erb' %>
+    <% update_user_level %>
+<% end %>
 
 <div class="progress">
   <div class="progress-bar progress-bar-danger progress-bar" role="progressbar"

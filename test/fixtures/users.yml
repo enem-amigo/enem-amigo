@@ -2,7 +2,7 @@ renata:
   name: Renata Soares
   email: renatasoares@gmail.com
   password_digest: <%= User.digest('12345678') %>
-  level: 1
+  level: 0
   nickname: renatasoares
   role_admin: false
   points: 0
@@ -11,7 +11,7 @@ joao:
   name: Joao Vitor
   email: joao18araujo@gmail.com
   password_digest: <%= User.digest('12345678') %>
-  level: 1
+  level: 0
   nickname: joaovitor
   role_admin: false
   points: 0
@@ -20,7 +20,7 @@ admin:
   name: Admin
   email: admintest@gmail.com
   password_digest: <%= User.digest('12345678') %>
-  level: 1
+  level: 0
   nickname: admin
   role_admin: true
   points: 0

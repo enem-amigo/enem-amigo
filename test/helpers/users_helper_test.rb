@@ -19,15 +19,17 @@ class UsersHelperTest < ActionView::TestCase
   end
 
   test "should user levels up if he gets certain points" do
-    current_user.update_attribute(:points,25)
+    current_user.update_attribute(:points,8)
     new_level = find_level current_user.points
     assert_not_equal new_level, current_user.level
   end
 
   test "should user not levels up if he does not get certain points" do
-    current_user.update_attribute(:points,5)
+    current_user.update_attribute(:points,2)
+    actual_level = find_level current_user.points
+    current_user.update_attribute(:points,3)
     new_level = find_level current_user.points
-    assert_equal new_level, current_user.level
+    assert_equal new_level, actual_level
   end
 
 end

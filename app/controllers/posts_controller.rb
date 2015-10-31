@@ -12,8 +12,10 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     @post.topic_id = session[:topic_id]
     if @post.save
-      flash[:success] = "Postagem criada com sucesso"
-      redirect_to @post
+      flash[:success] = "Post criado com sucesso"
+      redirect_to Topic.find(session[:topic_id])
+    else
+      render 'new'
     end
   end
 
@@ -23,6 +25,20 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update_attributes(post_params)
+      flash[:success] = "Seu post foi atualizado com sucesso"
+      redirect_to Topic.find(session[:topic_id])
+    else
+      render 'edit'
+    end
   end
 
   def user_name(user_id)
@@ -47,10 +63,9 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    post_parent = @post.topic_id
     @post.destroy
-    flash[:notice] = "A postagem foi excluída com sucesso"
-    redirect_to topic_path(post_parent)
+    flash[:success] = "Post deletado com sucesso"
+    redirect_to Topic.find(session[:topic_id])
   end
 
   private
@@ -58,5 +73,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:content)
   end
-
 end

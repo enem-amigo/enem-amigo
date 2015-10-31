@@ -1,7 +1,10 @@
 class TopicsController < ApplicationController
 
+	include PostsHelper
+
 	before_action :authenticate_user
-  before_action :authenticate_admin, only: [ :new, :create, :edit, :destroy, :update ]
+	before_action :verify_user_permission, only: [:edit, :destroy]
+  	before_action :authenticate_admin, only: [ :new, :create, :edit, :destroy, :update ]
 
 	def new
 		@topic = Topic.new

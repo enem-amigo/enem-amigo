@@ -1,0 +1,15 @@
+.medal_name {
+  border-bottom: 1px solid rgb(170, 170, 170);
+}
+
+.medal_description {
+  height: 90px;
+}
+
+#user_medals {
+  border: 4px solid #1EC216;
+}
+
+#missing_medals {
+  border: 4px solid #AAAAAA;
+}

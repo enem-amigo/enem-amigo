@@ -10,11 +10,27 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
+    @comment.post_id = session[:post_id]
     if @comment.save
-      flash[:sucess] = "Seu comentário foi criado com sucesso"
-      redirect_to @comment
+      flash[:success] = "Seu comentário foi criado com sucesso"
+      redirect_to Topic.find(session[:topic_id])
     else
-      render 'form'
+      redirect_to new_post_comment_path(session[:post_id])
+    end
+  end
+
+  def edit
+    @comment = Comment.find(params[:id])
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
+    if @comment.update_attributes(post_params)
+      flash[:success] = "Seu comentário foi atualizado com sucesso"
+      redirect_to Topic.find(session[:topic_id])
+    else
+      redirect_to edit_post_comment_path(session[:post_id])
     end
   end
 
@@ -36,10 +52,9 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    comment_parent = @comment.post_id
     @comment.destroy
-    flash[:notice] = "O comentário foi excluído com sucesso"
-    redirect_to post_path(comment_parent)
+    flash[:success] = "Comentário deletado com sucesso"
+    redirect_to Topic.find(session[:topic_id])
   end
 
   def show
@@ -49,7 +64,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.permit(:content)
   end
 
 end

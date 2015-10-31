@@ -11,9 +11,16 @@ class PostsControllerTest < ActionController::TestCase
     @admin = users(:admin)
     @admin.update_attribute(:id,3)
     @request.env['HTTP_REFERER'] = 'http://test.host/#'
-    @topic= Topic.create(name: 'Questão 1', question_id: 1, description: 'Dúvidas e respostas', post_at: DateTime.now)
+    @topic = Topic.create(name: 'Questão 1', question_id: 1, description: 'Dúvidas e respostas')
     @post = Post.create(content: 'Isso é um teste', topic_id: @topic.id, user_id: 1)
     @another_post = Post.create(content: 'Isso é um teste', topic_id: @topic.id, user_id: 2)
+    session[:topic_id] = @topic.id
+  end
+
+  test 'should get create post' do
+    log_in @user
+    post :create, post: {content: 'Isso é um teste', topic_id: @topic.id, user_id: @user.id}
+    assert_response :redirect
   end
 
   test 'should redirect to topic when post is deleted' do
@@ -67,5 +74,4 @@ class PostsControllerTest < ActionController::TestCase
     assert_not_equal ratings + 2, @post.user_ratings.count
     assert_equal ratings + 1, @post.user_ratings.count
   end  
-
 end

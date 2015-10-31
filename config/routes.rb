@@ -24,9 +24,18 @@ Rails.application.routes.draw do
   post 'questions/upload_questions'
   post 'questions/upload_candidates_data'
 
-  resources :topics
+  get 'medals' => 'medals#index'
+
   resources :posts
   resources :comments
+
+  post 'comments/create' => 'comments#create'
+
+  resources :topics
+  resources :posts do
+    resources :comments
+  end
+
   resources :users
   resources :questions do
     member do

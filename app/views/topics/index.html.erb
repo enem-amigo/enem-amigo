@@ -1,15 +1,18 @@
-<h1> Fórum </h1>
+<h1 class="content-title"> Forúm </h1>
 
 <table class="table">
   <thead>
-    <th>Nome</th>
-    <th>Descrição</th>
+    <th>Questões</th>
+    <th>Comentários</th>
   </thead>
   <tbody>
     <% @topics.each do |topic| %>
       <tr>
-          <td><%= link_to "#{topic.name}", "/topics/#{topic.id}" %></td>
-          <td><%= topic.description %></td>
+          <td>
+            <%= link_to "#{topic.name}", "/topics/#{topic.id}" %>
+            <ul><%= topic.description %></ul>
+          </td>
+          <td><%= topic.posts.count %></td>
       </tr>
     <% end %>
   </tbody>

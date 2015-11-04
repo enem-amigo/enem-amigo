@@ -23,20 +23,6 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
-  test 'should redirect to topic when post is deleted' do
-    log_in @user
-    topic_parent = @post.topic_id
-    delete :destroy, id: @post.id
-    assert_redirected_to topic_path(topic_parent)
-  end
-
-  test 'should user can delete his own post' do
-    log_in @user
-    topic_parent = @post.topic_id
-    delete :destroy, id: @post.id
-    assert_redirected_to topic_path(topic_parent)
-  end
-
   test 'should another user cannot delete user''s post' do
     log_in @another_user
     topic_parent = @post.topic_id

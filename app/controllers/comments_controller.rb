@@ -1,8 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_action :authenticate_user
-  before_action :authenticate_admin
-  before_action :verify_user_permission, only: [:destroy]
+  before_action :verify_user_permission, only: [:destroy, :edit]
 
   def new
     @comment = Comment.new

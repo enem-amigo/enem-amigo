@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   before_action :authenticate_user
-  before_action :verify_user_permission, only: [:destroy]
+  before_action :verify_user_permission, only: [:destroy, :edit]
 
   def new
     @post = Post.new
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     @post.topic_id = session[:topic_id]
     if @post.save
-      flash[:success] = "Post criado com sucesso"
+      flash[:success] = "Postagem criada com sucesso"
       redirect_to Topic.find(session[:topic_id])
     else
       render 'new'

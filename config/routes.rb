@@ -35,11 +35,24 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+
   resources :users
   resources :questions do
     member do
       post 'answer'
       post 'next' => 'questions#next_question'
+    end
+  end
+
+  resources :posts do
+    member do
+      post 'rate_post' => 'posts#rate_post'
+    end
+  end
+
+  resources :comments do
+    member do
+      post 'rate_comment' => 'comments#rate_comment'
     end
   end
 

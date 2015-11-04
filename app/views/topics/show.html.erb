@@ -5,28 +5,54 @@
 <div class="container-fluid">
 	<ul class="list-group">
 
-		<% @topic.posts.each do |t| %>
- 			<li class="list-group-item">
-				<%= link_to "Editar", edit_post_path(t), class: "btn btn-primary" %>
-				<%= link_to "Excluir", post_path(t), :method => :delete, class: "btn btn-danger" %>
-				<span class="badge">Postado por <%= t.user.name %></span>
- 				<p class="text-left"><%= t.content %></p>
-			
-				<div class="container-fluid">
-					<%= link_to "Comentar", new_post_comment_path(t), class: "btn btn-info" %>
- 				</div>
- 
- 				<ul class="list-group">
- 				<% t.comments.each do |f| %>
- 					<li class="list-group-item">
- 						<%= link_to "Editar", edit_post_comment_path(t,f), class: "btn btn-primary" %>
-						<%= link_to "Excluir", post_comment_path(t,f), :method => :delete, class: "btn btn-danger" %>
- 						<p class="text-left"><%= f.content %>
-						<span class="badge"> Comentado por <%= f.user.name %></span>
-				<% end %>		
- 				</ul>
+    <% @topic.posts.each do |t| %>
+      <li class="list-group-item">
+        <div class="post-buttons">
+          <%= form_tag rate_post_post_path(t), remote: true do %>
+            <%= submit_tag "Avaliar", class: 'btn btn-primary', id: 'rate-post-btn' %>
+          <% end %>
+          <% if current_user.id == t.user_id  || current_user.role_admin? %>
+            <%= link_to "Editar", edit_post_path(t), class: "btn btn-primary", id: 'edit-btn' %>
+            <%= link_to "Excluir", post_path(t), :method => :delete, class: "btn btn-danger",id: 'destroy-post-btn' %>
+          <% end %>
+        </div>
 
- 			</li>
- 		<% end %>
-	</ul>
+        <div class="side-contents">
+          <span class="badge">Postado por <%= t.user.name %></span>
+          <span class="badge" id="votes">
+            <p id="show-vote"><%= pluralize(t.count_post_rates,"voto","votos") %></p>
+          </span>
+        </div>
+
+        <p class="text-left"><%= t.content %></p>
+
+        <div class="container-fluid">
+          <%= link_to "Comentar", new_post_comment_path(t), class: "btn btn-info" %>
+        </div>
+
+        <ul class="list-group">
+        <% t.comments.each do |f| %>
+          <li class="list-group-item" id="comments-index">
+            <div class="comments-buttons">
+              <%= form_tag rate_comment_comment_path(f), remote: true do %>
+                <%= submit_tag "Avaliar", class: 'btn btn-primary', id: 'rate-comment-btn' %>
+              <% end %>
+              <%= link_to "Editar", edit_comment_path, class: "btn btn-primary", id: 'edit-btn' %>
+              <%= link_to "Excluir", comment_path, method: :delete, class: 'btn btn-danger', id: 'destroy-comment-btn' %>
+            </div>
+
+            <div class="side-contents">
+              <span class="badge"> Comentado por <%= f.user.name %></span>
+              <span class="badge" id="votes">
+                <p id="show-vote"><%= pluralize(f.count_comment_rates,"voto","votos") %></p>
+              </span>
+            </div>
+
+            <p class="text-left"><%= f.content %></p>
+          </li>
+        <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
 </div>

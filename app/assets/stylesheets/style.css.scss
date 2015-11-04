@@ -184,6 +184,15 @@ form input#answer-btn {
   width: 10em;
 }
 
+form input#rate-btn {
+  width: 10em;
+}
+
+form input#rate-post-btn, form input#rate-comment-btn {
+  width: 5em;
+  margin-right: 5px;
+}
+
 .answer-feedback {
   margin-left: 0.5em;
 }
@@ -312,4 +321,33 @@ form input#answer-btn {
 #new_level_modal > div > div > div.modal-header > h4 {
   padding-top: 15px;
   padding-left: 5px;
+}
+
+body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-success {
+  width: 10em;
+}
+
+.post-buttons,.comments-buttons{
+  display: inline-flex;
+  float: right;
+}
+
+#edit-btn {
+  margin-right: 5px;
+}
+
+.list-group-item {
+  margin-top: 18px;
+}
+
+#votes {
+  height: 18px;
+}
+
+#show-vote {
+  margin-top: -4px;
+}
+
+#comments-index {
+  margin-left: 10%;
 }

@@ -1,8 +1,13 @@
 class Post < ActiveRecord::Base
-	validates :content, presence: true
 
+  has_many :comments
+  belongs_to :topic
 
-	has_many :comments
-	belongs_to :topic
-	belongs_to :user
+  serialize :user_ratings, Array
+  validates :content, presence: true
+  belongs_to :user
+
+  def count_post_rates
+    self.user_ratings.count
+  end
 end

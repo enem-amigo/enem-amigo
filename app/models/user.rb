@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+  has_many :notifications
   has_and_belongs_to_many :medals
 
   serialize :accepted_questions, Array

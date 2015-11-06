@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
   include MedalsHelper
+  include NotificationsHelper
   include UsersHelper
 
   if ENV['RAILS_ENV'] != 'test'

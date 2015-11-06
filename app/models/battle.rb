@@ -8,4 +8,6 @@ class Battle < ActiveRecord::Base
   serialize :player_2_answers, Array
 
   validates :answer, presence: true
+  validates :player_2, presence: true
+
 end

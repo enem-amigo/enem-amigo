@@ -5,9 +5,9 @@ class BattlesController < ApplicationController
   end
 
   def create
-    @battle = Battle.new(player_1: current_user, player_2: User.where(nickname: :player_2_nickname))
-
+    @battle = Battle.new(player_1: current_user, player_2: User.where(nickname: params[:player_2_nickname]))
     if @battle.save
+      new_battle_notification(@battle)
       flash[:success] = "Convite enviado com sucesso!"
     else
       render 'new'
@@ -24,13 +24,25 @@ class BattlesController < ApplicationController
 
   def destroy
     @battle = Battle.find(params[:id])
+    battle_answer_notification(@battle, false)
     @battle.destroy
     redirect_to battles_path
   end
 
-  private
-    def battle_params
-      params.permit(:player_2_nickname)
+
+  def go
+    @battle = Battle.find(params[:id])
+    @player_answers = []
+  end
+
+  def stop
+    @battle = Battle.find(params[:id])
+    if current_user == @battle.player_1
+      @battle.update_attribute(:player_1_answers, @player_answers)
+    else
+      @battle.update_attribute(:player_2_answers, @player_answers)
     end
+    redirect_to @battle
+  end
 
 end

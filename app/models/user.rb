@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
 
-  has_many :battles
+  has_many :active_battles, class_name: 'Battle', foreign_key: 'player_1_id'
+  has_many :passive_battles, class_name: 'Battle', foreign_key: 'player_2_id'
   has_many :notifications
+
   has_and_belongs_to_many :medals
 
   serialize :accepted_questions, Array
@@ -53,6 +55,10 @@ class User < ActiveRecord::Base
 
   def progress
       (100 * self.total_accepted_questions.to_f/Question.all.count).round(2)
+  end
+
+  def battles
+    self.active_battles + self.passive_battles
   end
 
 end

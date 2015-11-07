@@ -30,7 +30,7 @@ class BattlesController < ApplicationController
   end
 
 
-  def go
+  def start
     @battle = Battle.find(params[:id])
     @player_answers = []
   end

@@ -3,6 +3,7 @@ class CreateBattles < ActiveRecord::Migration
     create_table :battles do |t|
     t.text :player_1_answers
     t.text :player_2_answers
+    t.string :category
     t.timestamp :player_1_time
     t.timestamp :player_2_time
 

@@ -13,6 +13,9 @@ class StaticPagesController < ApplicationController
   def help
   end
 
+  def choose_exam
+  end
+
   def server_error
     redirect_to_back(root_path) unless session[:exception]
     session.delete(:exception)

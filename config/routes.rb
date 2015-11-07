@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'static_pages#about'
   get 'help' => 'static_pages#help'
+  get 'choose_exam' => 'static_pages#choose_exam'
   get 'server_error' => 'static_pages#server_error'
 
   get 'signup' => 'users#new'
@@ -25,6 +26,9 @@ Rails.application.routes.draw do
   post 'questions/upload_candidates_data'
 
   get 'medals' => 'medals#index'
+
+  get 'random_exam' => 'exams#random_exam'
+  get 'result' => 'exams#exam_result'
 
   resources :posts
   resources :comments

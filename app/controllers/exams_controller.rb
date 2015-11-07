@@ -1,29 +1,25 @@
 class ExamsController < ApplicationController
 
-	def new
-		@exam = Exam.new
-		math_questions = Question.where(area: "matemática e suas tecnologias")
-		humans_questions = Question.where(area: "ciências humanas e suas tecnologias")
-		language_questions = Question.where(area: "linguagens, códigos e suas tecnologias")
-		nature_questions = Question.where(area: "ciências da natureza e suas tecnologias")
-		
-		@exam.questions.push((1..humans_questions.count).to_a.sample 22)
-		@exam.questions.push((1..math_questions.count).to_a.sample 23)
-		@exam.questions.push((1..language_questions.count).to_a.sample 23)
-		@exam.questions.push((1..nature_questions.count).to_a.sample 23)
-	end
+  include ExamsHelper
 
-	def create
-		@exam = Exam.new(exam_params)
-		if @exam.save
-			flash[:sucess] = "Prova criada com sucesso"
-		else 
-			flash[:danger] = "Algo errado ocorreu"
-	end
-	
-	private
-	
-	def exam_params
-		params.require(:exams).permit(:questions)
-	end
+  def random_exam
+    if current_user.answered_exams.empty?
+      if Exam.all.count != 0
+        @exam = Exam.first
+      else
+        @exam = generate_random_exam
+      end
+    else
+      exam_id = current_user.answered_exams.max + 1
+      if Exam.where(id: exam_id).empty?
+        @exam = generate_random_exam
+      else
+        @exam = Exam.find(exam_id)
+      end
+    end
+  end
+
+  def exam_result
+  end
+
 end

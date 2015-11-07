@@ -26,10 +26,6 @@
 
         <p class="text-left"><%= t.content %></p>
 
-        <div class="container-fluid">
-          <%= link_to "Comentar", new_post_comment_path(t), class: "btn btn-info" %>
-        </div>
-
         <ul class="list-group">
         <% t.comments.each do |f| %>
           <li class="list-group-item" id="comments-index">
@@ -38,7 +34,7 @@
                 <%= submit_tag "Avaliar", class: 'btn btn-primary', id: 'rate-comment-btn' %>
               <% end %>
               <%= link_to "Editar", edit_comment_path, class: "btn btn-primary", id: 'edit-btn' %>
-              <%= link_to "Excluir", comment_path, method: :delete, class: 'btn btn-danger', id: 'destroy-comment-btn' %>
+              <%= link_to "Excluir", comment_path(f), method: :delete, class: 'btn btn-danger', id: 'destroy-comment-btn' %>
             </div>
 
             <div class="side-contents">
@@ -52,6 +48,14 @@
           </li>
         <% end %>
         </ul>
+
+        <div class="container-fluid">
+          <%= form_tag post_comments_path(t) do %>
+            <%= text_area_tag :content %>
+            <%= submit_tag "Comentar", class: "btn btn-info" %>
+          <% end %>
+        </div>
+
       </li>
     <% end %>
   </ul>

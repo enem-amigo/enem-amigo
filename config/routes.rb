@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
   get 'ranking' => 'users#ranking'
+  get 'battle_ranking' => 'users#battle_ranking'
+
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

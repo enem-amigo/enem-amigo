@@ -56,6 +56,10 @@ class UsersController < ApplicationController
     @users = User.order(:points).reverse
   end
 
+  def battle_ranking
+    @users = User.order(:battle_points).reverse
+  end
+
   def top10
     ranking = User.all.order(:points).reverse
     @top10 = ranking.take(10)

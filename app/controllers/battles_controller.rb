@@ -1,11 +1,14 @@
 class BattlesController < ApplicationController
 
+  include BattlesHelper
+
   def new
     @battle = Battle.new
   end
 
   def create
     @battle = Battle.new(player_1: current_user, player_2: User.where(nickname: params[:player_2_nickname]))
+    generate_questions(@battle)   
     if @battle.save
       new_battle_notification(@battle)
       flash[:success] = "Convite enviado com sucesso!"
@@ -16,7 +19,14 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
-  end
+    
+    unless player_started?(@battle)
+      start_battle(@battle)
+    else
+      flash[:danger] = "Você já participou desta batalha"
+      redirect_to battles_path
+    end
+  end    
 
   def index
     @battles = current_user.battles
@@ -29,20 +39,10 @@ class BattlesController < ApplicationController
     redirect_to battles_path
   end
 
-
-  def start
+  def finish
     @battle = Battle.find(params[:id])
-    @player_answers = []
-  end
-
-  def stop
-    @battle = Battle.find(params[:id])
-    if current_user == @battle.player_1
-      @battle.update_attribute(:player_1_answers, @player_answers)
-    else
-      @battle.update_attribute(:player_2_answers, @player_answers)
-    end
-    redirect_to @battle
+    save_answers(battle)
+    redirect_to battles_path
   end
 
 end

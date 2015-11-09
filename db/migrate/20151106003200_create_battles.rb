@@ -6,6 +6,8 @@ class CreateBattles < ActiveRecord::Migration
     t.string :category
     t.timestamp :player_1_time
     t.timestamp :player_2_time
+    t.boolean :player_1_start
+    t.boolean :player_2_start
 
     t.timestamps null: false
     end

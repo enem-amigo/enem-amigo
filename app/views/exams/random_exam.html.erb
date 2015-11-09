@@ -3,6 +3,7 @@ Exam <%= @exam.id %>
 <%= form_tag "/result", method: :get do %>
   <% for i in 0...4 %>
     <% @exam.questions[i].each do |a| %>
+      <%= hidden_field_tag :exam_id , @exam.id %>
       <% if i == 0 %>
         <% q = Question.where(area: "ciências humanas e suas tecnologias") %>
       <% elsif i == 1 %>
@@ -12,9 +13,9 @@ Exam <%= @exam.id %>
       <% elsif i == 3 %>
         <% q = Question.where(area: "ciências da natureza e suas tecnologias") %>
       <% end %>
-      <% @question = q[a-1] %>
+      <% @question = q[a] %>
       <%= render :partial => 'question' %>
     <% end %>
   <% end %>
-  <p><%= submit_tag("Comentar") %></p>
+  <p><%= submit_tag "Enviar Prova" %></p>
 <% end %>

@@ -16,9 +16,9 @@
   <p class="question"><%= @question.enunciation %></p>
   <% @question.alternatives.each do |f| %>
     <div class="alternative">
-      <%= radio_button_tag(:alternative, f.letter) %>
+      <%= radio_button_tag(:"alternative_#{@question.id}", f.letter) %>
       <%= label_tag(f.letter.to_s, f.letter.to_s + ")") %>
-      <%= f.description %>      
+      <%= f.description %>
     </div>
   <% end %>
 </div>

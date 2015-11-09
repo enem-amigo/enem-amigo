@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'about' => 'static_pages#about'
   get 'help' => 'static_pages#help'
   get 'choose_exam' => 'static_pages#choose_exam'
-  get 'server_error' => 'static_pages#server_error'
+  # get 'server_error' => 'static_pages#server_error'
 
   get 'signup' => 'users#new'
   get 'ranking' => 'users#ranking'
@@ -60,6 +60,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*unmatched_route', :to => 'application#raise_not_found!'
+  # get '*unmatched_route', :to => 'application#raise_not_found!'
 
 end

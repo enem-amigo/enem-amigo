@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   get 'ranking' => 'users#ranking'
   get 'battle_ranking' => 'users#battle_ranking'
 
-
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
@@ -55,6 +54,12 @@ Rails.application.routes.draw do
   resources :comments do
     member do
       post 'rate_comment' => 'comments#rate_comment'
+    end
+  end
+
+  resources :battles do
+    member do
+      get 'result' => 'battles#result'
     end
   end
 

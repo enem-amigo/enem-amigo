@@ -45,4 +45,32 @@ class BattlesController < ApplicationController
     redirect_to battles_path
   end
 
+  def result
+    @battle = Battle.find(params[:id])
+    player_1_comparison = @battle.questions.zip(player_1_answers).map { |x, y| x.right_answer == y }
+    player_2_comparison = @battle.questions.zip(player_2_answers).map { |x, y| x.right_answer == y }
+    player_1_comparison.delete(false)
+    player_2_comparison.delete(false)
+
+    player_1_points = player_1_comparison.count
+    player_2_points = player_2_comparison.count
+
+    player_1.update_attribute(:battle_points, player_1.battle_points + player_1_points)
+    player_2.update_attribute(:battle_points, player_2.battle_points + player_2_points)
+
+    if player_1_points > player_2_points
+      @battle.update_attribute(:winner, player_1)
+      player_1.update_attribute(:wins, player_1.wins + 1)
+    elsif player_1_points < player_2_points
+      @battle.update_attribute(:winner, player_2)
+      player_2.update_attribute(:wins, player_2.wins + 1)
+    elsif player_1_time > player_2_time
+      @battle.update_attribute(:winner, player_1)
+      player_1.update_attribute(:wins, player_1.wins + 1)
+    elsif player_1_time < player_2_time
+      @battle.update_attribute(:winner, player_2)
+      player_2.update_attribute(:wins, player_2.wins + 1)
+    end
+      
+  end
 end

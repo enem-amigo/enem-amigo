@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 
   has_many :active_battles, class_name: 'Battle', foreign_key: 'player_1_id'
   has_many :passive_battles, class_name: 'Battle', foreign_key: 'player_2_id'
+  has_many :won_battles, class_name: 'Battle', foreign_key: 'winner'
+
   has_many :notifications
 
   has_and_belongs_to_many :medals

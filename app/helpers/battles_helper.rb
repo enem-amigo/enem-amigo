@@ -1,9 +1,5 @@
 module BattlesHelper
 
-  def generate_questions(battle)
-    battle.questions = battle.category == "" ? Question.all.sample(10) : Question.where(area: battle.category).sample(10)
-  end
-
   def player_started?(battle)
   	is_player_1?(battle) ? player_1_start : player_2_start
   end

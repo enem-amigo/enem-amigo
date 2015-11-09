@@ -8,7 +8,7 @@ class BattlesController < ApplicationController
 
   def create
     @battle = Battle.new(player_1: current_user, player_2: User.where(nickname: params[:player_2_nickname]))
-    generate_questions(@battle)   
+    @battle.generate_questions
     if @battle.save
       new_battle_notification(@battle)
       flash[:success] = "Convite enviado com sucesso!"
@@ -19,14 +19,14 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
-    
+
     unless player_started?(@battle)
       start_battle(@battle)
     else
       flash[:danger] = "Você já participou desta batalha"
       redirect_to battles_path
     end
-  end    
+  end
 
   def index
     @battles = current_user.battles

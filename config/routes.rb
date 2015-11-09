@@ -46,6 +46,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :battles do
+    member do
+      post 'answer'
+      post 'finish'
+    end
+  end
+
   resources :posts do
     member do
       post 'rate_post' => 'posts#rate_post'

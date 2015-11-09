@@ -9,4 +9,8 @@ class Battle < ActiveRecord::Base
 
   validates :player_2, presence: true
 
+  def generate_questions
+    self.questions = self.category == "" ? Question.all.sample(10) : Question.where(area: self.category).sample(10)
+  end
+
 end

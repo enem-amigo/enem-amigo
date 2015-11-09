@@ -5,6 +5,7 @@
     <th>Posição</th>
     <th>Nome</th>
     <th>Pontos da Batalha</th>
+    <th>Batalhas vencidas</th>
   </thead>
   <tbody>
     <% i = 0 %>
@@ -13,6 +14,7 @@
         <td><%= i = i+1 %>º</td>
         <td><%= link_to user.name, "/users/#{user.id}" %></td>
         <td><%= user.battle_points %></td>
+        <td><%= user.wins %></td>
     </tr>
     <% end %>
     </tbody>

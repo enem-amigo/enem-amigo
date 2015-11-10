@@ -1,9 +1,7 @@
-<p><%= link_to "Responda questões aleatórias", answer_exam_path %></p>
-
-<p> ou <p>
-
 <center>
-  <%= form_tag({ action: :answer_exam }, multipart: true, class: 'upload-form', id: 'candidates-data-form', :method => :get) do %>
+  <%= form_tag({ action: :answer_exam }, class: 'select-type-exam', id: 'select-exam-form', :method => :get) do %>
+    <p><%= link_to "Responda questões aleatórias", answer_exam_path %></p>
+    <p> ou <p>
     <h2 class="form-title">Escolha um ano</h2>
     <%= select_tag :year_exam, options_for_select((2009..2015).to_a.collect { |x| x.to_s }), class: 'form-control' %>
     <%= submit_tag 'Responder Prova', class: 'btn btn-primary btn-sm' %>

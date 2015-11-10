@@ -210,7 +210,7 @@ form input#rate-post-btn, form input#rate-comment-btn {
   white-space: nowrap;
 }
 
-.upload-form {
+.upload-form, .select-type-exam {
   display: table-cell;
   vertical-align: bottom;
 }
@@ -225,7 +225,7 @@ form input#rate-post-btn, form input#rate-comment-btn {
   padding-right: 2em;
 }
 
-#candidates-data-form {
+#candidates-data-form, #select-exam-form {
   padding-left: 2em;
 }
 
@@ -385,4 +385,8 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
   font-size: 29px;
   font-weight: bold;
   padding: 30px;
+}
+
+#submit-exam, #cancel-exam {
+  width: 200px;
 }

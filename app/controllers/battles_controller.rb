@@ -20,8 +20,8 @@ class BattlesController < ApplicationController
   def show
     @battle = Battle.find(params[:id])
 
-    @question = @battle.questions.first
     session[:counter] = 0
+    @question = @battle.questions[0]
 
     unless player_started?(@battle)
       start_battle(@battle)
@@ -46,37 +46,41 @@ class BattlesController < ApplicationController
     battle = Battle.find(params[:id])
 
     question_number = session[:counter]
+    session[:counter] = question_number + 1
+
     question = battle.questions[question_number]
+    puts "="*50
+    puts question.number
+    puts "="*50
     @answer_letter = params[:alternative]
 
     if params[:alternative].blank?
-      redirect_to :back
-      flash[:danger] = "Selecione uma alternativa"
+      session[:counter] = question_number
     else
       question.update_attribute(:users_tries, question.users_tries + 1)
 
       @correct_answers = (@answer_letter == question.right_answer)
+      question.update_attribute(:users_hits, question.users_hits + 1) if @correct_answer
       if is_player_1?(battle)
-        battle.player_1_answers.push(@answer_letter)
+        battle.player_1_answers[question_number] = @answer_letter
+        puts "*"*80
+        puts battle.player_1_answers
+        puts "*"*80
       else
-        battle.player_2_answers.push(@answer_letter)
+        battle.player_2_answers[question_number] = @answer_letter
       end
+      battle.save
+    end
 
-      respond_to do |format|
-        format.html { redirect_to battles_path }
-        format.js { @correct_answer }
-      end
-
-      session[:counter] = question_number + 1
+    if is_last_question?
+      flash[:success] = "Batalha finalizada com sucesso!"
+      render :js => "window.location.href += '/finish'"
+    else
       @question = battle.questions[session[:counter]]
-      #question.update_attribute(:users_hits, question.users_hits + 1) if @correct_answer
     end
   end
 
   def finish
     @battle = Battle.find(params[:id])
-    save_answers(battle)
-    redirect_to battles_path
   end
-
 end

@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   resources :battles do
     member do
       post 'answer'
-      post 'finish'
+      get 'finish'
     end
   end
 

@@ -2,4 +2,25 @@
   MODO BATALHA
 </p>
 
+<div id="counter"></div>
+<script>
+function countdown() {
+    var seconds = 100;
+    function tick() {
+        var counter = document.getElementById("counter");
+        seconds--;
+        counter.innerHTML = String((seconds-seconds%60)/60) + ":" + String(seconds%60);
+        if( seconds > 0 ) {
+            setTimeout(tick, 1000);
+        } else {
+            window.location.href += '/finish';
+        }
+    }
+    tick();
+}
+
+// start the countdown
+countdown();
+</script>
+
 <%= render 'question' %>

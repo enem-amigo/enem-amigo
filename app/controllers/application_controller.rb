@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
   include UsersHelper
 
   if ENV['RAILS_ENV'] != 'test'
-    rescue_from Exception, :with => :server_exception
-    rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-    rescue_from ActionController::RoutingError, :with => :raise_not_found!
+    #rescue_from Exception, :with => :server_exception
+    #rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+    #rescue_from ActionController::RoutingError, :with => :raise_not_found!
 
     def server_exception
       redirect_to server_error_path

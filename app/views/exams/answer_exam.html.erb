@@ -6,6 +6,7 @@
     <%= render :partial => 'question' %>
   <% end %>
   <div class="submit-exam">
-    <p><%= submit_tag "Submeter Prova", class: "btn btn-primary" %></p>
+    <p><%= submit_tag "Submeter Prova", class: "btn btn-primary", id: "submit-exam" %>
+    <%= link_to "Cancelar Prova", root_path, class: "btn btn-danger", id: "cancel-exam" %></p>
   </div>
 <% end %>

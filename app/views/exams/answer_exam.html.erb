@@ -1,8 +1,7 @@
 <%= form_tag "/exam_result", method: :get do %>
-  <%= hidden_field_tag :exam_id , @exams[0] %>
-  <% @exams.shift %>
-  <% @exams.each do |a| %>
-    <% @question = a %>
+  <%= hidden_field_tag :exam_id , @exam.id %>
+  <% @exam.questions.each do |a| %>
+    <% @question = Question.find(a) %>
     <%= render :partial => 'question' %>
   <% end %>
   <div class="submit-exam">

@@ -351,3 +351,38 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
 #comments-index {
   margin-left: 10%;
 }
+
+.user-answers {
+  width: 120px;
+  margin-left: 30%;
+  float: left;
+}
+
+.right-answers {
+  width: 120px;
+  margin-right: 30%;
+  float: right;
+  display: inline;
+}
+
+.exam-result {
+  display: inline-table;
+}
+
+.submit-exam {
+  margin-top: 15px;
+}
+
+#button-answer-exam {
+  width: 379px;
+  height: 104px;
+  margin-bottom: 19px;
+  border-radius: 13px;
+}
+
+.user-options a#button-answer-exam {
+  color: white;
+  font-size: 29px;
+  font-weight: bold;
+  padding: 30px;
+}

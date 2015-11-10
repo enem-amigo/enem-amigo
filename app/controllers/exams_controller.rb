@@ -2,60 +2,82 @@ class ExamsController < ApplicationController
 
   include ExamsHelper
 
-  def random_exam
-    @exam = Exam.new
-    exam_right_answers = []
+  def select_exam
+  end
 
-    @math_questions = Question.where(area: "matemática e suas tecnologias")
-    @humans_questions = Question.where(area: "ciências humanas e suas tecnologias")
-    @language_questions = Question.where(area: "linguagens, códigos e suas tecnologias")
-    @nature_questions = Question.where(area: "ciências da natureza e suas tecnologias")
+  def answer_exam
+    questions = params[:year_exam] ? Question.where(year: params[:year_exam]) : Question.all
 
-    @exam.questions.push((0...@humans_questions.count).to_a.sample 22)
-    exam_right_answers.push(generate_right_answers(@exam, 0))
-    @exam.questions.push((0...@math_questions.count).to_a.sample 22)
-    exam_right_answers.push(generate_right_answers(@exam, 1))
-    @exam.questions.push((0...@language_questions.count).to_a.sample 23)
-    exam_right_answers.push(generate_right_answers(@exam, 2))
-    @exam.questions.push((0...@nature_questions.count).to_a.sample 23)
-    exam_right_answers.push(generate_right_answers(@exam, 3))
-    @exam.save
-    @exam
+    exam = Exam.new
+    exam.right_answers = []
+
+    @math_questions = questions.where(area: "matemática e suas tecnologias")
+    @humans_questions = questions.where(area: "ciências humanas e suas tecnologias")
+    @language_questions = questions.where(area: "linguagens, códigos e suas tecnologias")
+    @nature_questions = questions.where(area: "ciências da natureza e suas tecnologias")
+
+    exam.questions.push((0...@humans_questions.count).to_a.sample 22)
+    exam.right_answers.push(generate_right_answers(exam, 0))
+    exam.questions.push((0...@math_questions.count).to_a.sample 22)
+    exam.right_answers.push(generate_right_answers(exam, 1))
+    exam.questions.push((0...@language_questions.count).to_a.sample 23)
+    exam.right_answers.push(generate_right_answers(exam, 2))
+    exam.questions.push((0...@nature_questions.count).to_a.sample 23)
+    exam.right_answers.push(generate_right_answers(exam, 3))
+    exam.save
+
+    @exams = []
+    @exams.push(exam.id)
+    for i in 0...4
+      exam.questions[i].each do |a|
+        if i == 0
+          single_question = Question.where(area: "ciências humanas e suas tecnologias")[a]
+        elsif i == 1
+          single_question = Question.where(area: "matemática e suas tecnologias")[a]
+        elsif i == 2
+          single_question = Question.where(area: "linguagens, códigos e suas tecnologias")[a]
+        elsif i == 3
+          single_question = Question.where(area: "ciências da natureza e suas tecnologias")[a]
+        end
+        @exams.push(single_question)
+      end
+    end
+
+    if @exams.count == 1
+      redirect_to_back(exam_result_path)
+      flash[:danger] = "Não há questões cadastradas do ano de #{params[:year_exam]}."
+    else
+      @exams
+    end
   end
 
   def exam_result
-    exam_answers = []
+    @exam_user_answers = []
+    @accepted_answers = 0
 
-    puts '='*80
-    puts params[:exam_id]
-    puts '='*80
-
-    for i in 0...4
-      puts Exam.last.questions[i]
-    end
+    @current_exam = Exam.find(params[:exam_id])
 
     for i in 0...4
-      if i == 0
-        Exam.last.questions[i].each do |t|
-          exam_answers.push(params[:"alternative_#{Question.where(area: "ciências humanas e suas tecnologias")[t].id}"])
+      @current_exam.questions[i].each do |t|
+        if i == 0
+          question = Question.where(area: "ciências humanas e suas tecnologias")[t]
+        elsif i == 1
+          question = Question.where(area: "matemática e suas tecnologias")[t]
+        elsif i == 2
+          question = Question.where(area: "linguagens, códigos e suas tecnologias")[t]
+        elsif i == 3
+          question = Question.where(area: "ciências da natureza e suas tecnologias")[t]
         end
-      elsif i == 1
-        Exam.last.questions[i].each do |t|
-          exam_answers.push(params[:"alternative_#{Question.where(area: "matemática e suas tecnologias")[t].id}"])
-        end
-      elsif i == 2
-        Exam.last.questions[i].each do |t|
-          exam_answers.push(params[:"alternative_#{Question.where(area: "linguagens, códigos e suas tecnologias")[t].id}"])
-        end
-      elsif i == 3
-        Exam.last.questions[i].each do |t|
-          exam_answers.push(params[:"alternative_#{Question.where(area: "ciências da natureza e suas tecnologias")[t].id}"])
+
+        user_answer = params[:"alternative_#{question.id}"] ? params[:"alternative_#{question.id}"] : "não marcou"
+        @exam_user_answers.push(user_answer)
+        if(user_answer == question.right_answer)
+          @accepted_answers += 1
         end
       end
     end
 
-    puts '#'*80
-    puts exam_answers
+    @exam_user_aswers
   end
 
 end

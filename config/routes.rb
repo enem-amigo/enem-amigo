@@ -4,8 +4,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'static_pages#about'
   get 'help' => 'static_pages#help'
-  get 'choose_exam' => 'static_pages#choose_exam'
-  # get 'server_error' => 'static_pages#server_error'
+  get 'server_error' => 'static_pages#server_error'
 
   get 'signup' => 'users#new'
   get 'ranking' => 'users#ranking'
@@ -27,8 +26,9 @@ Rails.application.routes.draw do
 
   get 'medals' => 'medals#index'
 
-  get 'random_exam' => 'exams#random_exam'
-  get 'result' => 'exams#exam_result'
+  get 'answer_exam' => 'exams#answer_exam'
+  get 'select_exam' => 'exams#select_exam'
+  get 'exam_result' => 'exams#exam_result'
 
   resources :posts
   resources :comments
@@ -60,6 +60,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # get '*unmatched_route', :to => 'application#raise_not_found!'
+  get '*unmatched_route', :to => 'application#raise_not_found!'
 
 end

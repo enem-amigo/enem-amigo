@@ -1,0 +1,31 @@
+<div class="question">
+  <h1>Questão <%= @question.number%></h1>
+  <h2>Ano: <%= @question.year %></h2>
+
+  <div class='question-index'>
+    <p><%= @question.area %></p>
+  </div>
+
+  <p class="question-text"><%= @question.text unless @question.text.nil? %></p>
+  <% unless @question.image.empty? %>
+    <%= image_tag(@question.image , class: 'img-responsive question-img') %>
+  <% end %>
+
+  <p class="question-text-reference"><%= @question.reference unless @question.reference.nil? %></p>
+
+  <p class="question"><%= @question.enunciation %></p>
+
+
+  <%= form_tag answer_battle_path, remote: true do %>
+    <% @question.alternatives.each do |f| %>
+      <div class="alternative">
+        <%= radio_button_tag(:alternative, f.letter) %>
+        <%= label_tag(f.letter.to_s, f.letter.to_s + ")") %>
+        <span class="<%= f.letter.to_s %>-description"><%= f.description %></span>
+      </div>
+    <% end %>
+
+  <%= submit_tag "Responder", class: 'btn btn-primary btn-sm button', id: 'answer-btn' %>
+  <% end %>
+
+</div>

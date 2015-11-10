@@ -16,6 +16,7 @@ class Question < ActiveRecord::Base
   end
 
   has_many :alternatives
+  has_and_belongs_to_many :battles
   accepts_nested_attributes_for :alternatives, allow_destroy: true
 
   ALTERNATIVES_COUNT = 5

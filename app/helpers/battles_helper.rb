@@ -1,24 +1,23 @@
 module BattlesHelper
 
   def player_started?(battle)
-  	is_player_1?(battle) ? player_1_start : player_2_start
+    is_player_1?(battle) ? battle.player_1_start : battle.player_2_start
   end
 
   def start_battle(battle)
   	if is_player_1?(battle)
-  		battle.update_attribute(:player_1_start, true)
+  		battle.player_1_start = true
+      battle.player_1_answers = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
+      battle.save
   	else
-  		battle.update_attribute(:player_2_start, true)
+  		battle.player_2_start = true
+      battle.player_2_answers = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
+      battle.save
   	end
-  	@player_answers = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
   end
 
   def save_answers(battle)
-  	if is_player_1?(battle)
-  		battle.update_attribute(:player_1_answers, @player_answers)
-    else
-      battle.update_attribute(:player_2_answers, @player_answers)
-    end
+  	battle.save
   end
 
   def is_player_1?(battle)

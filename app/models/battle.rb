@@ -1,6 +1,6 @@
 class Battle < ActiveRecord::Base
 
-  has_many :questions
+  has_and_belongs_to_many :questions
   belongs_to :player_1, class_name: 'User'
   belongs_to :player_2, class_name: 'User'
 

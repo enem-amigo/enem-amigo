@@ -10,11 +10,15 @@ class BattlesController < ApplicationController
   end
 
   def create
-    @battle = Battle.new(player_1: current_user, player_2: User.where(nickname: params[:player_2_nickname]))
+    @battle = Battle.new
+    @battle.player_1 = current_user
+    @battle.player_2 = User.where(nickname: params[:player_2_nickname]).first
+    @battle.category = params[:battle][:category]
     @battle.generate_questions
     if @battle.save
       new_battle_notification(@battle)
       flash[:success] = "Convite enviado com sucesso!"
+      redirect_to battles_path
     else
       render 'new'
     end
@@ -22,7 +26,7 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
-
+    battle_answer_notification(@battle, true) unless is_player_1?(battle)
     session[:counter] = 0
     @question = @battle.questions[0]
   end
@@ -45,9 +49,6 @@ class BattlesController < ApplicationController
     session[:counter] = question_number + 1
 
     question = battle.questions[question_number]
-    puts "="*50
-    puts question.number
-    puts "="*50
     @answer_letter = params[:alternative]
 
     if params[:alternative].blank?
@@ -59,9 +60,6 @@ class BattlesController < ApplicationController
       question.update_attribute(:users_hits, question.users_hits + 1) if @correct_answer
       if is_player_1?(battle)
         battle.player_1_answers[question_number] = @answer_letter
-        puts "*"*80
-        puts battle.player_1_answers
-        puts "*"*80
       else
         battle.player_2_answers[question_number] = @answer_letter
       end
@@ -98,5 +96,11 @@ class BattlesController < ApplicationController
       @adversary_points = @player_1_points
     end
     @answers = @battle.questions.zip(current_player_answers, adversary_answers)
+  end
+
+  def generate_random_user
+    random_user = (User.all - [current_user]).sample
+
+    render :text => random_user.nickname
   end
 end

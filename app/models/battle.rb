@@ -1,6 +1,7 @@
 class Battle < ActiveRecord::Base
 
   has_and_belongs_to_many :questions
+  has_many :notifications
   belongs_to :player_1, class_name: 'User'
   belongs_to :player_2, class_name: 'User'
   belongs_to :winner, class_name: 'User'

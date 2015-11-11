@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get 'medals' => 'medals#index'
 
+  get '/generate_random_user', :to=>"battles#generate_random_user"
+
   resources :posts
   resources :comments
 

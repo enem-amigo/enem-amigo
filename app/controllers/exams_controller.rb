@@ -73,4 +73,10 @@ class ExamsController < ApplicationController
     end
   end
 
+  def cancel_exam
+    exam = Exam.find(params[:exam_id])
+    exam.destroy
+    redirect_to root_path
+  end
+
 end

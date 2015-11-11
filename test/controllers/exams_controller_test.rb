@@ -86,6 +86,29 @@ class ExamsControllerTest < ActionController::TestCase
     assert_not last_exam.questions.empty?
   end
 
+  test "should user be redirected to exam_result when he submits an exam" do
+    log_in @user
+    get :answer_exam
+    post :answer_exam, exam_id: 58, alternative_12: "a"
+    assert_response :success
+  end
+
+  test "should user cannot access exam_result page if he did not answer an exam" do
+    log_in @user
+    get :exam_result
+    assert_redirected_to :back
+  end
+
+  test "should delete exam if user cancels it" do
+    log_in @user
+    get :answer_exam
+    old_count = Exam.all.count
+    id = Exam.last.id
+    delete :cancel_exam, exam_id: id
+    new_count = Exam.all.count
+    assert_equal old_count-1, new_count
+  end
+
   private
     def create_question year, area
       @question = Question.new(area: area, enunciation: 'something', number: 001, year: year, right_answer: 'a', image: "", reference: "", text: "")

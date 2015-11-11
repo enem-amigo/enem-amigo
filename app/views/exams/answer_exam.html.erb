@@ -6,6 +6,6 @@
   <% end %>
   <div class="submit-exam">
     <p><%= submit_tag "Submeter Prova", class: "btn btn-primary", id: "submit-exam" %>
-    <%= link_to "Cancelar Prova", root_path, class: "btn btn-danger", id: "cancel-exam" %></p>
+    <%= link_to "Cancelar Prova", cancel_exam_path(exam_id: @exam.id), data: { confirm: "Você tem certeza? Esse exame será perdido" }, method: :delete, class: "btn btn-danger", id: "cancel-exam" %></p>
   </div>
 <% end %>

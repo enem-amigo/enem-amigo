@@ -2,6 +2,9 @@ class BattlesController < ApplicationController
 
   include BattlesHelper
 
+  before_action :verify_processed, only: [:finish]
+  before_action :verify_participation, only: [:show]
+
   def new
     @battle = Battle.new
   end
@@ -22,13 +25,6 @@ class BattlesController < ApplicationController
 
     session[:counter] = 0
     @question = @battle.questions[0]
-
-    unless player_started?(@battle)
-      start_battle(@battle)
-    else
-      flash[:danger] = "Você já participou desta batalha"
-      redirect_to battles_path
-    end
   end
 
   def index
@@ -82,34 +78,25 @@ class BattlesController < ApplicationController
 
   def finish
     @battle = Battle.find(params[:id])
+    player_answers = is_player_1?(@battle) ? @battle.player_1_answers : @battle.player_2_answers
+    @answers = @battle.questions.zip(player_answers)
+    process_result if @battle.player_1_start and @battle.player_2_start
   end
 
   def result
     @battle = Battle.find(params[:id])
-    player_1_comparison = @battle.questions.zip(player_1_answers).map { |x, y| x.right_answer == y }
-    player_2_comparison = @battle.questions.zip(player_2_answers).map { |x, y| x.right_answer == y }
-    player_1_comparison.delete(false)
-    player_2_comparison.delete(false)
-
-    player_1_points = player_1_comparison.count
-    player_2_points = player_2_comparison.count
-
-    player_1.update_attribute(:battle_points, player_1.battle_points + player_1_points)
-    player_2.update_attribute(:battle_points, player_2.battle_points + player_2_points)
-
-    if player_1_points > player_2_points
-      @battle.update_attribute(:winner, player_1)
-      player_1.update_attribute(:wins, player_1.wins + 1)
-    elsif player_1_points < player_2_points
-      @battle.update_attribute(:winner, player_2)
-      player_2.update_attribute(:wins, player_2.wins + 1)
-    elsif player_1_time > player_2_time
-      @battle.update_attribute(:winner, player_1)
-      player_1.update_attribute(:wins, player_1.wins + 1)
-    elsif player_1_time < player_2_time
-      @battle.update_attribute(:winner, player_2)
-      player_2.update_attribute(:wins, player_2.wins + 1)
+    count_questions
+    if is_player_1?(@battle)
+      current_player_answers = @battle.player_1_answers
+      adversary_answers = @battle.player_2_answers
+      @current_player_points = @player_1_points
+      @adversary_points = @player_2_points
+    else
+      current_player_answers = @battle.player_2_answers
+      adversary_answers = @battle.player_1_answers
+      @current_player_points = @player_2_points
+      @adversary_points = @player_1_points
     end
-
+    @answers = @battle.questions.zip(current_player_answers, adversary_answers)
   end
 end

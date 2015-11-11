@@ -5,11 +5,11 @@
 <div id="counter"></div>
 <script>
 function countdown() {
-    var seconds = 100;
+    var seconds = 601;
     function tick() {
         var counter = document.getElementById("counter");
         seconds--;
-        counter.innerHTML = String((seconds-seconds%60)/60) + ":" + String(seconds%60);
+        counter.innerHTML = String((seconds-seconds%60)/60) + ":" + (seconds%60 < 10 ? "0" : "") + String(seconds%60);
         if( seconds > 0 ) {
             setTimeout(tick, 1000);
         } else {

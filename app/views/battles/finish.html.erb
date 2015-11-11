@@ -1,1 +1,17 @@
-Batalha Finalizada
+<p>
+  Batalha Finalizada
+</p>
+
+<table class='table'>
+    <thead>
+      <th>Suas Respostas</th>
+      <th>Gabarito</th>
+    </thead>
+
+    <% @answers.each do |x, y| %>
+      <tr>
+        <td class="align-center"><%= y %></td>
+        <td class="align-center"><%= x.right_answer %></td>
+      </tr>
+    <% end %>
+  </table>

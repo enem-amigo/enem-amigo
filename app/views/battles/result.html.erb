@@ -1,0 +1,30 @@
+<h1>
+  Resultado da Batalha
+</h1>
+
+<h2>
+  Vencedor: <%= @battle.winner.name + " (" + @battle.winner.nickname + ")" %>
+</h2>
+
+<table class='table'>
+    <thead>
+      <th class="align-center">Gabarito</th>
+      <th class="align-center">Suas Respostas</th>
+      <th class="align-center">Respostas do Adversário</th>
+    </thead>
+
+    <% @answers.each do |x, y, z| %>
+      <tr>
+        <td class="align-center"><%= x.right_answer %></td>
+        <td class="align-center"><%= y %></td>
+        <td class="align-center"><%= z %></td>
+      </tr>
+    <% end %>
+  </table>
+
+<h2>
+  Questões acertadas por você: <%= @current_player_points %>
+</h2>
+<h2>
+  Questões acertadas pelo adversário: <%= @adversary_points %>
+</h2>

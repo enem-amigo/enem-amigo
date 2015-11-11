@@ -3,16 +3,22 @@
 <% unless @battles.blank? %>
   <table class='table'>
     <thead>
-      <th>Adversário</th>
-      <th>Vencedor</th>
-      <th>Questões acertadas</th>
+      <th class="align-center">Status</th>
+      <th class="align-center">Jogador 1</th>
+      <th class="align-center">Jogador 2</th>
+      <th class="align-center">Vencedor</th>
     </thead>
 
     <% @battles.each do |t| %>
       <tr>
-        <td class="align-center"><%= t.player_2 %></td>
-        <td class="align-center"><%= link_to t.player_1, "/questions/#{t.id}" %></td>
-        <td><%= t.player_1_answers.count %></td>
+        <% if t.processed %>
+          <td class="align-center"><%= link_to 'Finalizada (clique para ver o resultado)', "/battles/#{t.id}/result" %></td>
+        <% else %>
+          <td class="align-center"><%= 'Pendente' %></td>
+        <% end %>
+        <td class="align-center"><%= t.player_1.name %></td>
+        <td class="align-center"><%= t.player_2.name %></td>
+        <td class="align-center"><%= t.winner.name + " (" + t.winner.nickname + ")" %></td>
       </tr>
     <% end %>
   </table>

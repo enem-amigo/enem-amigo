@@ -1,0 +1,21 @@
+<h1> Batalhas </h1>
+
+<% unless @battles.blank? %>
+  <table class='table'>
+    <thead>
+      <th>Adversário</th>
+      <th>Vencedor</th>
+      <th>Questões acertadas</th>
+    </thead>
+
+    <% @battles.each do |t| %>
+      <tr>
+        <td class="align-center"><%= t.player_2 %></td>
+        <td class="align-center"><%= link_to t.player_1, "/questions/#{t.id}" %></td>
+        <td><%= t.player_1_answers.count %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h3> Você não participou de nenhuma batalha </h3>
+<% end %>

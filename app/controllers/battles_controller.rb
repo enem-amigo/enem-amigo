@@ -84,8 +84,13 @@ class BattlesController < ApplicationController
 
   def result
     @battle = Battle.find(params[:id])
-    process_result unless @battle.processed
-    count_questions
+
+    if @battle.processed?
+      count_questions
+    else
+      process_result
+    end
+
     if is_player_1?(@battle)
       current_player_answers = @battle.player_1_answers
       adversary_answers = @battle.player_2_answers
@@ -97,6 +102,7 @@ class BattlesController < ApplicationController
       @current_player_points = @player_2_points
       @adversary_points = @player_1_points
     end
+
     @answers = @battle.questions.zip(current_player_answers, adversary_answers)
   end
 

@@ -15,4 +15,8 @@ class Battle < ActiveRecord::Base
     self.questions = self.category == "" ? Question.all.sample(10) : Question.where(area: self.category).sample(10)
   end
 
+  def all_played?
+    self.player_1_start and self.player_2_start
+  end
+
 end

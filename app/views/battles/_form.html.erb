@@ -12,7 +12,7 @@
   <%= f.label :player_2_nickname, "Nome da Categoria" %>
   <%= text_field_tag :player_2_nickname, params[:player_2_nickname], id: 'deviceIDfield' %>
 
-  <div id='deviceIDbutton'><%= f.button "Gerar Aleatório" %></div>
+  <%= f.button "Gerar Aleatório", id: 'deviceIDbutton'%>
 
   <%= f.select :category, ([['Geral',''] , ['Matemática','matemática e suas tecnologias'] , ['Ciências da Natureza','ciências da natureza e suas tecnologias'] , ['Ciências Humanas','ciências humanas e suas tecnologias'] , ['Códigos e Linguagens','linguagens, códigos e suas tecnologias']]) %>
 

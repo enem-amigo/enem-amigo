@@ -10,7 +10,7 @@
 
     <% @battles.each do |t| %>
       <tr>
-        <% if t.processed %>
+        <% if t.all_played? %>
           <td class="align-center"><%= link_to 'Finalizada (clique para ver o resultado)', "/battles/#{t.id}/result" %></td>
         <% else %>
           <td class="align-center"><%= 'Pendente' %>

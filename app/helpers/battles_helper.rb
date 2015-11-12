@@ -31,45 +31,45 @@ module BattlesHelper
   end
 
   def process_result
-    @battle = Battle.find(params[:id])
+    battle = Battle.find(params[:id])
 
     count_questions
-    player_1 = @battle.player_1
-    player_2 = @battle.player_2
+    player_1 = battle.player_1
+    player_2 = battle.player_2
 
     player_1.update_attribute(:battle_points, player_1.battle_points + @player_1_points)
     player_2.update_attribute(:battle_points, player_2.battle_points + @player_2_points)
 
     if @player_1_points > @player_2_points
-      @battle.update_attribute(:winner, player_1)
+      battle.update_attribute(:winner, player_1)
       player_1.update_attribute(:wins, player_1.wins + 1)
     elsif @player_1_points < @player_2_points
-      @battle.update_attribute(:winner, player_2)
+      battle.update_attribute(:winner, player_2)
       player_2.update_attribute(:wins, player_2.wins + 1)
-    elsif @battle.player_1_time > @battle.player_2_time
-      @battle.update_attribute(:winner, player_1)
+    elsif battle.player_1_time > battle.player_2_time
+      battle.update_attribute(:winner, player_1)
       player_1.update_attribute(:wins, player_1.wins + 1)
     else
-      @battle.update_attribute(:winner, player_2)
+      battle.update_attribute(:winner, player_2)
       player_2.update_attribute(:wins, player_2.wins + 1)
     end
 
-    @battle.update_attribute(:processed, true)
+    battle.update_attribute(:processed, true)
   end
 
   def verify_processed
-    @battle = Battle.find(params[:id])
-    if @battle.processed
+    battle = Battle.find(params[:id])
+    if battle.processed?
       flash[:danger] = "Você já participou dessa batalha, espere o outro jogador"
       redirect_to battles_path
     end
   end
 
   def verify_participation
-    @battle = Battle.find(params[:id])
+    battle = Battle.find(params[:id])
 
-    unless player_started?(@battle)
-      start_battle(@battle)
+    unless player_started?(battle)
+      start_battle(battle)
     else
       flash[:danger] = "Você já participou desta batalha"
       redirect_to battles_path
@@ -77,9 +77,9 @@ module BattlesHelper
   end
 
   def verify_played
-    @battle = Battle.find(params[:id])
+    battle = Battle.find(params[:id])
 
-    if @battle.player_1_start and @battle.player_2_start
+    unless battle.all_played?
       flash[:danger] = "A batalha ainda não foi finalizada"
       redirect_to battles_path
     end

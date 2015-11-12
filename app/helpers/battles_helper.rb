@@ -8,10 +8,12 @@ module BattlesHelper
   	if is_player_1?(battle)
   		battle.player_1_start = true
       battle.player_1_answers = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
+      battle.player_1_time = Time.now.to_i
       battle.save
   	else
   		battle.player_2_start = true
       battle.player_2_answers = ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
+      battle.player_2_time = Time.now.to_i
       battle.save
   	end
   end
@@ -44,9 +46,6 @@ module BattlesHelper
     elsif @player_1_points < @player_2_points
       @battle.update_attribute(:winner, player_2)
       player_2.update_attribute(:wins, player_2.wins + 1)
-    end
-
-=begin
     elsif @battle.player_1_time > @battle.player_2_time
       @battle.update_attribute(:winner, player_1)
       player_1.update_attribute(:wins, player_1.wins + 1)
@@ -54,7 +53,7 @@ module BattlesHelper
       @battle.update_attribute(:winner, player_2)
       player_2.update_attribute(:wins, player_2.wins + 1)
     end
-=end
+
     @battle.update_attribute(:processed, true)
   end
 
@@ -68,6 +67,7 @@ module BattlesHelper
 
   def verify_participation
     @battle = Battle.find(params[:id])
+
     unless player_started?(@battle)
       start_battle(@battle)
     else
@@ -84,6 +84,15 @@ module BattlesHelper
 
     @player_1_points = player_1_comparison.count
     @player_2_points = player_2_comparison.count
+  end
+
+  def process_time(battle)
+    if is_player_1?(battle)
+      battle.update_attribute(:player_1_time, Time.now.to_i - battle.player_1_time)
+
+    else
+      battle.update_attribute(:player_2_time, Time.now.to_i - battle.player_2_time)
+    end
   end
 
 end

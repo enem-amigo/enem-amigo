@@ -16,6 +16,8 @@
           <td class="align-center"><%= 'Pendente' %>
           <% unless player_started?(t) %>
             <%= link_to ' Batalhar', "/battles/#{t.id}", class: "btn btn-success" %>
+          <% else %>
+            <%= '-Esperando o outro jogador-' %>
           <% end %>
             <%= link_to " Cancelar Batalha", battle_path(t), :method => :delete, class: "btn btn-danger", id: "btn-delete" %>
 

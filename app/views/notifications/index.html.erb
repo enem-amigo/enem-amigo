@@ -1,0 +1,21 @@
+<h1> Notificações </h1>
+
+<% unless @notifications.blank? %>
+  <table class='table'>
+    <thead>
+      <th class="align-center">Enviado por</th>
+      <th class="align-center">Assunto</th>
+      <th class="align-center">Data</th>
+    </thead>
+
+    <% @notifications.each do |t| %>
+      <tr>
+        <td class="align-center"><%= t.user.name %></td>
+        <td class="align-center"><%= t.message %></td>
+        <td class="align-center"><%= t.created_at.strftime(" %d/%m/%Y") %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h3> Você não possui notificações </h3>
+<% end %>

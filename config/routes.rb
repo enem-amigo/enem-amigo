@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   get '/generate_random_user', :to=>"battles#generate_random_user"
 
+  get 'notifications' => 'notifications#index'
+
   resources :posts
   resources :comments
 

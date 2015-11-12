@@ -14,9 +14,12 @@ class BattlesController < ApplicationController
     @battle.player_1 = current_user
     @battle.player_2 = User.where(nickname: params[:player_2_nickname]).first
     @battle.category = params[:battle][:category]
+    @battle.player_1_start = false
+    @battle.player_2_start = false
     @battle.generate_questions
     if @battle.save
       new_battle_notification(@battle)
+
       flash[:success] = "Convite enviado com sucesso!"
       redirect_to battles_path
     else
@@ -26,13 +29,13 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
-    battle_answer_notification(@battle, true) unless is_player_1?(battle)
+    battle_answer_notification(@battle, true) unless is_player_1?(@battle)
     session[:counter] = 0
     @question = @battle.questions[0]
   end
 
   def index
-    @battles = current_user.battles
+    @battles = current_user.battles.reverse
   end
 
   def destroy
@@ -67,6 +70,7 @@ class BattlesController < ApplicationController
     end
 
     if is_last_question?
+      process_time(battle)
       flash[:success] = "Batalha finalizada com sucesso!"
       render :js => "window.location.href += '/finish'"
     else

@@ -4,8 +4,8 @@ class CreateBattles < ActiveRecord::Migration
     t.text :player_1_answers
     t.text :player_2_answers
     t.string :category
-    t.timestamp :player_1_time
-    t.timestamp :player_2_time
+    t.integer :player_1_time
+    t.integer :player_2_time
     t.boolean :player_1_start
     t.boolean :player_2_start
 

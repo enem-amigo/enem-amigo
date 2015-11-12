@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   end
 
   def battles
-    self.active_battles + self.passive_battles
+    (self.active_battles + self.passive_battles).sort
   end
 
 end

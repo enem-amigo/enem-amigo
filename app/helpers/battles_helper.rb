@@ -76,6 +76,15 @@ module BattlesHelper
     end
   end
 
+  def verify_played
+    @battle = Battle.find(params[:id])
+
+    if @battle.player_1_start and @battle.player_2_start
+      flash[:danger] = "A batalha ainda não foi finalizada"
+      redirect_to battles_path
+    end
+  end
+
   def count_questions
     player_1_comparison = @battle.questions.zip(@battle.player_1_answers).map { |x, y| x.right_answer == y }
     player_2_comparison = @battle.questions.zip(@battle.player_2_answers).map { |x, y| x.right_answer == y }
@@ -89,7 +98,6 @@ module BattlesHelper
   def process_time(battle)
     if is_player_1?(battle)
       battle.update_attribute(:player_1_time, Time.now.to_i - battle.player_1_time)
-
     else
       battle.update_attribute(:player_2_time, Time.now.to_i - battle.player_2_time)
     end

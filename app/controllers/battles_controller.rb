@@ -4,18 +4,15 @@ class BattlesController < ApplicationController
 
   before_action :verify_processed, only: [:finish]
   before_action :verify_participation, only: [:show]
+  before_action :verify_played, only: [:result]
 
   def new
     @battle = Battle.new
   end
 
   def create
-    @battle = Battle.new
-    @battle.player_1 = current_user
-    @battle.player_2 = User.where(nickname: params[:player_2_nickname]).first
+    @battle = Battle.new(player_1: current_user, player_2: User.where(nickname: params[:player_2_nickname]).first)
     @battle.category = params[:battle][:category]
-    @battle.player_1_start = false
-    @battle.player_2_start = false
     @battle.generate_questions
     if @battle.save
       new_battle_notification(@battle)
@@ -23,6 +20,7 @@ class BattlesController < ApplicationController
       flash[:success] = "Convite enviado com sucesso!"
       redirect_to battles_path
     else
+      flash[:danger] = "Usuário não encontrado"
       render 'new'
     end
   end
@@ -82,11 +80,11 @@ class BattlesController < ApplicationController
     @battle = Battle.find(params[:id])
     player_answers = is_player_1?(@battle) ? @battle.player_1_answers : @battle.player_2_answers
     @answers = @battle.questions.zip(player_answers)
-    process_result if @battle.player_1_start and @battle.player_2_start
   end
 
   def result
     @battle = Battle.find(params[:id])
+    process_result unless @battle.processed
     count_questions
     if is_player_1?(@battle)
       current_player_answers = @battle.player_1_answers

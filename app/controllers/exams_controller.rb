@@ -53,20 +53,17 @@ class ExamsController < ApplicationController
 
   def exam_result
     if params[:exam_id]
-      @exam_user_answers = []
-      @accepted_answers = 0
-
-      @current_exam = Exam.find(params[:exam_id])
-
-      @current_exam.questions.each do |t|
+      @exam = Exam.find(params[:exam_id])
+      @exam.questions.each do |t|
         question = Question.find(t)
         user_answer = params[:"alternative_#{question.id}"] ? params[:"alternative_#{question.id}"] : "não marcou"
-        @exam_user_answers.push(user_answer)
+        @exam.user_answers.push(user_answer)
         if(user_answer == question.right_answer)
-          @accepted_answers += 1
+          @exam.accepted_answers += 1
         end
       end
-      @exam_user_aswers
+      @exam.save
+      @exam.user_answers
     else
       redirect_to_back
       flash[:danger] = "Você deve responder uma prova antes para obter seu resultado."

@@ -99,6 +99,13 @@ class ExamsControllerTest < ActionController::TestCase
     assert_redirected_to :back
   end
 
+  test "should user can access exam_result page if he did not answer an exam" do
+    log_in @user
+    get :answer_exam
+    get :exam_result, exam_id: Exam.last.id
+    assert_response :success
+  end
+
   test "should delete exam if user cancels it" do
     log_in @user
     get :answer_exam
@@ -107,6 +114,22 @@ class ExamsControllerTest < ActionController::TestCase
     delete :cancel_exam, exam_id: id
     new_count = Exam.all.count
     assert_equal old_count-1, new_count
+  end
+
+  test "should exam_result collects user answers when user answers an exam" do
+    log_in @user
+    get :answer_exam
+    question = Question.find(Exam.last.questions.first)
+    get :exam_result, exam_id: Exam.last.id, "alternative_#{question.id}": "b"
+    assert_not Exam.last.user_answers.empty?
+  end
+
+  test "should accepted_answers increments when user answers question right" do
+    log_in @user
+    get :answer_exam
+    question = Question.find(Exam.last.questions.first)
+    get :exam_result, exam_id: Exam.last.id, "alternative_#{question.id}": "#{question.right_answer}"
+    assert_not_equal Exam.last.accepted_answers, 0
   end
 
   private

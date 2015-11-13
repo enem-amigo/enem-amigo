@@ -26,8 +26,8 @@ module BattlesHelper
   	current_user == battle.player_1
   end
 
-  def is_last_question?
-    session[:counter] == 10
+  def is_last_question?(battle)
+    ((is_player_1?(battle) ? battle.player_1_answers : battle.player_2_answers)-['.']).count == 10
   end
 
   def process_result
@@ -101,6 +101,10 @@ module BattlesHelper
     else
       battle.update_attribute(:player_2_time, Time.now.to_i - battle.player_2_time)
     end
+  end
+
+  def question_number(battle)
+    ((is_player_1?(battle) ? battle.player_1_answers : battle.player_2_answers)-['.']).count
   end
 
 end

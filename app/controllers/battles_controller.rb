@@ -28,7 +28,6 @@ class BattlesController < ApplicationController
   def show
     @battle = Battle.find(params[:id])
     battle_answer_notification(@battle, true) unless is_player_1?(@battle)
-    session[:counter] = 0
     @question = @battle.questions[0]
   end
 
@@ -46,33 +45,28 @@ class BattlesController < ApplicationController
   def answer
     battle = Battle.find(params[:id])
 
-    question_number = session[:counter]
-    session[:counter] = question_number + 1
-
-    question = battle.questions[question_number]
+    question = battle.questions[question_number(battle)]
     @answer_letter = params[:alternative]
 
-    if params[:alternative].blank?
-      session[:counter] = question_number
-    else
+    unless params[:alternative].blank?
       question.update_attribute(:users_tries, question.users_tries + 1)
 
       @correct_answers = (@answer_letter == question.right_answer)
       question.update_attribute(:users_hits, question.users_hits + 1) if @correct_answer
       if is_player_1?(battle)
-        battle.player_1_answers[question_number] = @answer_letter
+        battle.player_1_answers[question_number(battle)] = @answer_letter
       else
-        battle.player_2_answers[question_number] = @answer_letter
+        battle.player_2_answers[question_number(battle)] = @answer_letter
       end
       battle.save
     end
 
-    if is_last_question?
+    if is_last_question?(battle)
       process_time(battle)
       flash[:success] = "Batalha finalizada com sucesso!"
       render :js => "window.location.href += '/finish'"
     else
-      @question = battle.questions[session[:counter]]
+      @question = battle.questions[question_number(battle)]
     end
   end
 

@@ -1,18 +1,9 @@
 <%= form_for(@battle) do |f| %>
-  <% if @battle.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% @battle.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <%= f.label :player_2_nickname, "Nome da Categoria" %>
   <%= text_field_tag :player_2_nickname, params[:player_2_nickname], id: 'deviceIDfield' %>
 
-  <%= f.button "Gerar Aleatório", id: 'deviceIDbutton'%>
+  <%= f.button "Usuário Aleatório", id: 'deviceIDbutton'%>
 
   <%= f.select :category, ([['Geral',''] , ['Matemática','matemática e suas tecnologias'] , ['Ciências da Natureza','ciências da natureza e suas tecnologias'] , ['Ciências Humanas','ciências humanas e suas tecnologias'] , ['Códigos e Linguagens','linguagens, códigos e suas tecnologias']]) %>
 

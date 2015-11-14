@@ -4,6 +4,7 @@
   <table class='table'>
     <thead>
       <th class="align-center">Status</th>
+      <th class="align-center"></th>
       <th class="align-center">Jogador 1</th>
       <th class="align-center">Jogador 2</th>
     </thead>
@@ -11,16 +12,22 @@
     <% @battles.each do |t| %>
       <tr>
         <% if t.all_played? %>
-          <td class="align-center"><%= link_to 'Finalizada (clique para ver o resultado)', "/battles/#{t.id}/result" %></td>
+          <td class="align-center"><%= 'Finalizada' %></td>
+          <td class="align-center"><%= link_to 'Ver Resultado', "/battles/#{t.id}/result" , class: "btn btn-info" %></td>
         <% else %>
-          <td class="align-center"><%= 'Pendente' %>
-          <% unless player_started?(t) %>
-            <%= link_to ' Batalhar', "/battles/#{t.id}", class: "btn btn-success" %>
+          <% if player_started?(t) %>
+            <td class="align-center"><%= 'Esperando outro jogador' %>
           <% else %>
-            <%= '-Esperando o outro jogador-' %>
+            <td class="align-center"><%= 'Pendente' %>
           <% end %>
-            <%= link_to " Cancelar Batalha", battle_path(t), :method => :delete, class: "btn btn-danger", id: "btn-delete" %>
-
+          <td class="align-center">
+          <% unless player_started?(t) %>
+            <%= link_to '', "/battles/#{t.id}", class: "btn btn-success glyphicon glyphicon-ok" %>
+          <% else %>
+            <%= link_to '', "/battles/#{t.id}/finish", class: "btn btn-default glyphicon glyphicon-stats" %>
+          <% end %>
+            <%= link_to '', battle_path(t), :method => :delete, class: "btn btn-danger glyphicon glyphicon-remove", id: "btn-delete" %>
+          </td>
         <% end %>
         <td class="align-center"><%= t.player_1.name %></td>
         <td class="align-center"><%= t.player_2.name %></td>

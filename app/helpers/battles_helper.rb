@@ -42,7 +42,7 @@ module BattlesHelper
     elsif @player_1_points < @player_2_points
       battle.update_attribute(:winner, player_2)
       player_2.update_attribute(:wins, player_2.wins + 1)
-    elsif battle.player_1_time > battle.player_2_time
+    elsif battle.player_1_time < battle.player_2_time
       battle.update_attribute(:winner, player_1)
       player_1.update_attribute(:wins, player_1.wins + 1)
     else
@@ -51,14 +51,6 @@ module BattlesHelper
     end
 
     battle.update_attribute(:processed, true)
-  end
-
-  def verify_processed
-    battle = Battle.find(params[:id])
-    if battle.processed?
-      flash[:danger] = "Você já participou dessa batalha, espere o outro jogador"
-      redirect_to battles_path
-    end
   end
 
   def verify_participation

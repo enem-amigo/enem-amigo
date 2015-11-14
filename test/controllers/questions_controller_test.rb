@@ -92,7 +92,7 @@ class QuestionsControllerTest < ActionController::TestCase
   private
 
     def create_question
-      @question = Question.new(area: 'matematica', enunciation: 'something', number: 001, year: 2007, right_answer: 'a')
+      @question = Question.new(area: 'matematica', enunciation: 'something', number: 021, year: 2007, right_answer: 'a')
       5.times{@question.alternatives.build}
       @question.alternatives.each do |a|
         a.letter = 'a'

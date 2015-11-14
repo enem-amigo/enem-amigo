@@ -1,0 +1,8 @@
+first_battle:
+  player_1_answers: ['a', 'b', 'c', 'd', 'e', 'c', 'e', 'c', 'a', 'e']
+  player_2_answers: ['a', 'c', 'c', 'a', 'e', 'a', 'a', 'a', 'a', 'd']
+  category: ""
+  player_1_time: 457
+  player_2_time: 231
+  player_1_start: false
+  player_2_start: false

@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :medals
 
   serialize :accepted_questions, Array
+  serialize :answered_exams, Array
 
   before_save { self.email = email.downcase }
   has_secure_password

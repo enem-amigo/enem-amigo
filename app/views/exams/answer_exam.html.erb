@@ -1,0 +1,11 @@
+<%= form_tag "/exam_result", method: :get do %>
+  <%= hidden_field_tag :exam_id , @exam.id %>
+  <% @exam.questions.each do |a| %>
+    <% @question = Question.find(a) %>
+    <%= render :partial => 'question' %>
+  <% end %>
+  <div class="submit-exam">
+    <p><%= submit_tag "Submeter Prova", class: "btn btn-primary", id: "submit-exam" %>
+    <%= link_to "Cancelar Prova", cancel_exam_path(exam_id: @exam.id), data: { confirm: "Você tem certeza? Esse exame será perdido" }, method: :delete, class: "btn btn-danger", id: "cancel-exam" %></p>
+  </div>
+<% end %>

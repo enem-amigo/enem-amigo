@@ -31,6 +31,11 @@ Rails.application.routes.draw do
 
   get 'notifications' => 'notifications#index'
 
+  get 'answer_exam' => 'exams#answer_exam'
+  get 'select_exam' => 'exams#select_exam'
+  get 'exam_result' => 'exams#exam_result'
+  delete 'cancel_exam' => 'exams#cancel_exam'
+
   resources :posts
   resources :comments
 

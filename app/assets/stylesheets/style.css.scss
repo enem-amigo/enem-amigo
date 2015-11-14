@@ -387,7 +387,7 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
   padding: 30px;
 }
 
-#submit-exam, #cancel-exam {
+#submit-exam-button, #cancel-exam {
   width: 200px;
 }
 
@@ -407,4 +407,11 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
 #year_exam {
   font-size: 15px;
   height: 100%;
+}
+
+#counter {
+  font-size: 30px;
+  position: fixed;
+  margin-top: 7%;
+  margin-left: -1%;
 }

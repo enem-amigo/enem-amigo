@@ -23,8 +23,8 @@
   </table>
 
 <h2>
-  Questões acertadas por você: <%= @current_player_points %>
+  Questões acertadas por você: <%= @current_player_stats.first %> (Tempo: <%= "#{@current_player_stats.second/60}:#{@current_player_stats.second%60 < 10 ? "0" : ""}#{@current_player_stats.second%60}"%>)
 </h2>
 <h2>
-  Questões acertadas pelo adversário: <%= @adversary_points %>
+  Questões acertadas pelo adversário: <%= @adversary_stats.first %> (Tempo: <%= "#{@adversary_stats.second/60}:#{@adversary_stats.second%60 < 10 ? "0" : ""}#{@adversary_stats.second%60}"%>)
 </h2>

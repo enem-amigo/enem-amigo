@@ -1,11 +1,11 @@
-<p>
+<h1 class="align-center">
   Batalha Finalizada
-</p>
+</h2>
 
 <table class='table'>
     <thead>
-      <th>Suas Respostas</th>
-      <th>Gabarito</th>
+      <th class="align-center">Suas Respostas</th>
+      <th class="align-center">Gabarito</th>
     </thead>
 
     <% @answers.each do |x, y| %>
@@ -15,3 +15,7 @@
       </tr>
     <% end %>
   </table>
+
+  <h2 class="align-center">
+    Você acertou <%= pluralize(@player_points,"questão","questões") %>
+  </h2>

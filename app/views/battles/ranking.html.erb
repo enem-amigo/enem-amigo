@@ -1,0 +1,21 @@
+<h1>Ranking da Batalha</h1>
+
+<table class="table">
+  <thead>
+    <th>Posição</th>
+    <th>Nome</th>
+    <th>Batalhas vencidas</th>
+    <th>Pontos da Batalha</th>
+  </thead>
+  <tbody>
+    <% i = 0 %>
+    <% @users.each do |user| %>
+    <tr>
+        <td><%= i = i+1 %>º</td>
+        <td><%= link_to user.name, "/users/#{user.id}" %></td>
+        <td><%= user.wins %></td>
+        <td><%= user.battle_points %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>

@@ -42,6 +42,10 @@ class BattlesController < ApplicationController
     redirect_to battles_path
   end
 
+  def ranking
+    @users = User.order(:wins, :battle_points).reverse
+  end
+
   def answer
     battle = Battle.find(params[:id])
 

@@ -1,3 +1,5 @@
+<div class="glyphicon glyphicon-time label label-default" id="counter"></div>
+
 <%= form_tag "/exam_result", method: :get do %>
   <%= hidden_field_tag :exam_id , @exam.id %>
   <% @exam.questions.each do |a| %>
@@ -5,7 +7,25 @@
     <%= render :partial => 'question' %>
   <% end %>
   <div class="submit-exam">
-    <p><%= submit_tag "Submeter Prova", class: "btn btn-primary", id: "submit-exam" %>
+    <p><%= submit_tag "Submeter Prova", class: "btn btn-primary", id: "submit-exam-button" %>
     <%= link_to "Cancelar Prova", cancel_exam_path(exam_id: @exam.id), data: { confirm: "Você tem certeza? Esse exame será perdido" }, method: :delete, class: "btn btn-danger", id: "cancel-exam" %></p>
   </div>
 <% end %>
+
+<script>
+  function countdown() {
+    var seconds = 18000;
+    function tick() {
+      var counter = document.getElementById("counter");
+      seconds--;
+      counter.innerHTML = " " + String((seconds - seconds%3600)/3600) + ":" + String((seconds%3600-seconds%60)/60) + ":" + (seconds%60 < 10 ? "0" : "") + String(seconds%60);
+      if( seconds > 0 ) {
+        setTimeout(tick, 1000);
+      } else {
+        document.getElementById("submit-exam-button").click();
+      }
+    }
+    tick();
+  }
+  countdown();
+</script>

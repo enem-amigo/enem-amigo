@@ -1,22 +1,26 @@
-<div class="user-answers">
-  <p><strong>Suas respostas</strong></p>
-  <% @exam.user_answers.each do |a| %>
-    <p><%= a %><p>
-  <% end %>
-</div>
-<div class="right-answers">
-  <p><strong>Gabarito</strong></p>
-  <% @exam.right_answers.each do |a| %>
-    <p><%= a %></p>
-  <% end %>
-</div>
+<h1>
+  Resultado da Prova
+</h1>
+
+<table class='table'>
+  <thead>
+    <th class="align-center">Suas Respostas</th>
+    <th class="align-center">Gabarito</th>
+  </thead>
+
+    <% @exam.user_answers.zip @exam.right_answers do | x, y | %>
+  <tr>
+      <td class="align-center"><%= x %></td>
+      <td class="align-center"><%= y %></td>
+  </tr>
+    <% end %>
+</table>
+
+<h2>
+  Você acertou <%= pluralize(@exam.accepted_answers,"questão!","questões!") %>
+</h2>
 
 <center>
-  <div class="exam-result">
-      <p>
-        Você acertou <%= pluralize(@exam.accepted_answers,"questão","questões") %>!
-      </p>
-  </div>
   <div class="buttons-exam">
     <%= link_to "Ver relatório completo", '#', class: "btn btn-success", id: "btn-edit" %>
     <%= link_to "Voltar à Página Principal", root_path, class: "btn btn-primary", id: "btn-edit" %>

@@ -4,7 +4,8 @@ class BattlesController < ApplicationController
 
   before_action :authenticate_user
   before_action :verify_participation, only: [:show]
-  before_action :verify_played, only: [:result]
+  before_action :verify_all_played, only: [:result]
+  before_action :verify_current_user_played, only: [:finish]
 
   def new
     @battle = Battle.new
@@ -27,6 +28,7 @@ class BattlesController < ApplicationController
 
   def show
     @battle = Battle.find(params[:id])
+    start_battle(@battle)
     battle_answer_notification(@battle, true) unless is_player_1?(@battle)
     @question = @battle.questions[0]
   end
@@ -96,6 +98,7 @@ class BattlesController < ApplicationController
       process_result
     end
 
+    @battle.reload
     if is_player_1?(@battle)
       current_player_answers = @battle.player_1_answers
       adversary_answers = @battle.player_2_answers

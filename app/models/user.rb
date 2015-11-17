@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   serialize :accepted_questions, Array
   serialize :answered_exams, Array
+  serialize :exam_performance, Array
 
   before_save { self.email = email.downcase }
   has_secure_password
@@ -54,6 +55,10 @@ class User < ActiveRecord::Base
       ["Linguagens", self.count_questions_by_area('linguagens, códigos e suas tecnologias')],
       ["Humanas", self.count_questions_by_area('ciências humanas e suas tecnologias')]
     ]
+  end
+
+  def sum_exam_performance
+    self.exam_performance.inject(:+)
   end
 
   def progress

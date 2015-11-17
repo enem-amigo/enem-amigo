@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get 'answer_exam' => 'exams#answer_exam'
   get 'select_exam' => 'exams#select_exam'
   get 'exam_result' => 'exams#exam_result'
+  get 'exams_statistics' => 'exams#exams_statistics'
   delete 'cancel_exam' => 'exams#cancel_exam'
 
   resources :posts

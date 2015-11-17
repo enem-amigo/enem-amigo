@@ -1,0 +1,16 @@
+<h1 class="content-title">Estatísticas do Modo Prova</h1>
+
+<table class="table" id="complete-result">
+  <thead>
+    <th class="align-center">Questões acertadas até agora</th>
+    <th class="align-center">Questões respondidas</th>
+  </thead>
+
+  <tr>
+      <td class="align-center"><%= pluralize(current_user.sum_exam_performance,"questão","questões") %> (<%= ((current_user.sum_exam_performance.to_f/current_user.exams_total_questions)*100).round(2) %>%)</td>
+      <td class="align-center"><%= pluralize(current_user.exams_total_questions,"questão","questões") %></td>
+  </tr>
+</table>
+
+<h2 id="accepted-by-exam">Questões acertadas por prova</h2>
+<%= area_chart current_user.exam_performance.each_with_index.map { |value,index| [index+1,value] }, discrete: true, library: { hAxis: { title: "Prova" }, vAxis: { title: "Questões respondidas" } } %>

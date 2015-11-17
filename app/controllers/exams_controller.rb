@@ -5,6 +5,9 @@ class ExamsController < ApplicationController
   def select_exam
   end
 
+  def exams_statistics
+  end
+
   def answer_exam
     questions = params[:year_exam] ? Question.where(year: params[:year_exam]) : Question.all
 
@@ -62,6 +65,10 @@ class ExamsController < ApplicationController
           @exam.accepted_answers += 1
         end
       end
+
+      current_user.exams_total_questions += @exam.questions.count
+      current_user.update_attribute(:exam_performance, current_user.exam_performance + [@exam.accepted_answers])
+
       @exam.save
       @exam.user_answers
     else

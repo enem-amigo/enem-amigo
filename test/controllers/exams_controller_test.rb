@@ -99,7 +99,7 @@ class ExamsControllerTest < ActionController::TestCase
     assert_redirected_to :back
   end
 
-  test "should user can access exam_result page if he did not answer an exam" do
+  test "should user can access exam_result page if he answers an exam" do
     log_in @user
     get :answer_exam
     get :exam_result, exam_id: Exam.last.id
@@ -124,12 +124,77 @@ class ExamsControllerTest < ActionController::TestCase
     assert_not Exam.last.user_answers.empty?
   end
 
+  test "should exam_result not collect user answers if user does not answer an exam" do
+    log_in @user
+    get :answer_exam
+    assert Exam.last.user_answers.empty?
+  end
+
   test "should accepted_answers increments when user answers question right" do
     log_in @user
     get :answer_exam
     question = Question.find(Exam.last.questions.first)
     get :exam_result, exam_id: Exam.last.id, "alternative_#{question.id}": "#{question.right_answer}"
     assert_not_equal Exam.last.accepted_answers, 0
+  end
+
+  test "should accepted_answers not increment when user does not answer question right" do
+    log_in @user
+    get :answer_exam
+    question = Question.find(Exam.last.questions.first)
+    get :exam_result, exam_id: Exam.last.id, "alternative_#{question.id}": "#{question.right_answer.next}"
+    assert_equal Exam.last.accepted_answers, 0
+  end
+
+  test "should exams_total_questions in user be incremented if user answers an exam" do
+    log_in @user
+    get :answer_exam
+    old_exams_total_questions = current_user.exams_total_questions
+    get :exam_result, exam_id: Exam.last.id
+    current_user.reload
+    assert_not_equal old_exams_total_questions, current_user.exams_total_questions
+  end
+
+  test "should exams_total_questions in user not be incremented if user does not answer an exam" do
+    log_in @user
+    old_exams_total_questions = current_user.exams_total_questions
+    current_user.reload
+    assert_equal old_exams_total_questions, current_user.exams_total_questions
+  end
+
+  test "should exam_performance in user be incremented if user answers an exam" do
+    log_in @user
+    get :answer_exam
+    old_exam_perfomance_count = current_user.exam_performance.count
+    get :exam_result, exam_id: Exam.last.id
+    current_user.reload
+    assert_not_equal old_exam_perfomance_count, current_user.exam_performance.count
+  end
+
+  test "should exam_performance in user not be incremented if user does not answer an exam" do
+    log_in @user
+    old_exam_perfomance_count = current_user.exam_performance.count
+    current_user.reload
+    assert_equal old_exam_perfomance_count, current_user.exam_performance.count
+  end
+
+  test "should sum_exam_performance changes if user answers an exam and accepts one answer" do
+    log_in @user
+    get :answer_exam
+    old_sum_exam_performance = current_user.sum_exam_performance
+    question = Question.find(Exam.last.questions.first)
+    get :exam_result, exam_id: Exam.last.id, "alternative_#{question.id}": "#{question.right_answer}"
+    current_user.reload
+    assert_not_equal old_sum_exam_performance, current_user.sum_exam_performance
+  end
+
+  test "should sum_exam_performance not change if user answers an exam and accepts no answer" do
+    log_in @user
+    get :answer_exam
+    old_sum_exam_performance = current_user.sum_exam_performance
+    get :exam_result, exam_id: Exam.last.id
+    current_user.reload
+    assert_equal old_sum_exam_performance, current_user.sum_exam_performance
   end
 
   private

@@ -57,7 +57,7 @@ class BattlesController < ApplicationController
     unless params[:alternative].blank?
       question.update_attribute(:users_tries, question.users_tries + 1)
 
-      @correct_answers = (@answer_letter == question.right_answer)
+      @correct_answer = (@answer_letter == question.right_answer)
       question.update_attribute(:users_hits, question.users_hits + 1) if @correct_answer
       if is_player_1?(battle)
         battle.player_1_answers[question_position] = @answer_letter

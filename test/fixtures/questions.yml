@@ -4,6 +4,7 @@ question_01:
   number: 001
   year: 2007
   right_answer: a
+  image: ""
 
 question_02:
   area: matemática e suas tecnologias
@@ -11,6 +12,7 @@ question_02:
   number: 002
   year: 2007
   right_answer: a
+  image: ""
 
 question_03:
   area: matemática e suas tecnologias
@@ -18,6 +20,7 @@ question_03:
   number: 003
   year: 2007
   right_answer: a
+  image: ""
 
 question_04:
   area: matemática e suas tecnologias
@@ -25,6 +28,7 @@ question_04:
   number: 004
   year: 2007
   right_answer: a
+  image: ""
 
 question_05:
   area: matemática e suas tecnologias
@@ -32,6 +36,7 @@ question_05:
   number: 005
   year: 2007
   right_answer: a
+  image: ""
 
 question_06:
   area: matemática e suas tecnologias
@@ -39,6 +44,7 @@ question_06:
   number: 006
   year: 2007
   right_answer: a
+  image: ""
 
 question_07:
   area: matemática e suas tecnologias
@@ -46,6 +52,7 @@ question_07:
   number: 007
   year: 2007
   right_answer: a
+  image: ""
 
 question_08:
   area: matemática e suas tecnologias
@@ -53,6 +60,7 @@ question_08:
   number: 008
   year: 2007
   right_answer: a
+  image: ""
 
 question_09:
   area: matemática e suas tecnologias
@@ -60,6 +68,7 @@ question_09:
   number: 009
   year: 2007
   right_answer: a
+  image: ""
 
 question_10:
   area: matemática e suas tecnologias
@@ -67,73 +76,84 @@ question_10:
   number: 010
   year: 2007
   right_answer: a
+  image: ""
 
 question_11:
   area: ciências humanas e suas tecnologias
   enunciation: something
-  number: 001
+  number: 011
   year: 2007
   right_answer: a
+  image: ""
 
 question_12:
   area: ciências humanas e suas tecnologias
   enunciation: something
-  number: 002
+  number: 012
   year: 2007
   right_answer: a
+  image: ""
 
 question_13:
   area: ciências humanas e suas tecnologias
   enunciation: something
-  number: 003
+  number: 013
   year: 2007
   right_answer: a
+  image: ""
 
 question_14:
   area: ciências humanas e suas tecnologias
   enunciation: something
-  number: 004
+  number: 014
   year: 2007
   right_answer: a
+  image: ""
 
 question_15:
   area: ciências humanas e suas tecnologias
   enunciation: something
-  number: 005
+  number: 015
   year: 2007
   right_answer: a
+  image: ""
 
 question_16:
   area: ciências humanas e suas tecnologias
   enunciation: something
-  number: 006
+  number: 016
   year: 2007
   right_answer: a
+  image: ""
 
 question_17:
   area: ciências humanas e suas tecnologias
   enunciation: something
-  number: 007
+  number: 017
   year: 2007
   right_answer: a
+  image: ""
 
 question_18:
   area: ciências humanas e suas tecnologias
   enunciation: something
-  number: 008
+  number: 018
   year: 2007
   right_answer: a
+  image: ""
 
 question_19:
   area: ciências humanas e suas tecnologias
   enunciation: something
-  number: 009
+  number: 019
   year: 2007
   right_answer: a
+  image: ""
 
 question_20:
   area: ciências humanas e suas tecnologias
   enunciation: something
-  number: 010
+  number: 020
   year: 2007
   right_answer: a
+  image: ""

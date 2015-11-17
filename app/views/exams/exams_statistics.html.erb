@@ -7,7 +7,9 @@
   </thead>
 
   <tr>
-      <td class="align-center"><%= pluralize(current_user.sum_exam_performance,"questão","questões") %> (<%= ((current_user.sum_exam_performance.to_f/current_user.exams_total_questions)*100).round(2) %>%)</td>
+      <td class="align-center"><%= pluralize(current_user.sum_exam_performance,"questão","questões") %>
+        (<%= ((current_user.sum_exam_performance.to_f == 0 ? 0 : current_user.sum_exam_performance.to_f/current_user.exams_total_questions)*100).round(2) %>%)
+      </td>
       <td class="align-center"><%= pluralize(current_user.exams_total_questions,"questão","questões") %></td>
   </tr>
 </table>

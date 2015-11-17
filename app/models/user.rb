@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   end
 
   def sum_exam_performance
-    self.exam_performance.inject(:+)
+    self.exam_performance.empty? ? 0 : self.exam_performance.inject(:+)
   end
 
   def progress

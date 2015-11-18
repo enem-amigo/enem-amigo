@@ -6,10 +6,10 @@ class ExamsControllerTest < ActionController::TestCase
   def setup
     @request.env['HTTP_REFERER'] = 'http://test.host/#'
     @user = users(:renata)
-    @math_question = create_question(2011,"matemática e suas tecnologias")
-    @human_question = create_question(2014,"ciências humanas e suas tecnologias")
-    @language_question = create_question(2011,"linguagens, códigos e suas tecnologias")
-    @nature_question = create_question(2014,"ciências da natureza e suas tecnologias")
+    @math_question = create_question(2011,"matemática e suas tecnologias",22)
+    @human_question = create_question(2014,"ciências humanas e suas tecnologias",23)
+    @language_question = create_question(2011,"linguagens, códigos e suas tecnologias",24)
+    @nature_question = create_question(2014,"ciências da natureza e suas tecnologias",25)
   end
 
   test "should get select_exam page when user is logged in" do
@@ -197,9 +197,21 @@ class ExamsControllerTest < ActionController::TestCase
     assert_equal old_sum_exam_performance, current_user.sum_exam_performance
   end
 
+  test "should exam not have more than 90 questions" do
+    log_in @user
+    30.times do |i|
+      create_question(2011,"matemática e suas tecnologias",i+50)
+      create_question(2014,"ciências humanas e suas tecnologias",i+300)
+      create_question(2014,"ciências da natureza e suas tecnologias",i+250)
+      create_question(2011,"linguagens, códigos e suas tecnologias",i+900)
+    end
+    get :answer_exam
+    assert_equal Exam.last.questions.count, 90
+  end
+
   private
-    def create_question year, area
-      @question = Question.new(area: area, enunciation: 'something', number: 001, year: year, right_answer: 'a', image: "", reference: "", text: "")
+    def create_question year, area, number
+      @question = Question.new(area: area, enunciation: 'something', number: number, year: year, right_answer: 'a', image: "", reference: "", text: "")
       5.times{@question.alternatives.build}
       @question.alternatives.each do |a|
         a.letter = 'a'

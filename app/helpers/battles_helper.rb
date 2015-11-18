@@ -18,10 +18,6 @@ module BattlesHelper
   	end
   end
 
-  def save_answers(battle)
-  	battle.save
-  end
-
   def is_player_1?(battle)
   	current_user == battle.player_1
   end
@@ -36,41 +32,42 @@ module BattlesHelper
     player_1.update_attribute(:battle_points, player_1.battle_points + @player_1_points)
     player_2.update_attribute(:battle_points, player_2.battle_points + @player_2_points)
 
-    if @player_1_points > @player_2_points
-      battle.update_attribute(:winner, player_1)
-      player_1.update_attribute(:wins, player_1.wins + 1)
-    elsif @player_1_points < @player_2_points
-      battle.update_attribute(:winner, player_2)
-      player_2.update_attribute(:wins, player_2.wins + 1)
-    elsif battle.player_1_time < battle.player_2_time
+    if @player_1_points > @player_2_points || (@player_1_points == @player_2_points && battle.player_1_time <= battle.player_2_time)
       battle.update_attribute(:winner, player_1)
       player_1.update_attribute(:wins, player_1.wins + 1)
     else
       battle.update_attribute(:winner, player_2)
       player_2.update_attribute(:wins, player_2.wins + 1)
     end
-
     battle.update_attribute(:processed, true)
   end
 
   def verify_participation
     battle = Battle.find(params[:id])
 
-    unless player_started?(battle)
-      start_battle(battle)
-    else
+    if player_started?(battle)
       flash[:danger] = "Você já participou desta batalha"
       redirect_to battles_path
     end
   end
 
-  def verify_played
+  def verify_all_played
     battle = Battle.find(params[:id])
 
     unless battle.all_played?
       flash[:danger] = "A batalha ainda não foi finalizada"
       redirect_to battles_path
     end
+  end
+
+  def verify_current_user_played
+    battle = Battle.find(params[:id])
+
+    unless player_started?(battle)
+      flash[:danger] = "Você ainda não participou dessa batalha"
+      redirect_to battles_path
+    end
+
   end
 
   def count_questions

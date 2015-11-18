@@ -38,6 +38,7 @@ gem 'chartkick', '~> 1.4.1'
 
 group :test do
     gem 'simplecov', :require => false
+    gem 'mocha', :require => false
 end
 
 group :development, :test do

@@ -6,3 +6,4 @@ first_battle:
   player_2_time: 231
   player_1_start: false
   player_2_start: false
+  processed: false

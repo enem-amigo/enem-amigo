@@ -209,6 +209,38 @@ class ExamsControllerTest < ActionController::TestCase
     assert_equal Exam.last.questions.count, 90
   end
 
+  test "should exam.questions contains ids for questions in the database" do
+    log_in @user
+    get :answer_exam
+    exam = Exam.last
+    exam.questions.each do |a|
+      assert_not_nil Question.find(a)
+    end
+  end
+
+  test "should year exam contains only questions for that year" do
+    log_in @user
+    year = 2011
+    get :answer_exam, year_exam: year
+    exam = Exam.last
+    exam.questions.each do |a|
+      question = Question.find(a)
+      assert_equal question.year, year
+    end
+  end
+
+  test "should year exam not contains questions for another year" do
+    log_in @user
+    year = 2011
+    another_year = 2019
+    get :answer_exam, year_exam: year
+    exam = Exam.last
+    exam.questions.each do |a|
+      question = Question.find(a)
+      assert_not_equal question.year, another_year
+    end
+  end
+
   private
     def create_question year, area, number
       @question = Question.new(area: area, enunciation: 'something', number: number, year: year, right_answer: 'a', image: "", reference: "", text: "")

@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :medals
 
   serialize :accepted_questions, Array
+  serialize :tried_questions, Array
   serialize :answered_exams, Array
   serialize :exam_performance, Array
 
@@ -67,6 +68,33 @@ class User < ActiveRecord::Base
 
   def battles
     (self.active_battles + self.passive_battles).sort
+  end
+
+  def average_performance area
+    accepted_questions = []
+    tried_questions = []
+    self.accepted_questions.each do |question_id|
+      q = Question.find question_id
+      accepted_questions << q if q.area == area
+    end
+    self.tried_questions.each do |question_id|
+      q = Question.find question_id
+      tried_questions << q if q.area == area
+    end
+    result = accepted_questions.count.to_f / tried_questions.count
+    result.nan? ? 0.0 : result
+  end
+
+  def classification area
+    performance = self.average_performance area
+    performance *= 100
+    if performance >= 0 && performance <= 30
+      :beginner
+    elsif performance > 30 && performance <= 60
+      :intermediate
+    else
+      :advanced
+    end
   end
 
 end

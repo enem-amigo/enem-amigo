@@ -55,6 +55,7 @@ class QuestionsController < ApplicationController
       redirect_to :back
       flash[:danger] = "Selecione uma alternativa"
     else
+      current_user.update_attribute(:tried_questions, current_user.tried_questions << question.id)
       question.update_attribute(:users_tries, question.users_tries + 1)
 
       @correct_answer = (@answer_letter == question.right_answer)

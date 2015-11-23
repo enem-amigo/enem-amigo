@@ -435,3 +435,28 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
 #statistics {
   margin-bottom: 2%;
 }
+
+/***** battles *****/
+
+.battle-categories {
+  display: table;
+  margin: 2em;
+  width: 100%;
+}
+
+.battle-categories td {
+  vertical-align: middle;
+  text-align: center;
+  max-width: 70px;
+  padding-bottom: 0.5em;
+}
+
+.battle-categories td:hover {
+  cursor: pointer;
+}
+
+.form-divisor {
+  border-bottom: 1px solid #D3D6DE;
+  height: 0;
+  margin-bottom: 3em;
+}

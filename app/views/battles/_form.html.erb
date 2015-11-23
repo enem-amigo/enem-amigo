@@ -1,4 +1,44 @@
 <%= form_for(@battle) do |f| %>
+  <h3>Escolha a categoria</h3>
+
+  <table class="battle-categories">
+    <tr>
+      <td>
+        <%= image_tag("humanas-icon.png") %>
+      </td>
+      <td>
+        <%= image_tag("natureza-icon.png") %> 
+      </td>
+      <td>
+        <%= image_tag("codigos-icon.png") %>
+      </td>
+      <td>
+        <%= image_tag("matematica-icon.png") %>
+      </td>
+      <td>
+        <%= image_tag("geral-icon.png") %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Ciências Humanas
+      </td>
+      <td>
+        Ciências da Natureza
+      </td>
+      <td>
+        Linguagens e Códigos
+      </td>
+      <td>
+        Matemática
+      </td>
+      <td>
+        Geral
+      </td>
+    </tr>
+  </table>
+
+  <div class="form-divisor">&nbsp</div>
 
   <%= f.label :player_2_nickname, "Nome da Categoria" %>
   <%= text_field_tag :player_2_nickname, params[:player_2_nickname], id: 'deviceIDfield' %>

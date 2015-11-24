@@ -441,7 +441,7 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
 .battle-categories {
   display: table;
   margin: 2em;
-  width: 100%;
+  width: 99%;
 }
 
 .battle-categories td {
@@ -451,12 +451,53 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
   padding-bottom: 0.5em;
 }
 
-.battle-categories td:hover {
+.battle-categories td.click:hover {
   cursor: pointer;
+}
+
+.battle-categories td img {
+  padding: 0.5em;
 }
 
 .form-divisor {
   border-bottom: 1px solid #D3D6DE;
   height: 0;
   margin-bottom: 3em;
+}
+
+select#battle_category {
+  display: none;
+}
+
+.or-container {
+  text-align: center;
+  font-size: 4em;
+}
+
+.opponent-container {
+  padding-top: 1em;
+  text-align: center;
+}
+
+.opponent-container input {
+  border-radius: 0.4em;
+  height: 2em;
+  padding-left: 0.5em;
+}
+
+.random-opponent-container {
+  padding-top: 0.5em;
+}
+
+.random-opponent-container button {
+  color: #fff;
+  border-radius: 0.6em;
+  font-weight: 700;
+  background-color: #5CB85C;
+  border-color: #5CB85C !important;
+  height: 5em;
+}
+
+.battle-submit {
+  margin-top: 3em;
 }

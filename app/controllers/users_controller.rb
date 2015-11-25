@@ -61,10 +61,16 @@ class UsersController < ApplicationController
     @top10 = ranking.take(10)
   end
 
+  def delete_profile_image
+    current_user.update_attribute(:profile_image_file_name,"")
+    flash[:success] = "Foto de perfil removida com sucesso!"
+    redirect_to user_path(current_user.id)
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :level, :points, :nickname, :password_digest,:password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :level, :points, :nickname, :password_digest,:password, :password_confirmation, :profile_image)
   end
 
 end

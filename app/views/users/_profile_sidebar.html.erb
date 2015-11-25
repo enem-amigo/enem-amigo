@@ -9,7 +9,7 @@
       <p id="user-level"><strong>Nível:</strong> <%= current_user.level %></p>
       <p id="user-rank"><strong>Posição:</strong> <%= current_user.find_position_in_ranking %>º</p>
       <p><strong>Resolvido:</strong> <%= pluralize(current_user.total_accepted_questions, 'questão' ,'questões')%></p>
-      <%= link_to "Seu Desempenho", exams_statistics_path, class: 'btn btn-primary', id:'statistics' %>
+      <%= link_to "Meu Desempenho", exams_statistics_path, class: 'btn btn-primary', id:'statistics' %>
       <a href="/medals" class="btn btn-success"><%= image_tag("star.png") %><span>Medalhas</span></a>
     </div>
     <%= render 'users/ranking' %>

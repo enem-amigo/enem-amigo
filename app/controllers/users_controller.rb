@@ -57,8 +57,12 @@ class UsersController < ApplicationController
   end
 
   def delete_profile_image
-    current_user.update_attribute(:profile_image_file_name,"")
-    flash[:success] = "Foto de perfil removida com sucesso!"
+    unless current_user.profile_image_file_name.empty?
+      current_user.update_attribute(:profile_image_file_name,"")
+      flash[:success] = "Foto de perfil removida com sucesso!"
+    else
+      flash[:danger] = "Não há foto de perfil para ser removida."
+    end
     redirect_to user_path(current_user.id)
   end
 

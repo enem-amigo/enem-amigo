@@ -56,11 +56,6 @@ class UsersController < ApplicationController
     @users = User.order(:points).reverse
   end
 
-  def top10
-    ranking = User.all.order(:points).reverse
-    @top10 = ranking.take(10)
-  end
-
   def delete_profile_image
     current_user.update_attribute(:profile_image_file_name,"")
     flash[:success] = "Foto de perfil removida com sucesso!"

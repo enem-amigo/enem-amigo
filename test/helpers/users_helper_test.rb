@@ -1,4 +1,6 @@
 require 'test_helper'
+include SessionsHelper
+
 class UsersHelperTest < ActionView::TestCase
 
   def setup
@@ -31,5 +33,20 @@ class UsersHelperTest < ActionView::TestCase
     new_level = find_level current_user.points
     assert_equal new_level, actual_level
   end
+
+  test "should top10 takes only 10 users" do
+    word = "a"
+    20.times { create_user word.next , word.next! }
+    top = top10
+    assert_equal top.count, 10
+  end
+
+  private
+
+    def create_user nickname, email
+      @user = User.new(nickname: nickname, name: 'New User', email: email + '@email.com', password: '12345678', password_confirmation: '12345678')
+      @user.save
+      puts @user.errors.full_messages
+    end
 
 end

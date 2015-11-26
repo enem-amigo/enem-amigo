@@ -37,6 +37,11 @@ table.ranking {
   min-height: 259px;
 }
 
+table.ranking tbody tr td {
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
 div.alert {
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
   width: 101.4%;
@@ -434,7 +439,7 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
 }
 
 #statistics {
-  margin-bottom: 2%;
+  margin-bottom: 5%;
 }
 
 /***** battles *****/

@@ -8,7 +8,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Início", root_path %></li>
         <li><%= link_to "Ranking", ranking_path %></li>
-        <li><%= link_to "Batalha", battles_path %></li>
+        <li><%= link_to "Batalha", new_battle_path %></li>
         <% if current_user && current_user.role_admin? %>
           <li><%= link_to "Usuários", users_path %></li>
         <% end %>

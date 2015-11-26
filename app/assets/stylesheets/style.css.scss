@@ -1,12 +1,17 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   background: #E5E9EC none repeat scroll 0% 0%;
   padding-top: 4em;
+  margin-bottom: 8em;
   font-family: "Open Sans", sans-serif;
   padding-right: 1em;
-  padding-bottom: 2em;
 }
 
 body.homepage {
@@ -56,8 +61,8 @@ div.alert {
 }
 
 .main-content {
-  padding-right: 2em;
-  padding-left: 2em;
+  padding-right: 4em;
+  padding-left: 4em;
   padding-top: 1em;
 }
 
@@ -494,4 +499,8 @@ select#battle_category {
 
 .battle-submit {
   margin-top: 3em;
+}
+
+#chart-1 {
+  margin-top: 2em;
 }

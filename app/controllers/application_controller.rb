@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   include NotificationsHelper
   include UsersHelper
 
-  if ENV['RAILS_ENV'] != 'test'
+  if ENV['RAILS_ENV'] == 'production'
     rescue_from Exception, :with => :server_exception
     rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
     rescue_from ActionController::RoutingError, :with => :raise_not_found!

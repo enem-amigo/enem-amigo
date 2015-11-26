@@ -14,7 +14,10 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
 
   has_secure_password
+
   has_attached_file :profile_image
+  validates_attachment :profile_image,
+      content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: true, length:{maximum: 60}

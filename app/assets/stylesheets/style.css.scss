@@ -1,16 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
   background: #E5E9EC none repeat scroll 0% 0%;
-  padding-top: 60px;
-  margin-bottom: 50px;
+  padding-top: 4em;
   font-family: "Open Sans", sans-serif;
+  padding-right: 1em;
+  padding-bottom: 2em;
 }
 
 body.homepage {
@@ -21,7 +17,7 @@ body.homepage {
 }
 
 body > .container {
-  padding-bottom: 50px;
+  padding-bottom: 4em;
 }
 
 section {

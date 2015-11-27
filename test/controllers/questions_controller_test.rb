@@ -7,7 +7,7 @@ class QuestionsControllerTest < ActionController::TestCase
     @user = users(:renata)
     @another_user = users(:joao)
     @admin = users(:admin)
-    @math_question = create_question_with_params(2011,"matemática e suas tecnologias",22)
+    @math_question = create_question_with_params(2011,"matemática e suas tecnologias",42)
     @human_question = create_question_with_params(2014,"ciências humanas e suas tecnologias",23)
     @language_question = create_question_with_params(2011,"linguagens, códigos e suas tecnologias",24)
     @nature_question = create_question_with_params(2014,"ciências da natureza e suas tecnologias",25)
@@ -135,6 +135,32 @@ class QuestionsControllerTest < ActionController::TestCase
     assigns(:questions).each do |q|
       assert q.area == "ciências da natureza e suas tecnologias"
     end
+  end
+
+  test 'should upload a json file to create a set of questions' do
+    log_in @admin
+    questions_count = Question.all.count
+    json_file = fixture_file_upload('files/template.json', 'application/json')
+    post :upload_questions, questions_file: json_file
+    assert questions_count < Question.all.count
+  end
+
+  test 'should throw an exception when no question file is uploaded' do
+    log_in @admin
+    assert_raises(Exception) { post :upload_questions }
+  end
+
+  test 'should upload a text file to persist data from old candidates' do
+    log_in @admin
+    candidates_count = Candidate.all.count
+    file = fixture_file_upload('files/candidates_data.txt', 'application/text')
+    post :upload_candidates_data, candidates_data_file: file
+    assert candidates_count < Candidate.all.count
+  end
+
+  test 'should throw an exception when no candidates data file is uploaded' do
+    log_in @admin
+    assert_raises(Exception) { post :upload_candidates_data }
   end
 
   private

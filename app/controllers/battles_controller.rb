@@ -111,6 +111,8 @@ class BattlesController < ApplicationController
       @adversary_stats = [@player_1_points, @battle.player_1_time]
     end
 
+    @current_player_stats[1] = @current_player_stats.second >= 610 ? "--:--" : "#{@current_player_stats.second/60}:#{@current_player_stats.second%60 < 10 ? "0" : ""}#{@current_player_stats.second%60}"
+    @adversary_stats[1] = @adversary_stats.second >= 610 ? "--:--" : "#{@adversary_stats.second/60}:#{@adversary_stats.second%60 < 10 ? "0" : ""}#{@adversary_stats.second%60}"
     @answers = @battle.questions.zip(current_player_answers, adversary_answers)
   end
 

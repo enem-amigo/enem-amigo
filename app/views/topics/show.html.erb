@@ -1,62 +1,78 @@
-<div class="container-fluid">
-	<%= render "posts/new", method: new_post %>
-</div>
+<h1 class="content-title"> <%= @topic.name %></h1>
+<h2><%= @topic.description %></h2>
 
 <div class="container-fluid">
-	<ul class="list-group">
+  <ul class="list-group" id="posts-index">
 
     <% @topic.posts.each do |t| %>
       <li class="list-group-item">
         <div class="post-buttons">
           <%= form_tag rate_post_post_path(t), remote: true do %>
-            <%= submit_tag "Avaliar", class: 'btn btn-primary', id: 'rate-post-btn' %>
+            <%= button_tag " #{t.count_post_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary", id: 'rate-post-btn' %>
           <% end %>
           <% if current_user.id == t.user_id  || current_user.role_admin? %>
-            <%= link_to "Editar", edit_post_path(t), class: "btn btn-primary", id: 'edit-btn' %>
-            <%= link_to "Excluir", post_path(t), :method => :delete, class: "btn btn-danger",id: 'destroy-post-btn' %>
+            <div class="dropdown">
+              <a href="#" class="btn btn-default glyphicon glyphicon-cog" data-toggle="dropdown" id="dropdown-post-conf"></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Editar", edit_post_path(t) %></li>
+                <li><%= link_to "Excluir", post_path(t), :method => :delete %></li>
+              </ul>
+            </div>
           <% end %>
         </div>
 
         <div class="side-contents">
-          <span class="badge">Postado por <%= t.user.name %></span>
-          <span class="badge" id="votes">
-            <p id="show-vote"><%= pluralize(t.count_post_rates,"voto","votos") %></p>
-          </span>
+          <div class="profile-image">
+            <%= link_to image_tag(t.user.profile_image_file_name.blank? ? "profiles_images/default" : t.user.profile_image.url, alt: "Profile image"), "/users/#{current_user.id}" %>
+          </div>
+          <span class="badge"><%= t.user.nickname %></span>
         </div>
 
-        <p class="text-left"><%= t.content %></p>
+        <p class="text-left" id="post-text"><%= t.content %></p>
 
         <ul class="list-group">
         <% t.comments.each do |f| %>
           <li class="list-group-item" id="comments-index">
             <div class="comments-buttons">
               <%= form_tag rate_comment_comment_path(f), remote: true do %>
-                <%= submit_tag "Avaliar", class: 'btn btn-primary', id: 'rate-comment-btn' %>
+                <%= button_tag " #{f.count_comment_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary", id: 'rate-post-btn' %>
               <% end %>
-              <%= link_to "Editar", edit_comment_path, class: "btn btn-primary", id: 'edit-btn' %>
-              <%= link_to "Excluir", comment_path(f), method: :delete, class: 'btn btn-danger', id: 'destroy-comment-btn' %>
+
+              <% if current_user.id == f.user_id  || current_user.role_admin? %>
+                <div class="dropdown">
+                  <a href="#" class="btn btn-default glyphicon glyphicon-cog" data-toggle="dropdown" id="dropdown-comment-conf"></a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "Editar", edit_comment_path(f) %></li>
+                    <li><%= link_to "Excluir", comment_path, method: :delete %></li>
+                  </ul>
+                </div>
+              <% end %>
             </div>
 
             <div class="side-contents">
-              <span class="badge"> Comentado por <%= f.user.name %></span>
-              <span class="badge" id="votes">
-                <p id="show-vote"><%= pluralize(f.count_comment_rates,"voto","votos") %></p>
-              </span>
+              <div class="profile-image">
+                <%= link_to image_tag(f.user.profile_image_file_name.blank? ? "profiles_images/default" : f.user.profile_image.url, alt: "Profile image"), "/users/#{current_user.id}" %>
+              </div>
+              <span class="badge"><%= f.user.nickname %></span>
             </div>
 
-            <p class="text-left"><%= f.content %></p>
+            <p class="text-left" id="comment-text"><%= f.content %></p>
           </li>
         <% end %>
         </ul>
 
-        <div class="container-fluid">
-          <%= form_tag post_comments_path(t) do %>
-            <%= text_area_tag :content %>
-            <%= submit_tag "Comentar", class: "btn btn-info" %>
+        <div class="container-fluid" id="comment-text-area">
+          <%= form_tag post_comments_path(t), id: 'comment-area' do %>
+            <div id="cmnt-area"><%= text_area_tag :content %></div>
+            <div id="cmnt-btn"><%= submit_tag "Comentar", class: "btn btn-success", id: 'btn-comment-area' %></div>
           <% end %>
         </div>
 
       </li>
     <% end %>
   </ul>
+</div>
+
+<div class="container-fluid">
+  <%= render "posts/new", method: new_post %>
 </div>

@@ -347,9 +347,16 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
   width: 10em;
 }
 
-.post-buttons,.comments-buttons{
+.post-buttons {
   display: inline-flex;
   float: right;
+  margin-right: 14px;
+}
+
+.comments-buttons {
+  display: inline-flex;
+  float: right;
+  margin-right: 2px;
 }
 
 #edit-btn {
@@ -370,6 +377,7 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
 
 #comments-index {
   margin-left: 10%;
+  margin-right: 14px;
 }
 
 .user-answers {
@@ -523,4 +531,54 @@ select#battle_category {
   margin-bottom: 5px;
   padding: 0px;
   width: 13%;
+}
+
+#dropdown-post-conf, #dropdown-comment-conf {
+  margin-left: 5px;
+}
+
+#comment-area {
+  width: 92%;
+}
+
+#comment-text-area {
+  width: 100%;
+  margin-left: 8%;
+}
+
+#btn-comment-area {
+  height: 46px;
+}
+
+#cmnt-area {
+  width: 84%;
+}
+
+#cmnt-btn {
+  float: right;
+  width: 14%;
+  margin-top: -66px;
+}
+
+.profile-image {
+  border-radius: 5px;
+  height: 3em;
+  width: 3em;
+}
+
+.profile-image img {
+  margin: 0px auto;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% !important;
+}
+
+#post-text, #comment-text {
+  width: 80%;
+  margin-left: 70px;
+  margin-top: -36px;
+}
+
+#posts-index > .list-group-item {
+  background-color: #E3E3E3;
 }

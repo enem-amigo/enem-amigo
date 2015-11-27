@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   has_many :won_battles, class_name: 'Battle', foreign_key: 'winner'
 
   has_many :notifications
-
   has_and_belongs_to_many :medals
 
   serialize :accepted_questions, Array
@@ -13,7 +12,13 @@ class User < ActiveRecord::Base
   serialize :exam_performance, Array
 
   before_save { self.email = email.downcase }
+
   has_secure_password
+
+  has_attached_file :profile_image
+  validates_attachment :profile_image,
+      content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+
   VALID_EMAIL = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: true, length:{maximum: 60}
   validates :nickname, presence: true, length:{maximum: 40}, uniqueness: true

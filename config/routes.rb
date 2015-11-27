@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
   get 'ranking' => 'users#ranking'
+  get 'delete_profile_image' => 'users#delete_profile_image'
   get 'battles/ranking' => 'battles#ranking'
 
   get 'login' => 'sessions#new'

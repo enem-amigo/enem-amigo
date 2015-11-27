@@ -9,12 +9,12 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
-    @comment.post_id = session[:post_id]
+    @comment.post_id = params[:post_id]
     if @comment.save
       flash[:success] = "Seu comentário foi criado com sucesso"
       redirect_to Topic.find(session[:topic_id])
     else
-      redirect_to new_post_comment_path(session[:post_id])
+      redirect_to new_post_comment_path(params[:post_id])
     end
   end
 

@@ -9,9 +9,9 @@
         <h4 class="modal-title">Medalhas de <%= @user.name %></h4>
       </div>
       <div class="modal-body">
-        <div class="row">
+        <div>
           <% @user.medals.each do |medal| %>
-          <div class="col-sm-6 col-md-3">
+          <div>
             <div class="thumbnail" id="user_medals">
               <%= image_tag medal.image %>
               <p class="medal_name">

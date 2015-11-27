@@ -1,13 +1,61 @@
 <%= form_for(@battle) do |f| %>
+  <h3>Escolha a categoria</h3>
 
-  <%= f.label :player_2_nickname, "Nome da Categoria" %>
-  <%= text_field_tag :player_2_nickname, params[:player_2_nickname], id: 'deviceIDfield' %>
+  <table class="battle-categories">
+    <tr>
+      <td class="humans-sup click" category="ciências humanas e suas tecnologias">
+        <%= image_tag("humanas-icon.png") %>
+      </td>
+      <td class="nature-sup click" category="ciências da natureza e suas tecnologias">
+        <%= image_tag("natureza-icon.png") %> 
+      </td>
+      <td class="language-sup click" category="linguagens, códigos e suas tecnologias">
+        <%= image_tag("codigos-icon.png") %>
+      </td>
+      <td class="math-sup click" category="matemática e suas tecnologias">
+        <%= image_tag("matematica-icon.png") %>
+      </td>
+      <td class="general-sup click" category="">
+        <%= image_tag("geral-icon.png") %>
+      </td>
+    </tr>
+    <tr>
+      <td class="humans-inf">
+        Ciências Humanas
+      </td>
+      <td class="nature-inf">
+        Ciências da Natureza
+      </td>
+      <td class="language-inf">
+        Linguagens e Códigos
+      </td>
+      <td class="math-inf">
+        Matemática
+      </td>
+      <td class="general-inf">
+        Geral
+      </td>
+    </tr>
+  </table>
 
-  <%= f.button "Usuário Aleatório", id: 'deviceIDbutton'%>
+  <div class="form-divisor">&nbsp</div>
+
+  <div class="row">
+    <div class="col-md-4 opponent-container">
+    <%= f.label :player_2_nickname, "Escolher adversário" %>
+    <%= text_field_tag :player_2_nickname, params[:player_2_nickname], id: 'deviceIDfield' %>
+    </div>
+    <div class="col-md-4 or-container">
+      <span id="or">ou</span>
+    </div>
+    <div class="col-md-4 random-opponent-container">
+    <%= f.button "Usuário Aleatório", id: 'deviceIDbutton', class: 'btn btn-success' %>
+    </div>
+  </div>
 
   <%= f.select :category, ([['Geral',''] , ['Matemática','matemática e suas tecnologias'] , ['Ciências da Natureza','ciências da natureza e suas tecnologias'] , ['Ciências Humanas','ciências humanas e suas tecnologias'] , ['Códigos e Linguagens','linguagens, códigos e suas tecnologias']]) %>
 
-  <%= f.submit "Criar", class: 'btn btn-primary' %>
+  <%= f.submit "Criar", class: 'btn btn-primary battle-submit' %>
 <% end %>
 
 <script type="text/javascript">
@@ -18,5 +66,27 @@
       });
       e.preventDefault();
     })
+
+    $(".click").click(function(e) {
+      var selected_category = $(this).attr("category");
+      $("select#battle_category").val(selected_category);
+      $(".battle-categories tbody tr td").css("border", "none");
+      switch(selected_category) {
+        case "ciências humanas e suas tecnologias":
+          $(".humans-inf").css("border-bottom", "1px solid #2ECC71");
+          break;
+        case "ciências da natureza e suas tecnologias":
+          $(".nature-inf").css("border-bottom", "1px solid #2ECC71");
+          break;
+        case "linguagens, códigos e suas tecnologias":
+          $(".language-inf").css("border-bottom", "1px solid #2ECC71");
+          break;
+        case "matemática e suas tecnologias":
+          $(".math-inf").css("border-bottom", "1px solid #2ECC71");
+          break;
+        default:
+          $(".general-inf").css("border-bottom", "1px solid #2ECC71");
+      }
+    });
   })
 </script>

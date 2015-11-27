@@ -8,9 +8,10 @@ html {
 
 body {
   background: #E5E9EC none repeat scroll 0% 0%;
-  padding-top: 60px;
-  margin-bottom: 50px;
+  padding-top: 4em;
+  margin-bottom: 8em;
   font-family: "Open Sans", sans-serif;
+  padding-right: 1em;
 }
 
 body.homepage {
@@ -21,7 +22,7 @@ body.homepage {
 }
 
 body > .container {
-  padding-bottom: 50px;
+  padding-bottom: 4em;
 }
 
 section {
@@ -36,10 +37,22 @@ table.ranking {
   min-height: 259px;
 }
 
+table.ranking tbody tr td {
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
 div.alert {
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
   width: 101.4%;
   margin-top: 1em;
+}
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
 }
 
 .content {
@@ -53,10 +66,9 @@ div.alert {
 }
 
 .main-content {
-  padding-right: 2em;
-  padding-left: 2em;
+  padding-right: 4em;
+  padding-left: 4em;
   padding-top: 1em;
-  min-height: 42.3em;
 }
 
 .content-title {
@@ -310,6 +322,14 @@ form input#rate-post-btn, form input#rate-comment-btn {
 
 /********new-level********/
 
+.modal-header {
+  border: none;
+}
+
+.modal-footer {
+  margin-top: 10px;
+}
+
 #new_level_modal > div > div.modal-content {
   width: 350px;
 }
@@ -427,5 +447,73 @@ body > div > div.row > div.col-sm-9.content.main-content > div.alert.alert-succe
 }
 
 #statistics {
-  margin-bottom: 2%;
+  margin-bottom: 5%;
+}
+
+/***** battles *****/
+
+.battle-categories {
+  display: table;
+  margin: 2em;
+  width: 99%;
+}
+
+.battle-categories td {
+  vertical-align: middle;
+  text-align: center;
+  max-width: 70px;
+  padding-bottom: 0.5em;
+}
+
+.battle-categories td.click:hover {
+  cursor: pointer;
+}
+
+.battle-categories td img {
+  padding: 0.5em;
+}
+
+.form-divisor {
+  border-bottom: 1px solid #D3D6DE;
+  height: 0;
+  margin-bottom: 3em;
+}
+
+select#battle_category {
+  display: none;
+}
+
+.or-container {
+  text-align: center;
+  font-size: 4em;
+}
+
+.opponent-container {
+  padding-top: 1em;
+  text-align: center;
+}
+
+.opponent-container input {
+  border-radius: 0.4em;
+  height: 2em;
+  padding-left: 0.5em;
+}
+
+.random-opponent-container {
+  padding-top: 0.5em;
+}
+
+.random-opponent-container button {
+  color: #fff;
+  border-radius: 0.6em;
+  font-weight: 700;
+  height: 5em;
+}
+
+.battle-submit {
+  margin-top: 3em;
+}
+
+#chart-1 {
+  margin-top: 2em;
 }

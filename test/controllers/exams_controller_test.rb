@@ -211,7 +211,7 @@ class ExamsControllerTest < ActionController::TestCase
 
   private
     def create_question year, area, number
-      @question = Question.new(area: area, enunciation: 'something', number: number, year: year, right_answer: 'a', image: "", reference: "", text: "")
+      @question = Question.new(area: area, enunciation: 'something', number: number, year: year, right_answer: 'a', image: "", reference: "")
       5.times{@question.alternatives.build}
       @question.alternatives.each do |a|
         a.letter = 'a'

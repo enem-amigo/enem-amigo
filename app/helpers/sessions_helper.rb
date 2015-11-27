@@ -26,8 +26,7 @@ module SessionsHelper
   end
 
   def verify_user_permission
-    # user = User.find(params[:id])
-    user = User.find 3
+    user = User.find(params[:id])
     redirect_to_back(users_path) unless user.id == current_user.id or current_user.role_admin?
   end
 

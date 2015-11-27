@@ -2,7 +2,7 @@
 <div class="buttons-questions">
   <% if current_user.role_admin? %>
     <%= link_to "Editar", edit_question_path, class: "btn btn-primary", id: "btn-edit" %>
-    <%= link_to "Deletar", question_path, :method => :delete, class: "btn btn-danger", id: "btn-delete" %>
+    <%= link_to "Deletar", question_path, :method => :delete, class: "btn btn-danger", id: "btn-delete", data: { confirm: "Você tem certeza que deseja excluir esta questão?" } %>
   <% end %>
 </div>
 

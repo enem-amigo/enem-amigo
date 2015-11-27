@@ -14,8 +14,8 @@
   <%= f.label :password_confirmation, "Confirmar senha" %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
   <%= f.label :profile_image, "Foto de Perfil" %>
-  <% unless current_user.profile_image_file_name.empty? %>
-    <%= link_to 'Remover foto', delete_profile_image_path, class: 'btn btn-danger', id: 'delete-image' %>
+  <% unless current_user.profile_image_file_name.blank? %>
+    <%= link_to 'Remover foto', delete_profile_image_path, class: 'btn btn-danger', id: 'delete-image', data: { confirm: "Você tem certeza que deseja remover a foto?" } %>
   <% end %>
   <%= f.file_field :profile_image, class: 'form-control' %>
   <%= f.submit "Atualizar Dados", class: 'btn btn-primary' %>

@@ -6,7 +6,7 @@
 <div class="buttons-questions">
   <% if current_user.role_admin? || current_user.id == @user.id %>
     <%= link_to "Editar", edit_user_path, class: "btn btn-primary" %>
-    <%= link_to "Excluir", user_path, :method => :delete,  class: "btn btn-danger" %>
+    <%= link_to "Excluir", user_path, :method => :delete,  class: "btn btn-danger", data: { confirm: "Você tem certeza que deseja excluir seu usuário?" } %>
   <% end %>
 </div>
 

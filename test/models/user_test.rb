@@ -1,5 +1,10 @@
 class UserTest < ActiveSupport::TestCase
 
+  def setup
+    @math_question = questions(:question_01)
+    @humans_question = questions(:question_11)
+  end
+
   test 'should be valid' do
     create_user
     assert @user.valid?
@@ -64,6 +69,26 @@ class UserTest < ActiveSupport::TestCase
     create_user
     @user.password="this"
     assert_not @user.valid?
+  end
+
+  test "should count_questions_by_area return the number of questions of a specific area" do
+    create_user
+    @user.accepted_questions.push(@math_question.id)
+    @user.accepted_questions.push(@humans_question.id)
+    assert_not_equal @user.count_questions_by_area("matemática e suas tecnologias"), 0
+    assert_not_equal @user.count_questions_by_area("ciências humanas e suas tecnologias"), 0
+    assert_equal @user.count_questions_by_area("linguagens, códigos e suas tecnologias"), 0
+  end
+
+  test "should user.data return hash containing name and number of accepted questions for each area" do
+    create_user
+    data = @user.data
+    assert_not data.empty?
+    areas = ["Matemática","Natureza","Linguagens","Humanas"]
+    data.each do |name,number|
+      assert areas.include? name
+      assert number >= 0
+    end
   end
 
   private

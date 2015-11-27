@@ -17,6 +17,17 @@ class CommentsControllerTest < ActionController::TestCase
     @another_comment = Comment.create(content: 'TestComment', post_id: @post.id, user_id: 2)
   end
 
+  test "should not get new comment if user is not logged in" do
+    get :new
+    assert_redirected_to login_path
+  end
+
+  test "should get new comment if user is logged in" do
+    log_in @user
+    get :new
+    assert_response :success
+  end
+
   test 'should create a comment' do
     @comment = Comment.create(content: 'Teste', post_id: @post.id, user_id: @user.id)
     assert_response :success

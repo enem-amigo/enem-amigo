@@ -73,4 +73,12 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to users_path
   end
 
+  test "should user be redirected to default path when he tries to delete other and no request is set" do
+    @request.env["HTTP_REFERER"] = ""
+    @request.env["HTTP_REFERER"] = @request.env["REQUEST_URI"] = "something"
+    log_in @user
+    delete :destroy, id: @another_user.id
+    assert_redirected_to users_path
+  end
+
 end

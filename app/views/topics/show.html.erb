@@ -4,18 +4,18 @@
 <div class="container-fluid">
   <ul class="list-group" id="posts-index">
 
-    <% @topic.posts.each do |t| %>
+    <% @topic.posts.each do |topic| %>
       <li class="list-group-item">
         <div class="post-buttons">
-          <%= form_tag rate_post_post_path(t), remote: true do %>
-            <%= button_tag " #{t.count_post_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary", id: 'rate-post-btn' %>
+          <%= form_tag rate_post_post_path(topic), remote: true do %>
+            <%= button_tag " #{topic.count_post_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary", id: 'rate-post-btn' %>
           <% end %>
-          <% if current_user.id == t.user_id  || current_user.role_admin? %>
+          <% if current_user.id == topic.user_id  || current_user.role_admin? %>
             <div class="dropdown">
               <a href="#" class="btn btn-default glyphicon glyphicon-cog" data-toggle="dropdown" id="dropdown-post-conf"></a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Editar", edit_post_path(t) %></li>
-                <li><%= link_to "Excluir", post_path(t), :method => :delete %></li>
+                <li><%= link_to "Editar", edit_post_path(topic, id: current_user.id, post_id: topic.id) %></li>
+                <li><%= link_to "Excluir", post_path(topic, id: current_user.id, post_id: topic.id), :method => :delete, data: { confirm: "Você tem certeza que deseja excluir este post?" } %></li>
               </ul>
             </div>
           <% end %>
@@ -23,27 +23,27 @@
 
         <div class="side-contents">
           <div class="profile-image">
-            <%= link_to image_tag(t.user.profile_image_file_name.blank? ? "profiles_images/default" : t.user.profile_image.url, alt: "Profile image"), "/users/#{current_user.id}" %>
+            <%= link_to image_tag(topic.user.profile_image_file_name.blank? ? "profiles_images/default" : topic.user.profile_image.url, alt: "Profile image"), "/users/#{topic.user.id}" %>
           </div>
-          <span class="badge"><%= t.user.nickname %></span>
+          <span class="badge"><%= topic.user.nickname %></span>
         </div>
 
-        <p class="text-left" id="post-text"><%= t.content %></p>
+        <p class="text-left" id="post-text"><%= topic.content %></p>
 
         <ul class="list-group">
-        <% t.comments.each do |f| %>
+        <% topic.comments.each do |comment| %>
           <li class="list-group-item" id="comments-index">
-            <div class="comments-buttons">
-              <%= form_tag rate_comment_comment_path(f), remote: true do %>
-                <%= button_tag " #{f.count_comment_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary", id: 'rate-post-btn' %>
+            <div class="comments-buttons" id="comment-<%= comment.id %>">
+              <%= form_tag rate_comment_comment_path(comment, comment_id: comment.id), remote: true do %>
+                <%= button_tag " #{comment.count_comment_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary", id: 'rate-comment-btn' %>
               <% end %>
 
-              <% if current_user.id == f.user_id  || current_user.role_admin? %>
+              <% if current_user.id == comment.user_id  || current_user.role_admin? %>
                 <div class="dropdown">
                   <a href="#" class="btn btn-default glyphicon glyphicon-cog" data-toggle="dropdown" id="dropdown-comment-conf"></a>
                   <ul class="dropdown-menu">
-                    <li><%= link_to "Editar", edit_comment_path(f) %></li>
-                    <li><%= link_to "Excluir", comment_path, method: :delete %></li>
+                    <li><%= link_to "Editar", edit_comment_path(comment, id: current_user.id, comment_id: comment.id) %></li>
+                    <li><%= link_to "Excluir", comment_path(comment, id: current_user.id, comment_id: comment.id), method: :delete, data: { confirm: "Você tem certeza que deseja excluir este comentário?" } %></li>
                   </ul>
                 </div>
               <% end %>
@@ -51,19 +51,19 @@
 
             <div class="side-contents">
               <div class="profile-image">
-                <%= link_to image_tag(f.user.profile_image_file_name.blank? ? "profiles_images/default" : f.user.profile_image.url, alt: "Profile image"), "/users/#{current_user.id}" %>
+                <%= link_to image_tag(comment.user.profile_image_file_name.blank? ? "profiles_images/default" : comment.user.profile_image.url, alt: "Profile image"), "/users/#{comment.user.id}" %>
               </div>
-              <span class="badge"><%= f.user.nickname %></span>
+              <span class="badge"><%= comment.user.nickname %></span>
             </div>
 
-            <p class="text-left" id="comment-text"><%= f.content %></p>
+            <p class="text-left" id="comment-text"><%= comment.content %></p>
           </li>
         <% end %>
         </ul>
 
         <div class="container-fluid" id="comment-text-area">
-          <%= form_tag post_comments_path(t), id: 'comment-area' do %>
-            <div id="cmnt-area"><%= text_area_tag :content %></div>
+          <%= form_tag post_comments_path(topic), id: 'comment-area' do %>
+            <div id="cmnt-area"><%= text_area_tag "comment[content]", nil, placeholder: "  Comente aqui..." %></div>
             <div id="cmnt-btn"><%= submit_tag "Comentar", class: "btn btn-success", id: 'btn-comment-area' %></div>
           <% end %>
         </div>

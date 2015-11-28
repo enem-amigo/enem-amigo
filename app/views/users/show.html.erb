@@ -15,7 +15,7 @@
 <% unless @user.accepted_questions.blank? %>
   <%= pie_chart @user.data, colors: ["red", "#0080FF" , "#009900", "#EEEE00"] %>
 <% else %>
-  <h4><center>Você ainda não respondeu nenhuma questão</center></h4>
+  <h4 id="no-questions"><center>Você ainda não respondeu nenhuma questão</center></h4>
 <% end %>
 
 <table class="table">
@@ -34,24 +34,22 @@
 </table>
 
 <div>
-  <b> Medalhas </b>
-
   <div>
-      <% @user.medals.reverse.take(4).each do |medal| %>
-        <div>
-          <div class="thumbnail" id="user_medals">
-            <%= image_tag medal.image %>
-            <p class="medal_name">
-              <b><%= medal.name %></b>
-            </p>
-            <p class="medal_description">
-              <%= medal.description %>
-            </p>
-          </div>
+    <% @user.medals.reverse.take(4).each do |medal| %>
+      <div>
+        <div class="thumbnail" id="user_medals">
+          <%= image_tag medal.image %>
+          <p class="medal_name">
+            <b><%= medal.name %></b>
+          </p>
+          <p class="medal_description">
+            <%= medal.description %>
+          </p>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
+</div>
 
 <%= render partial: 'medals' %>
 

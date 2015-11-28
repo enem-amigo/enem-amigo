@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#medal_modal">Ver todas</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#medal_modal">Medalhas</button>
 
 <div id="medal_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -6,22 +6,35 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Medalhas de <%= @user.name %></h4>
+        <h4 class="modal-title">
+          <% if @user.id == current_user.id %>
+            Minhas medalhas
+          <% else %>
+           Medalhas de <%= @user.name %>
+          <% end %>
+         </h4>
       </div>
       <div class="modal-body">
         <div>
-          <% @user.medals.each do |medal| %>
-          <div>
-            <div class="thumbnail" id="user_medals">
-              <%= image_tag medal.image %>
-              <p class="medal_name">
-                <b><%= medal.name %></b>
-              </p>
-              <p class="medal_description">
-                <%= medal.description %>
-              </p>
-            </div>
-          </div>
+          <% unless @user.medals.empty? %>
+            <% @user.medals.each do |medal| %>
+              <div>
+                <div class="thumbnail" id="user_medals">
+                  <%= image_tag medal.image %>
+                  <p class="medal_name">
+                    <b><%= medal.name %></b>
+                  </p>
+                  <p class="medal_description">
+                    <%= medal.description %>
+                  </p>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <% if @user.id == current_user.id %> Você
+            <% else %> <%= @user.name %>
+            <% end %>
+            não tem nenhuma medalha
           <% end %>
         </div>
       </div>

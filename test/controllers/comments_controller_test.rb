@@ -39,7 +39,7 @@ class CommentsControllerTest < ActionController::TestCase
     post_parent = Post.find(post_parent_id)
     topic_parent = post_parent.topic_id
     comment_id = @comment.id
-    delete :destroy, id: @comment.id
+    delete :destroy, id: @comment.id, comment_id: @comment.id
     assert_redirected_to :back
     assert_not_nil Comment.find_by_id(comment_id)
   end
@@ -47,7 +47,7 @@ class CommentsControllerTest < ActionController::TestCase
   test 'should user_ratings be incremented if user votes in a comment' do
     log_in @user
     ratings = @comment.user_ratings.count
-    post :rate_comment, id: @comment.id, user_id: @user.id
+    post :rate_comment, id: @comment.id, comment_id: @comment.id
     @comment.reload
     assert_equal ratings + 1, @comment.user_ratings.count
   end
@@ -56,7 +56,7 @@ class CommentsControllerTest < ActionController::TestCase
     log_in @user
     ratings = @comment.user_ratings.count
     @comment.user_ratings.push(@user.id)
-    post :rate_comment, id: @comment.id, user_id: @user.id
+    post :rate_comment, id: @comment.id, comment_id: @comment.id, user_id: @user.id
     @comment.reload
     assert_redirected_to :back
     assert_not_equal ratings + 2, @comment.user_ratings.count

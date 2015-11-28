@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   before_action :authenticate_user
-  before_action :verify_user_permission, only: [:destroy, :edit]
+  before_action :verify_user_permission, only: [:destroy, :edit, :update]
 
   def new
     @post = Post.new
@@ -28,11 +28,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:post_id])
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:post_id])
     if @post.update_attributes(post_params)
       flash[:success] = "Seu post foi atualizado com sucesso"
       redirect_to Topic.find(session[:topic_id])
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:post_id])
     @post.destroy
     flash[:success] = "Post deletado com sucesso"
     redirect_to Topic.find(session[:topic_id])

@@ -20,21 +20,21 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:comment_id])
   end
 
   def update
-    @comment = Comment.find(params[:id])
-    if @comment.update_attributes(post_params)
+    @comment = Comment.find(params[:comment_id])
+    if @comment.update_attributes(comment_params)
       flash[:success] = "Seu comentário foi atualizado com sucesso"
       redirect_to Topic.find(session[:topic_id])
     else
-      redirect_to edit_post_comment_path(session[:post_id])
+      redirect_to edit_post_comment_path(session[:topic_id])
     end
   end
 
   def rate_comment
-    comment = Comment.find(params[:id])
+    comment = Comment.find(params[:comment_id])
 
     if not comment.user_ratings.include? current_user.id
       comment.user_ratings.push(current_user.id)
@@ -50,7 +50,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:comment_id])
     @comment.destroy
     flash[:success] = "Comentário deletado com sucesso"
     redirect_to Topic.find(session[:topic_id])
@@ -63,7 +63,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.permit(:content)
+    params.require(:comment).permit(:content)
   end
 
 end

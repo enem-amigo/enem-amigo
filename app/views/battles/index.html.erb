@@ -26,7 +26,7 @@
           <% else %>
             <%= link_to '', "/battles/#{t.id}/finish", class: "btn btn-default glyphicon glyphicon-stats" %>
           <% end %>
-            <%= link_to '', battle_path(t), :method => :delete, class: "btn btn-danger glyphicon glyphicon-remove", id: "btn-delete" %>
+            <%= link_to '', battle_path(t), :method => :delete, class: "btn btn-danger glyphicon glyphicon-remove", id: "btn-delete", data: { confirm: "Você tem certeza que deseja excluir a batalha?" } %>
           </td>
         <% end %>
         <td class="align-center"><%= t.player_1.name %></td>

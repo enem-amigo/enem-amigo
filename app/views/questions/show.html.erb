@@ -2,7 +2,7 @@
 <div class="buttons-questions">
   <% if current_user.role_admin? %>
     <%= link_to "Editar", edit_question_path, class: "btn btn-primary", id: "btn-edit" %>
-    <%= link_to "Deletar", question_path, :method => :delete, class: "btn btn-danger", id: "btn-delete" %>
+    <%= link_to "Deletar", question_path, :method => :delete, class: "btn btn-danger", id: "btn-delete", data: { confirm: "Você tem certeza que deseja excluir esta questão?" } %>
   <% end %>
 </div>
 
@@ -14,12 +14,17 @@
     <p><%= @question.area %></p>
   </div>
 
-  <p class="question-text"><%= @question.text unless @question.text.nil? %></p>
+  <% @question.texts.each do |t| %>
+    <h4 class="question-title"><%= t.title %></h4>
+    <% t.paragraphs.each do |p| %>
+      <p class="question-text"><%= p %></p>
+    <% end %>
+    <p class="question-text-reference"><%= t.reference %></p>
+  <% end %>
+
   <% unless @question.image.empty? %>
     <%= image_tag(@question.image , class: 'img-responsive question-img') %>
   <% end %>
-
-  <p class="question-text-reference"><%= @question.reference unless @question.reference.nil? %></p>
 
   <p class="question"><%= @question.enunciation %></p>
 
@@ -33,7 +38,7 @@
       </div>
     <% end %>
 
-  <%= submit_tag "Responder", class: 'btn btn-primary btn-sm button', id: 'answer-btn' %>
+  <%= submit_tag "Responder", class: 'answer btn btn-primary btn-sm button', id: 'answer-btn' %>
   <%= link_to "Pular", next_question_path, method: :post, class: 'btn btn-primary btn-sm button', id: 'jump-btn' %>
 
   <% end %>

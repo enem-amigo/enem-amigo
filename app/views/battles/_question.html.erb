@@ -6,15 +6,19 @@
     <p><%= @question.area %></p>
   </div>
 
-  <p class="question-text"><%= @question.text unless @question.text.nil? %></p>
+  <% @question.texts.each do |t| %>
+    <h4 class="question-title"><%= t.title %></h4>
+    <% t.paragraphs.each do |p| %>
+      <p class="question-text"><%= p %></p>
+    <% end %>
+    <p class="question-text-reference"><%= t.reference %></p>
+  <% end %>
+
   <% unless @question.image.empty? %>
     <%= image_tag(@question.image , class: 'img-responsive question-img') %>
   <% end %>
 
-  <p class="question-text-reference"><%= @question.reference unless @question.reference.nil? %></p>
-
   <p class="question"><%= @question.enunciation %></p>
-
 
   <%= form_tag answer_battle_path, remote: true do %>
     <% @question.alternatives.each do |f| %>

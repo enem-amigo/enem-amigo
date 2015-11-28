@@ -35,10 +35,10 @@ class PostsControllerTest < ActionController::TestCase
   test 'should admin can delete any post' do
     log_in @admin
     topic_parent = @post.topic_id
-    delete :destroy, id: @post.id
+    delete :destroy, id: @post.id, post_id: @post.id
     assert_redirected_to topic_path(topic_parent)
     another_topic_parent = @another_post.topic_id
-    delete :destroy, id: @another_post.id
+    delete :destroy, id: @another_post.id, post_id: @another_post.id
     assert_redirected_to topic_path(another_topic_parent)
   end
 
@@ -59,5 +59,26 @@ class PostsControllerTest < ActionController::TestCase
     assert_redirected_to :back
     assert_not_equal ratings + 2, @post.user_ratings.count
     assert_equal ratings + 1, @post.user_ratings.count
-  end  
+  end
+
+  test "should user can get edit post page of his own post" do
+    log_in @user
+    get :edit, id: @post.id, post_id: @post.id
+    assert_response :success
+  end
+
+  test "should user cannot get edit post page of someone else's post" do
+    log_in @user
+    get :edit, id: @another_post.id, post_id: @another_post.id
+    assert_response :redirect
+  end
+
+  test "should user can update his own post" do
+    log_in @user
+    old_content = @post.content
+    patch :update, id: @post.id, post_id: @post.id, post: { content: "Novo conteudo" }
+    @post.reload
+    assert_not_equal old_content, @post.content
+  end
+
 end

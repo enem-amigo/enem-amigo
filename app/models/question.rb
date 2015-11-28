@@ -11,6 +11,8 @@ class Question < ActiveRecord::Base
   validates :right_answer, presence: true, length: { maximum: 1 }
   validates :number, uniqueness: { scope: [:year] }
 
+  has_many :texts
+
   validate do
     check_alternatives_number
   end

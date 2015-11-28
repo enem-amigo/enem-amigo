@@ -20,7 +20,12 @@ module QuestionsHelper
         questions.each do |question|
           q = Question.new
           question.each do |attr, value|
-            if value.is_a? Hash
+            if attr == "text"
+              value.each do |t|
+                q.texts << Text.new(title: t["title"], paragraphs: t["paragraphs"],
+                                    reference: t["reference"])
+              end
+            elsif attr == "alternatives"
               5.times do |i|
                 q.alternatives.build
                 q.alternatives[i].letter = value.keys[i]

@@ -17,9 +17,10 @@
 
 <div class="options-container">
   <div class="user-options">
-    <%= link_to image_tag("perfil.png", class: 'img-responsive custom-img'), current_user %>
+    <%= link_to image_tag("batalha.png", class: 'img-responsive custom-img'), battles_path %>
     <%= link_to image_tag("questoes.png", class: 'img-responsive custom-img'), questions_path %>
-    <%= link_to "Responder prova", select_exam_path, class: "btn btn-primary", id: "button-answer-exam" %>
+    <%= link_to image_tag("perfil.png", class: 'img-responsive custom-img'), current_user %>
+    <%= link_to image_tag("prova.png", class: 'img-responsive custom-img'), select_exam_path %>
     <%= link_to image_tag("ranking.png", class: 'img-responsive custom-img'), ranking_path %>
   </div>
 </div>

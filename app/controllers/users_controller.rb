@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = "Usuário criado com sucesso!"
       log_in @user
-      redirect_to @user
+      redirect_to root_path
     else
       @home_page = true
       render 'new'
@@ -56,15 +56,20 @@ class UsersController < ApplicationController
     @users = User.order(:points).reverse
   end
 
-  def top10
-    ranking = User.all.order(:points).reverse
-    @top10 = ranking.take(10)
+  def delete_profile_image
+    unless current_user.profile_image_file_name.empty?
+      current_user.update_attribute(:profile_image_file_name,"")
+      flash[:success] = "Foto de perfil removida com sucesso!"
+    else
+      flash[:danger] = "Não há foto de perfil para ser removida."
+    end
+    redirect_to user_path(current_user.id)
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :level, :points, :nickname, :password_digest,:password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :level, :points, :nickname, :password_digest,:password, :password_confirmation, :profile_image)
   end
 
 end

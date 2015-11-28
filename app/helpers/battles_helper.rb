@@ -32,12 +32,16 @@ module BattlesHelper
     player_1.update_attribute(:battle_points, player_1.battle_points + @player_1_points)
     player_2.update_attribute(:battle_points, player_2.battle_points + @player_2_points)
 
+    battle.update_attribute(:player_1_time, 610) if battle.player_1_time > 610
+    battle.update_attribute(:player_2_time, 610) if battle.player_2_time > 610  
     if @player_1_points > @player_2_points || (@player_1_points == @player_2_points && battle.player_1_time <= battle.player_2_time)
       battle.update_attribute(:winner, player_1)
       player_1.update_attribute(:wins, player_1.wins + 1)
+      player_1.update_attribute(:battle_points, player_1.battle_points + 25)
     else
       battle.update_attribute(:winner, player_2)
       player_2.update_attribute(:wins, player_2.wins + 1)
+      player_2.update_attribute(:battle_points, player_2.battle_points + 25)
     end
     battle.update_attribute(:processed, true)
   end

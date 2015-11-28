@@ -1,5 +1,6 @@
 <%= form_for @post do |f| %>
-	<%= f.label :content, "Entre na discussão!" %>
+	<%= f.label :content, "Edite aqui seu post" %>
 	<%= f.text_area :content, class: 'form-control' %>
-	<%= f.submit "Postar", class: 'btn btn-success active col-md-2' %>
+	<%= hidden_field_tag(:post_id, @post.id) %>
+	<%= f.submit "Atualizar", class: 'btn btn-success active col-md-2' %>
 <% end %>

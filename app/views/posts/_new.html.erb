@@ -1,5 +1,4 @@
 <%= form_for @post do |f| %>
-	<%= f.label :content, "Entre na discussão!" %>
-	<%= f.text_area :content, class: 'form-control' %>
-	<%= f.submit "Postar", class: 'btn btn-success active col-md-2' %>
+  <%= f.text_area :content, class: 'form-control', placeholder: "Entre na discussão!" %>
+  <span id="new-post-btn"><%= f.submit "Postar", class: 'btn btn-success col-md-2' %></span>
 <% end %>

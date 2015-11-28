@@ -11,7 +11,7 @@
 Gemfile.lock
 db/schema.rb
 
-#Ignore test results
+# Ignore test results
 /coverage
 
 # Ignore the default SQLite database.
@@ -22,3 +22,6 @@ db/schema.rb
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore profile images stored
+/public/system

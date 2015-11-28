@@ -1,58 +1,78 @@
-<div class="container-fluid">
-	<%= render "posts/new", method: new_post %>
-</div>
+<h1 class="content-title"> <%= @topic.name %></h1>
+<h2><%= @topic.description %></h2>
 
 <div class="container-fluid">
-	<ul class="list-group">
+  <ul class="list-group" id="posts-index">
 
-    <% @topic.posts.each do |t| %>
+    <% @topic.posts.each do |topic| %>
       <li class="list-group-item">
         <div class="post-buttons">
-          <%= form_tag rate_post_post_path(t), remote: true do %>
-            <%= submit_tag "Avaliar", class: 'btn btn-primary', id: 'rate-post-btn' %>
+          <%= form_tag rate_post_post_path(topic), remote: true do %>
+            <%= button_tag " #{topic.count_post_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary", id: 'rate-post-btn' %>
           <% end %>
-          <% if current_user.id == t.user_id  || current_user.role_admin? %>
-            <%= link_to "Editar", edit_post_path(t), class: "btn btn-primary", id: 'edit-btn' %>
-            <%= link_to "Excluir", post_path(t), :method => :delete, class: "btn btn-danger",id: 'destroy-post-btn' %>
+          <% if current_user.id == topic.user_id  || current_user.role_admin? %>
+            <div class="dropdown">
+              <a href="#" class="btn btn-default glyphicon glyphicon-cog" data-toggle="dropdown" id="dropdown-post-conf"></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Editar", edit_post_path(topic, id: current_user.id, post_id: topic.id) %></li>
+                <li><%= link_to "Excluir", post_path(topic, id: current_user.id, post_id: topic.id), :method => :delete, data: { confirm: "Você tem certeza que deseja excluir este post?" } %></li>
+              </ul>
+            </div>
           <% end %>
         </div>
 
         <div class="side-contents">
-          <span class="badge">Postado por <%= t.user.name %></span>
-          <span class="badge" id="votes">
-            <p id="show-vote"><%= pluralize(t.count_post_rates,"voto","votos") %></p>
-          </span>
+          <div class="profile-image">
+            <%= link_to image_tag(topic.user.profile_image_file_name.blank? ? "profiles_images/default" : topic.user.profile_image.url, alt: "Profile image"), "/users/#{topic.user.id}" %>
+          </div>
+          <span class="badge"><%= topic.user.nickname %></span>
         </div>
 
-        <p class="text-left"><%= t.content %></p>
-
-        <div class="container-fluid">
-          <%= link_to "Comentar", new_post_comment_path(t), class: "btn btn-info" %>
-        </div>
+        <p class="text-left" id="post-text"><%= topic.content %></p>
 
         <ul class="list-group">
-        <% t.comments.each do |f| %>
+        <% topic.comments.each do |comment| %>
           <li class="list-group-item" id="comments-index">
-            <div class="comments-buttons">
-              <%= form_tag rate_comment_comment_path(f), remote: true do %>
-                <%= submit_tag "Avaliar", class: 'btn btn-primary', id: 'rate-comment-btn' %>
+            <div class="comments-buttons" id="comment-<%= comment.id %>">
+              <%= form_tag rate_comment_comment_path(comment, comment_id: comment.id), remote: true do %>
+                <%= button_tag " #{comment.count_comment_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary", id: 'rate-comment-btn' %>
               <% end %>
-              <%= link_to "Editar", edit_comment_path, class: "btn btn-primary", id: 'edit-btn' %>
-              <%= link_to "Excluir", comment_path, method: :delete, class: 'btn btn-danger', id: 'destroy-comment-btn' %>
+
+              <% if current_user.id == comment.user_id  || current_user.role_admin? %>
+                <div class="dropdown">
+                  <a href="#" class="btn btn-default glyphicon glyphicon-cog" data-toggle="dropdown" id="dropdown-comment-conf"></a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "Editar", edit_comment_path(comment, id: current_user.id, comment_id: comment.id) %></li>
+                    <li><%= link_to "Excluir", comment_path(comment, id: current_user.id, comment_id: comment.id), method: :delete, data: { confirm: "Você tem certeza que deseja excluir este comentário?" } %></li>
+                  </ul>
+                </div>
+              <% end %>
             </div>
 
             <div class="side-contents">
-              <span class="badge"> Comentado por <%= f.user.name %></span>
-              <span class="badge" id="votes">
-                <p id="show-vote"><%= pluralize(f.count_comment_rates,"voto","votos") %></p>
-              </span>
+              <div class="profile-image">
+                <%= link_to image_tag(comment.user.profile_image_file_name.blank? ? "profiles_images/default" : comment.user.profile_image.url, alt: "Profile image"), "/users/#{comment.user.id}" %>
+              </div>
+              <span class="badge"><%= comment.user.nickname %></span>
             </div>
 
-            <p class="text-left"><%= f.content %></p>
+            <p class="text-left" id="comment-text"><%= comment.content %></p>
           </li>
         <% end %>
         </ul>
+
+        <div class="container-fluid" id="comment-text-area">
+          <%= form_tag post_comments_path(topic), id: 'comment-area' do %>
+            <div id="cmnt-area"><%= text_area_tag "comment[content]", nil, placeholder: "  Comente aqui..." %></div>
+            <div id="cmnt-btn"><%= submit_tag "Comentar", class: "btn btn-success", id: 'btn-comment-area' %></div>
+          <% end %>
+        </div>
+
       </li>
     <% end %>
   </ul>
+</div>
+
+<div class="container-fluid">
+  <%= render "posts/new", method: new_post %>
 </div>

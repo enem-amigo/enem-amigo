@@ -14,4 +14,9 @@ module NotificationsHelper
     battle.player_1.notifications << notification
   end
 
+  def first_notification
+    notification = Notification.create(message: "Bem-vindo(a) ao ENEM Amigo!", visualized: false)
+    current_user.notifications << notification
+  end
+
 end

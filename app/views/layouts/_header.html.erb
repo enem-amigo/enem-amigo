@@ -17,10 +17,13 @@
           <li><%= link_to "Fórum", topics_path %></li>
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle btn" data-toggle="dropdown">
-            Notificações <b class="caret"></b>
+            <a id="notification-dropdown" href="#" class="dropdown-toggle btn" data-toggle="dropdown">
+            Notificações
+            <% if current_user.notifications.where(visualized: false).count != 0 %>
+              <span class="badge" id="notification-counter"><%= current_user.notifications.where(visualized: false).count %>
+            <% end %> </span> <b class="caret"></b>
             </a>
-            <ul class="dropdown-menu">
+            <ul id="notification-list" class="dropdown-menu">
               <% @current_user.notifications.reverse.take(3).each do |notification| %>
                 <li><%= link_to truncate(notification.message, length: 50, separator: ' '), battles_path %></li>
               <% end %>
@@ -51,6 +54,18 @@
           <li><%= link_to "Cadastre-se", signup_path %></li>
         <% end %>
       </ul>
+
     </nav>
   </div>
+
 </header>
+
+<script>
+    $(function() {
+      $("#notification-dropdown").click(function(evt) {
+        $.ajax("/notifications/read");
+        $("#notification-counter").hide();
+        evt.preventDefault();
+      })
+    })
+</script>

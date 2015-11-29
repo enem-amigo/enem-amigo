@@ -81,6 +81,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :notifications do
+    get :read, on: :collection
+  end
+
   get '*unmatched_route', :to => 'application#raise_not_found!'
 
 end

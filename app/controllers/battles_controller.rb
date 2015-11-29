@@ -3,7 +3,7 @@ class BattlesController < ApplicationController
   include BattlesHelper
 
   before_action :authenticate_user
-  before_action :verify_participation, only: [:show]
+  before_action :verify_participation, only: [:show, :destroy]
   before_action :verify_all_played, only: [:result]
   before_action :verify_current_user_played, only: [:finish]
 

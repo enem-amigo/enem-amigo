@@ -590,3 +590,16 @@ select#battle_category {
 #no-questions > center {
   margin-bottom: 20px;
 }
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+  color: black !important;
+  background-color: white;
+}
+
+#notification-dropdown {
+  width: 10.5em;
+}
+
+#notification-counter {
+  background-color: #CF0000;
+}

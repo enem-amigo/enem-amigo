@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   include QuestionsHelper
 
   def index
-    @questions = Question.all
+    @questions = Question.all.order(:year, :number)
   end
 
   def new
@@ -79,19 +79,19 @@ class QuestionsController < ApplicationController
   end
 
   def nature
-    @questions = Question.where(area: "ciências da natureza e suas tecnologias")
+    @questions = Question.where(area: "ciências da natureza e suas tecnologias").order(:year, :number)
   end
 
   def humans
-    @questions = Question.where(area: "ciências humanas e suas tecnologias")
+    @questions = Question.where(area: "ciências humanas e suas tecnologias").order(:year, :number)
   end
 
   def languages
-    @questions = Question.where(area: "linguagens, códigos e suas tecnologias")
+    @questions = Question.where(area: "linguagens, códigos e suas tecnologias").order(:year, :number)
   end
 
   def math
-    @questions = Question.where(area: "matemática e suas tecnologias")
+    @questions = Question.where(area: "matemática e suas tecnologias").order(:year, :number)
   end
 
   def upload_questions

@@ -70,7 +70,7 @@ class BattlesController < ApplicationController
       battle.save
     end
 
-    if question_position == 10
+    if question_position == battle.questions.count
       process_time(battle)
       flash[:success] = "Batalha finalizada com sucesso!"
       render :js => "window.location.href += '/finish'"

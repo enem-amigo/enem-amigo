@@ -38,7 +38,7 @@ class Question < ActiveRecord::Base
   end
 
   def total_hit_rate
-    total_hit_rate = (100 * (self.hits + self.users_hits.to_f)/(self.tries + self.users_tries)).round(2)
+    total_hit_rate = (100 * (self.hits + self.users_hits.to_f) / (self.tries + self.users_tries)).round(2)
   end
 
   def data
@@ -47,6 +47,21 @@ class Question < ActiveRecord::Base
       {"name" => "Usuários","data" => {"Usuários" => self.users_hit_rate}},
       {"name" => "Todos","data" => {"Todos" => self.total_hit_rate}}
     ]
+  end
+
+  class << self
+    def method_missing method_name, *args
+      method_name = method_name.to_s
+      if method_name.slice! /_questions/
+        cmp_hash = { "easy" => lambda { |hit_rate| hit_rate >= 75.0 },
+                     "intermediate" => lambda { |hit_rate| hit_rate >= 30.0 && hit_rate < 75.0 },
+                     "hard" => lambda { |hit_rate| hit_rate < 30.0 } }
+        questions = Question.where area: args.first
+        questions.select { |q| cmp_hash[method_name].call q.total_hit_rate }
+      else
+        super
+      end
+    end
   end
 
   private

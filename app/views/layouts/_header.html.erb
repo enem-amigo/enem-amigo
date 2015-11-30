@@ -11,8 +11,9 @@
           <li><%= link_to "Usuários", users_path %></li>
         <% end %>
         <% if logged_in? %>
-          <li><%= link_to "Batalha", battles_path %></li>
           <li><%= link_to "Questões", questions_path %></li>
+          <li><%= link_to "Batalha", battles_path %></li>
+          <li><%= link_to "Prova", select_exam_path %></li>
           <li><%= link_to "Fórum", topics_path %></li>
           <li><%= link_to "Ranking", ranking_path %></li>
 

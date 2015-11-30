@@ -1,7 +1,7 @@
 <table class="ranking">
   <thead>
-    <tr>
-      <th><%= link_to image_tag("trophy.jpg"), ranking_path %><%= link_to "TOP 10", ranking_path, id: 'top-10' %></th>
+    <tr class="clickable-row" data-href=<%= ranking_path %> >
+      <th><%= link_to image_tag("trophy.jpg"), ranking_path %> <span>TOP 10</span></th>
     </tr>
   </thead>
   <tbody>

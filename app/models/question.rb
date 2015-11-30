@@ -39,6 +39,7 @@ class Question < ActiveRecord::Base
 
   def total_hit_rate
     total_hit_rate = (100 * (self.hits + self.users_hits.to_f) / (self.tries + self.users_tries)).round(2)
+    total_hit_rate = total_hit_rate.nan? ? 0.0 : total_hit_rate
   end
 
   def data

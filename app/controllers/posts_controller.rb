@@ -57,7 +57,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to_back(root_path) }
-      format.js { flash[:notice] = "Votou!!" }
+      format.js { flash[:success] = "Votou!!" }
     end
   end
 

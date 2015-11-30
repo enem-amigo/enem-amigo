@@ -9,19 +9,6 @@ class QuestionsController < ApplicationController
     @questions = Question.all.order(:year, :number)
   end
 
-  def new
-  end
-
-  def create
-    @question = Question.new(question_params)
-    if @question.save
-      flash[:success] = "Questão cadastrada com sucesso!"
-      redirect_to @question
-    else
-      render 'new'
-    end
-  end
-
   def edit
     @question = Question.find(params[:id])
   end
@@ -52,8 +39,7 @@ class QuestionsController < ApplicationController
     @answer_letter = params[:alternative]
 
     if params[:alternative].blank?
-      redirect_to :back
-      flash[:danger] = "Selecione uma alternativa"
+      redirect_to_back(root_path)
     else
       current_user.update_attribute(:tried_questions, current_user.tried_questions << question.id)
       question.update_attribute(:users_tries, question.users_tries + 1)

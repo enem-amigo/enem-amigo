@@ -163,6 +163,30 @@ class QuestionsControllerTest < ActionController::TestCase
     assert_raises(Exception) { post :upload_candidates_data }
   end
 
+  test 'should user be redirected to back if he does not marks an alternative' do
+    log_in @another_user
+    @question = create_question
+    point = @another_user.points
+    post :answer, id: @question.id
+
+    assert_redirected_to :back
+  end
+
+  test "should update question" do
+    log_in @admin
+    old_number = @question.number
+    patch :update, id: @question.id, question: { number: 999 }
+    @question.reload
+    assert_not_equal old_number, @question.number
+  end
+
+  test "should render edit if question is not updated correctly" do
+    log_in @admin
+    old_number = @question.number
+    patch :update, id: @question.id, question: { number: 12345678 }
+    assert_template :edit
+  end
+
   private
 
     def create_question

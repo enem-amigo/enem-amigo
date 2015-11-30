@@ -575,7 +575,7 @@ select#battle_category {
 
 #post-text, #comment-text {
   width: 80%;
-  margin-left: 70px;
+  margin-left: 100px;
   margin-top: -36px;
 }
 
@@ -622,7 +622,7 @@ select#battle_category {
 }
 
 #home-table {
-  margin-top: 5%;
+  margin-top: 4%;
 }
 
 #image-table {
@@ -637,4 +637,13 @@ select#battle_category {
 
 .login-title {
   margin-top: 2.5em;
+}
+
+#name-footer {
+  float: left;
+  padding-left: 0px;
+}
+
+.footer > .container {
+  width: 94%;
 }

@@ -15,10 +15,25 @@
   </div>
 </div>
 
-<div class="options-container">
+<div class="options-container" id="home-table">
   <div class="user-options">
-    <%= link_to image_tag("questoes.png", class: 'img-responsive custom-img'), questions_path %>
-    <%= link_to image_tag("batalha.png", class: 'img-responsive custom-img'), battles_path %>
-    <%= link_to image_tag("prova.png", class: 'img-responsive custom-img'), select_exam_path %>
+    <table class='table'>
+      <tr>
+          <td class="align-center" id="image-table"><%= link_to image_tag("questoes.png", class: 'img-responsive custom-img'), questions_path %></td>
+          <td class="align-center" id="desc-table">Treine para o ENEM respondendo questões de provas anteriores!</td>
+      </tr>
+      <tr>
+        <td class="align-center" id="image-table"><%= link_to image_tag("batalha.png", class: 'img-responsive custom-img'), battles_path %></td>
+        <td class="align-center" id="desc-table">Convide usuários ou seus amigos para uma disputa intelectual frenética com questões do ENEM!</td>
+      </tr>
+      <tr>
+        <td class="align-center" id="image-table"><%= link_to image_tag("prova.png", class: 'img-responsive custom-img'), select_exam_path %></td>
+        <td class="align-center" id="desc-table">Simule as condições de uma prova real do ENEM para melhorar seu desempenho!</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
   </div>
 </div>

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'questions/nature' => 'questions#nature'
   get 'questions/languages' => 'questions#languages'
   get 'questions/math' => 'questions#math'
+  get 'questions/recommended' => 'questions#recommended'
   get 'questions/upload' => 'questions#new'
   post 'questions/upload_questions'
   post 'questions/upload_candidates_data'

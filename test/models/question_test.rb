@@ -115,6 +115,30 @@ class QuestionTest < ActiveSupport::TestCase
     assert_not question.save
   end
 
+  test 'should return beginner level question' do
+    question = Question.new(area: 'some_area',year: 2008, enunciation: 'something', number: 001, image: 'something', right_answer: 'a',
+                            users_tries: 100, users_hits: 75)
+    create_alternatives(question)
+    question.save
+    assert question == Question.beginner_questions(question.area).first
+  end
+
+  test 'should return intermediate level question' do
+    question = Question.new(area: 'some_area',year: 2008, enunciation: 'something', number: 001, image: 'something', right_answer: 'a',
+                            users_tries: 100, users_hits: 30)
+    create_alternatives(question)
+    question.save
+    assert question == Question.intermediate_questions(question.area).first
+  end
+
+  test 'should return hard level question' do
+    question = Question.new(area: 'some_area',year: 2008, enunciation: 'something', number: 001, image: 'something', right_answer: 'a',
+                            users_tries: 100, users_hits: 15)
+    create_alternatives(question)
+    question.save
+    assert question == Question.advanced_questions(question.area).first
+  end
+
   private
 
     def create_alternatives_atributes(question)

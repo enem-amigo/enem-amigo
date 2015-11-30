@@ -137,6 +137,12 @@ class QuestionsControllerTest < ActionController::TestCase
     end
   end
 
+  test "should return a collection of recommended questions" do
+    log_in @user
+    get :recommended
+    assert_not_nil assigns(:questions)
+  end
+
   test 'should upload a json file to create a set of questions' do
     log_in @admin
     questions_count = Question.all.count

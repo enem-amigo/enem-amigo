@@ -53,9 +53,9 @@ class Question < ActiveRecord::Base
     def method_missing method_name, *args
       method_name = method_name.to_s
       if method_name.slice! /_questions/
-        cmp_hash = { "easy" => lambda { |hit_rate| hit_rate >= 75.0 },
+        cmp_hash = { "beginner" => lambda { |hit_rate| hit_rate >= 75.0 },
                      "intermediate" => lambda { |hit_rate| hit_rate >= 30.0 && hit_rate < 75.0 },
-                     "hard" => lambda { |hit_rate| hit_rate < 30.0 } }
+                     "advanced" => lambda { |hit_rate| hit_rate < 30.0 } }
         questions = Question.where area: args.first
         questions.select { |q| cmp_hash[method_name].call q.total_hit_rate }
       else

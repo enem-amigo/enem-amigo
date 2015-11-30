@@ -73,12 +73,16 @@
 .profile-sidebar .ranking th img {
   display: table-cell;
   float: left;
-  padding-left: 0.6em;
-  padding-right: 0.3em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
   padding-top: 2px;
   padding-bottom: 2px;
 }
 
 p#new-user {
   margin-top: 0.5em;
+}
+
+.clickable-row {
+  cursor: pointer;
 }

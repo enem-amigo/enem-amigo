@@ -94,11 +94,11 @@ class User < ActiveRecord::Base
     performance = self.average_performance area
     performance *= 100
     if performance >= 0 && performance <= 30
-      :beginner
+      "beginner"
     elsif performance > 30 && performance <= 60
-      :intermediate
+      "intermediate"
     else
-      :advanced
+      "advanced"
     end
   end
 

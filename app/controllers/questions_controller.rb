@@ -80,6 +80,20 @@ class QuestionsController < ApplicationController
     @questions = Question.where(area: "matemática e suas tecnologias").order(:year, :number)
   end
 
+  def recommended
+    areas = ["ciências da natureza e suas tecnologias",
+             "ciências humanas e suas tecnologias",
+             "linguagens, códigos e suas tecnologias",
+             "matemática e suas tecnologias"]
+    @questions = Question.where year: 2030 # ugly, but returns ActiveRecord::Relation instance :(
+    areas.each do |area|
+      classification = current_user.classification(area)
+      @questions.merge(instance_eval("Question.#{classification}_questions('#{area}')"))
+    end
+    @questions = @questions.select { |q| !current_user.accepted_questions.include? q.id }
+    @questions = @questions.shuffle
+  end
+
   def upload_questions
     uploaded_file = params[:questions_file]
 

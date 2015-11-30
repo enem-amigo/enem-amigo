@@ -65,13 +65,13 @@ Rails.application.routes.draw do
 
   resources :posts do
     member do
-      post 'rate_post' => 'posts#rate_post'
+      get 'rate_post' => 'posts#rate_post'
     end
   end
 
   resources :comments do
     member do
-      post 'rate_comment' => 'comments#rate_comment'
+      get 'rate_comment' => 'comments#rate_comment'
     end
   end
 

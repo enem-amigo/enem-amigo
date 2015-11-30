@@ -50,17 +50,6 @@ class PostsControllerTest < ActionController::TestCase
     assert_equal ratings + 1, @post.user_ratings.count
   end
 
-  test 'should user_ratings not be incremented if user votes again in a post' do
-    log_in @user
-    ratings = @post.user_ratings.count
-    @post.user_ratings.push(@user.id)
-    post :rate_post, id: @post.id, user_id: @user.id
-    @post.reload
-    assert_redirected_to :back
-    assert_not_equal ratings + 2, @post.user_ratings.count
-    assert_equal ratings + 1, @post.user_ratings.count
-  end
-
   test "should user can get edit post page of his own post" do
     log_in @user
     get :edit, id: @post.id, post_id: @post.id

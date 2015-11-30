@@ -34,18 +34,14 @@ class CommentsController < ApplicationController
   end
 
   def rate_comment
-    comment = Comment.find(params[:comment_id])
+    render nothing: true
+    comment = Comment.find(params[:id])
 
     if not comment.user_ratings.include? current_user.id
       comment.user_ratings.push(current_user.id)
       comment.save
     else
       redirect_to_back(root_path)
-    end
-
-    respond_to do |format|
-      format.html { redirect_to_back(root_path) }
-      format.js { flash[:success] = "Votou!!" }
     end
   end
 

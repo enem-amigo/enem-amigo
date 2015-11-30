@@ -52,15 +52,4 @@ class CommentsControllerTest < ActionController::TestCase
     assert_equal ratings + 1, @comment.user_ratings.count
   end
 
-  test 'should user_ratings not be incremented if user votes again in a comment' do
-    log_in @user
-    ratings = @comment.user_ratings.count
-    @comment.user_ratings.push(@user.id)
-    post :rate_comment, id: @comment.id, comment_id: @comment.id, user_id: @user.id
-    @comment.reload
-    assert_redirected_to :back
-    assert_not_equal ratings + 2, @comment.user_ratings.count
-    assert_equal ratings + 1, @comment.user_ratings.count
-  end
-
 end

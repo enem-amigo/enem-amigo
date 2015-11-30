@@ -46,6 +46,7 @@ class PostsController < ApplicationController
   end
 
   def rate_post
+    render nothing: true
     post = Post.find(params[:id])
 
     if not post.user_ratings.include? current_user.id
@@ -53,11 +54,6 @@ class PostsController < ApplicationController
       post.save
     else
       redirect_to_back(root_path)
-    end
-
-    respond_to do |format|
-      format.html { redirect_to_back(root_path) }
-      format.js { flash[:success] = "Votou!!" }
     end
   end
 

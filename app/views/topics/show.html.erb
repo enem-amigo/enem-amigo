@@ -4,18 +4,22 @@
 <div class="container-fluid">
   <ul class="list-group" id="posts-index">
 
-    <% @topic.posts.each do |topic| %>
+    <% @topic.posts.each do |post| %>
       <li class="list-group-item">
-        <div class="post-buttons">
-          <%= form_tag rate_post_post_path(topic), remote: true do %>
-            <%= button_tag " #{topic.count_post_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary", id: 'rate-post-btn' %>
+        <div class="post-buttons" id="<%= "#{post.id}_div" -%>">
+          <% unless post.user_ratings.include? current_user.id %>
+            <%= form_tag rate_post_post_path(post), remote: true do %>
+              <%= button_tag " #{post.count_post_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary rate-post-btn", id: post.id %>
+            <% end %>
+          <% else %>
+            <span class="btn btn-primary" id='rated-post' data-toggle="tooltip" title="Você já votou!"><%= "#{pluralize(post.count_post_rates,"voto","votos")}" %></span>
           <% end %>
-          <% if current_user.id == topic.user_id  || current_user.role_admin? %>
+          <% if current_user.id == post.user_id  || current_user.role_admin? %>
             <div class="dropdown">
               <a href="#" class="btn btn-default glyphicon glyphicon-cog" data-toggle="dropdown" id="dropdown-post-conf"></a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Editar", edit_post_path(topic, id: current_user.id, post_id: topic.id) %></li>
-                <li><%= link_to "Excluir", post_path(topic, id: current_user.id, post_id: topic.id), :method => :delete, data: { confirm: "Você tem certeza que deseja excluir este post?" } %></li>
+                <li><%= link_to "Editar", edit_post_path(post, id: current_user.id, post_id: post.id) %></li>
+                <li><%= link_to "Excluir", post_path(post, id: current_user.id, post_id: post.id), :method => :delete, data: { confirm: "Você tem certeza que deseja excluir este post?" } %></li>
               </ul>
             </div>
           <% end %>
@@ -23,19 +27,23 @@
 
         <div class="side-contents">
           <div class="profile-image">
-            <%= link_to image_tag(topic.user.profile_image_file_name.blank? ? "profiles_images/default" : topic.user.profile_image.url, alt: "Profile image"), "/users/#{topic.user.id}" %>
+            <%= link_to image_tag(post.user.profile_image_file_name.blank? ? "profiles_images/default" : post.user.profile_image.url, alt: "Profile image"), "/users/#{post.user.id}" %>
           </div>
-          <span class="badge"><%= topic.user.nickname %></span>
+          <span class="badge"><%= post.user.nickname %></span>
         </div>
 
-        <p class="text-left" id="post-text"><%= topic.content %></p>
+        <p class="text-left" id="post-text"><%= post.content %></p>
 
         <ul class="list-group">
-        <% topic.comments.each do |comment| %>
+        <% post.comments.each do |comment| %>
           <li class="list-group-item" id="comments-index">
-            <div class="comments-buttons" id="comment-<%= comment.id %>">
-              <%= form_tag rate_comment_comment_path(comment, comment_id: comment.id), remote: true do %>
-                <%= button_tag " #{comment.count_comment_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary", id: 'rate-comment-btn' %>
+            <div class="comments-buttons" id="<%= "#{comment.id}_div" -%>">
+              <% unless comment.user_ratings.include? current_user.id %>
+                <%= form_tag rate_comment_comment_path(comment), remote: true do %>
+                  <%= button_tag " #{comment.count_comment_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary rate-comment-btn", id: comment.id %>
+                <% end %>
+              <% else %>
+                <span class="btn btn-primary" id='rated-comment' data-toggle="tooltip" title="Você já votou!"><%= "#{pluralize(comment.count_comment_rates,"voto","votos")}" %></span>
               <% end %>
 
               <% if current_user.id == comment.user_id  || current_user.role_admin? %>
@@ -62,7 +70,7 @@
         </ul>
 
         <div class="container-fluid" id="comment-text-area">
-          <%= form_tag post_comments_path(topic), id: 'comment-area' do %>
+          <%= form_tag post_comments_path(post), id: 'comment-area' do %>
             <div id="cmnt-area"><%= text_area_tag "comment[content]", nil, placeholder: "  Comente aqui..." %></div>
             <div id="cmnt-btn"><%= submit_tag "Comentar", class: "btn btn-success", id: 'btn-comment-area' %></div>
           <% end %>
@@ -76,3 +84,27 @@
 <div class="container-fluid">
   <%= render "posts/new", method: new_post %>
 </div>
+
+<script>
+  $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  $(function() {
+    $(".rate-post-btn").click(function(evt) {
+      var id = $(this).attr("id");
+      $.ajax("/posts/"+ id + "/rate_post");
+      $("#"+id+"_div").load(location.href + " #" + id + "_div")
+      evt.preventDefault();
+    })
+  });
+
+  $(function() {
+    $(".rate-comment-btn").click(function(evt2) {
+      var id = $(this).attr("id");
+      $.ajax("/comments/"+ id + "/rate_comment");
+      $("#"+id+"_div").load(location.href + " #" + id + "_div")
+      evt2.preventDefault();
+    })
+  });
+</script>

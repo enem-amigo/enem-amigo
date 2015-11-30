@@ -15,7 +15,7 @@ body {
 }
 
 body.homepage {
-  background: image-url("study1.jpg") !important;
+  background: image-url("background.png") !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background-position: center !important;
@@ -614,4 +614,14 @@ select#battle_category {
 
 #home-back {
   padding-top: 7%;
+}
+
+.login-form {
+  background: none !important;
+  box-shadow: none !important;
+  padding-left: 2em;
+}
+
+.login-title {
+  margin-top: 2.5em;
 }

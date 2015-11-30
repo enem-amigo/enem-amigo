@@ -13,8 +13,12 @@
   <%= f.password_field :password, class: 'form-control' %>
   <%= f.label :password_confirmation, "Confirmar senha" %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
-  <%= f.label :profile_image, "Foto de Perfil" %>
-  <%= f.file_field :profile_image, class: 'form-control' %>
+  <div>
+    <%= f.label :profile_image, "Foto de Perfil" %>
+  </div>
+  <span class="btn btn-default btn-file">
+    Browse<%= f.file_field :profile_image, class: 'form-control' %>
+  </span>
   <%= f.submit "Cadastrar", class: 'btn btn-primary' %>
 
 <% end %>

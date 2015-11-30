@@ -54,6 +54,7 @@ class UsersController < ApplicationController
   end
 
   def ranking
+    @home_page = true unless logged_in?
     @users = User.order(:points).reverse
   end
 

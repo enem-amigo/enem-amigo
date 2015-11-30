@@ -11,6 +11,12 @@ class BattlesControllerTest < ActionController::TestCase
     @battle = battles(:first_battle)
     @battle.generate_questions
     @battle.update_attributes(player_1: @user, player_2: @another_user)
+    @second_battle = battles(:second_battle)
+    @second_battle.generate_questions
+    @second_battle.update_attributes(player_1: @user, player_2: @another_user)
+    @third_battle = battles(:third_battle)
+    @third_battle.generate_questions
+    @third_battle.update_attributes(player_1: @user, player_2: @another_user)
     log_in @user
   end
 

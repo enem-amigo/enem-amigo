@@ -26,7 +26,7 @@
             </a>
             <ul id="notification-list" class="dropdown-menu">
               <% @current_user.notifications.reverse.take(10).each do |notification| %>
-                <li><%= link_to truncate(notification.message, length: 50, separator: ' '), notification.battle.nil? ? help_path : battles_path %></li>
+                <li><%= link_to truncate(notification.message, length: 50, separator: ' '), notification.link %></li>
               <% end %>
               <li class="divider"></li>
               <li>

@@ -6,7 +6,7 @@
 
     <% @topic.posts.each do |post| %>
       <li class="list-group-item">
-        <div class="post-buttons" id="<%= "#{post.id}_div" -%>">
+        <div class="post-buttons" id="<%= "post_#{post.id}_div" -%>">
           <% unless post.user_ratings.include? current_user.id %>
             <%= form_tag rate_post_post_path(post), remote: true do %>
               <%= button_tag " #{post.count_post_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary rate-post-btn", id: post.id %>
@@ -37,7 +37,7 @@
         <ul class="list-group">
         <% post.comments.each do |comment| %>
           <li class="list-group-item" id="comments-index">
-            <div class="comments-buttons" id="<%= "#{comment.id}_div" -%>">
+            <div class="comments-buttons" id="<%= "comment_#{comment.id}_div" -%>">
               <% unless comment.user_ratings.include? current_user.id %>
                 <%= form_tag rate_comment_comment_path(comment), remote: true do %>
                   <%= button_tag " #{comment.count_comment_rates}", class: "glyphicon glyphicon-thumbs-up btn btn-primary rate-comment-btn", id: comment.id %>
@@ -94,7 +94,7 @@
     $(".rate-post-btn").click(function(evt) {
       var id = $(this).attr("id");
       $.ajax("/posts/"+ id + "/rate_post");
-      $("#"+id+"_div").load(location.href + " #" + id + "_div")
+      $("#post_"+id+"_div").load(location.href + " #post_" + id + "_div")
       evt.preventDefault();
     })
   });
@@ -103,7 +103,7 @@
     $(".rate-comment-btn").click(function(evt2) {
       var id = $(this).attr("id");
       $.ajax("/comments/"+ id + "/rate_comment");
-      $("#"+id+"_div").load(location.href + " #" + id + "_div")
+      $("#comment_"+id+"_div").load(location.href + " #comment_" + id + "_div")
       evt2.preventDefault();
     })
   });

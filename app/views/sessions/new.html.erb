@@ -7,9 +7,9 @@
   <%= link_to 'Sair', logout_path, method: :delete %>
 <% else %>
   <%= form_for(:session, url: login_path, html: { class: 'login' }) do |f| %>
-    <%= f.label :email%>
+    <%= f.label "E-mail"%>
     <%= f.email_field :email, class: 'form-control' %>
-    <%= f.label :password %>
+    <%= f.label "Senha" %>
     <%= f.password_field :password, class: 'form-control' %>
     <%= f.submit "Entrar", class: "btn btn-primary" %>
   <% end %>

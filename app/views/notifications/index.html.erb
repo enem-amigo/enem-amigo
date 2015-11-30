@@ -10,8 +10,8 @@
 
     <% @notifications.each do |t| %>
       <tr>
-        <td class="align-center"><%= t.user.name %></td>
-        <td class="align-center"><%= t.message %></td>
+        <td class="align-center"><%= t.sender %></td>
+        <td class="align-center"><%= link_to t.message, t.link %></td>
         <td class="align-center"><%= t.created_at.strftime(" %d/%m/%Y") %></td>
       </tr>
     <% end %>

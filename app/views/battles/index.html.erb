@@ -4,40 +4,67 @@
   <%= link_to ' Nova Batalha', "/battles/new", class: "btn btn-success glyphicon glyphicon-plus" %>
 </div>
 
-<% unless @battles.blank? %>
+<% unless @pending_battles.blank? %>
+  <br><br>
+  <h2><b>Batalhas Pendentes</b></h2>
   <table class='table'>
     <thead>
-      <th class="align-center">Status</th>
-      <th class="align-center"></th>
-      <th class="align-center">Jogador 1</th>
-      <th class="align-center">Jogador 2</th>
+      <th class="align-center">Adversário</th>
+      <th class="align-center">Jogar / Recusar</th>
     </thead>
 
-    <% @battles.each do |t| %>
+    <% @pending_battles.each do |t| %>
       <tr>
-        <% if t.all_played? %>
-          <td class="align-center"><%= 'Finalizada' %></td>
-          <td class="align-center"><%= link_to 'Ver Resultado', "/battles/#{t.id}/result" , class: "btn btn-info" %></td>
-        <% else %>
-          <% if player_started?(t) %>
-            <td class="align-center"><%= 'Esperando outro jogador' %>
-          <% else %>
-            <td class="align-center"><%= 'Pendente' %>
-          <% end %>
-          <td class="align-center">
-          <% unless player_started?(t) %>
-            <%= link_to '', "/battles/#{t.id}", class: "btn btn-success glyphicon glyphicon-ok" %>
-            <%= link_to '', battle_path(t), :method => :delete, class: "btn btn-danger glyphicon glyphicon-remove", id: "btn-delete", data: { confirm: "Você tem certeza que deseja excluir a batalha?" } %>
-          <% else %>
-            <%= link_to ' Gabarito', "/battles/#{t.id}/finish", class: "btn btn-default glyphicon glyphicon-stats" %>
-          <% end %>
-          </td>
-        <% end %>
-        <td class="align-center"><%= t.player_1.name %></td>
-        <td class="align-center"><%= t.player_2.name %></td>
+        <td class="align-center"><%= is_player_1?(t) ? t.player_2.name : t.player_1.name %></td>
+        <td class="align-center">
+          <%= link_to '', "/battles/#{t.id}", class: "btn btn-success glyphicon glyphicon-ok" %>
+          <%= link_to '', battle_path(t), :method => :delete, class: "btn btn-danger glyphicon glyphicon-remove", id: "btn-delete", data: { confirm: "Você tem certeza que deseja excluir a batalha?" } %>
+        </td>
       </tr>
     <% end %>
   </table>
-<% else %>
+<% end %>
+
+<% unless @waiting_battles.blank? %>
+  <br><br>
+  <h2><b>Batalhas Abertas</b></h2>
+  <table class='table'>
+    <thead>
+      <th class="align-center">Adversário</th>
+      <th class="align-center">Gabarito</th>
+    </thead>
+
+    <% @waiting_battles.each do |t| %>
+      <tr>
+        <td class="align-center"><%= is_player_1?(t) ? t.player_2.name : t.player_1.name %></td>
+        <td class="align-center">
+          <%= link_to ' Gabarito', "/battles/#{t.id}/finish", class: "btn btn-default glyphicon glyphicon-stats" %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+
+<% unless @finished_battles.blank? %>
+  <br><br>
+  <h2><b>Batalhas Finalizadas</b></h2>
+  <table class='table'>
+    <thead>
+      <th class="align-center">Adversário</th>
+      <th class="align-center">Resultado</th>
+    </thead>
+
+    <% @finished_battles.each do |t| %>
+      <tr>
+        <td class="align-center"><%= is_player_1?(t) ? t.player_2.name : t.player_1.name %></td>
+        <td class="align-center"><%= link_to 'Ver Resultado', "/battles/#{t.id}/result" , class: "btn btn-info" %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+
+<% if @battles.blank? %>
   <h3> Você não participou de nenhuma batalha </h3>
 <% end %>

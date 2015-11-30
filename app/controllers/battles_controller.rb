@@ -34,7 +34,19 @@ class BattlesController < ApplicationController
   end
 
   def index
+    @pending_battles = []
+    @waiting_battles = []
+    @finished_battles = []
     @battles = current_user.battles.reverse
+    @battles.each do |battle|
+      if battle.all_played?
+        @finished_battles.push(battle)
+      elsif player_started?(battle)
+        @waiting_battles.push(battle)
+      else
+        @pending_battles.push(battle)
+      end
+    end
   end
 
   def destroy

@@ -30,6 +30,7 @@ class BattlesController < ApplicationController
     @battle = Battle.find(params[:id])
     start_battle(@battle)
     battle_answer_notification(@battle, true) unless is_player_1?(@battle)
+    @adversary = is_player_1?(@battle) ? @battle.player_2 : @battle.player_1
     @question = @battle.questions[0]
   end
 

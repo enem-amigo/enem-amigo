@@ -638,3 +638,27 @@ select#battle_category {
 .login-title {
   margin-top: 2.5em;
 }
+
+#battle-ranking {
+  float: right;
+}
+
+#battle-options-table {
+  width: 100%;
+}
+
+#vs-image {
+  margin-top: -2.9em;
+  margin-left: 60%;
+  position: fixed;
+}
+
+#vs-title {
+  margin-right: 20%;
+  margin-top: 18%;
+}
+
+#vs-title p {
+  line-height: 1;
+  font-size: 1.2em;
+}

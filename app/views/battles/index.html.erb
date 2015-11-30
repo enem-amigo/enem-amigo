@@ -1,8 +1,19 @@
 <h1> Batalhas </h1>
 
-<div>
-  <%= link_to ' Nova Batalha', "/battles/new", class: "btn btn-success glyphicon glyphicon-plus" %>
-</div>
+<table id="battle-options-table">
+  <tr>
+  <td>
+  <div>
+    <%= link_to ' Nova Batalha', "/battles/new", class: "btn btn-success glyphicon glyphicon-plus" %>
+  </div>
+  </td>
+  <td id="battle-ranking">
+  <div>
+    <%= link_to ' Ranking de Batalha', "/battles/ranking", class: "btn btn-danger glyphicon glyphicon-signal align-center" %>
+  </div>
+  </td>
+  </tr>
+</table>
 
 <% unless @pending_battles.blank? %>
   <br><br>
